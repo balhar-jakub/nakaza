@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="img/logo16.ico">
+    <link rel="image_src" href="img/logo512.png"/>
+    <link rel="stylesheet" href="css/BasePage.css">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="larp, nákaza, zombie, apokalypsa, čr">
+    <meta name="description" content="Nákaza, aneb jak to vypadalo na začátku zombie apokalypsy.">
+
+    <title>
+        Nákaza
+    </title>
+</head>
+
+<body>
+<div class="page">
+    <div class="header">
+        <div class="logo">
+            <img src="img/logo128.png" alt="logoHry">
+        </div>
+        <div class="login">
+            <a href="registration.html">Registrace</a> |
+            <a href="login.html">Login</a>
+        </div>
+    </div>
+
+    <div class="menu">
+        <div class="items">
+            <span class="item"><a href="homePage.html">Domů</a></span>
+            <span class="item choosen"><a href="aboutGame.html">O hře</a></span>
+            <span class="item"><a href="aboutWorld.html">O světě</a></span>
+            <span class="item"><a href="createCharacter.html">Tvorba postavy</a></span>
+        </div>
+    </div>
+
+    <div class="content">
+        <!--
+            Tři stavy - Nepřihlášen, Postava už existuje, Tvorba nové postavy.
+        -->
+        <div class="left">
+            <h1>Registrace</h1>
+
+            <form>
+                <fieldset>
+                    <div class="field">
+                        <div class="label">Zadejte svůj email(Bude sloužit jako login): </div>
+                        <div class="input"><input type="text" id="login" name="login" value="login"/></div>
+                        <div class="error">Zadali jste chybný login</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="label">Zadejte své jméno: </div>
+                        <div class="input"><input type="text" id="name" name="name" value=""/></div>
+                        <div class="error">Jméno musí být zadáno</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="label">Zadejte své datum narození: </div>
+                        <div class="input"><input type="text" id="dateOfBirth" name="dateOfBirth" value=""/></div>
+                        <div class="error">Chybný formát data narození</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="label">Zadejte heslo: </div>
+                        <div class="input"><input type="text" id="password" name="password" value=""/></div>
+                        <div class="error">Chybný formát hesla. Heslo je příliš krátké.</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="label">Zadejte heslo znovu: </div>
+                        <div class="input"><input type="text" id="passwordAgain" name="passwordAgain" value=""/></div>
+                        <div class="error">Chybný formát hesla. Heslo není stejně jako poprvé heslo.</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="label">Zadejte svou fotografii: </div>
+                        <div class="input"><input type="text" id="photo" name="photo" value=""/></div>
+                        <div class="error">Fotografie musí být zadána.</div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="right">
+            <h2>Informace</h2>
+
+            <p class="text">
+                V rámci registrace je potřeba zadat několik nezbytných osobních údajů, jako vaše jméno
+                a email pro komunikaci.
+            </p>
+
+            <p class="text">
+                Skrz email budete dostávat informace o schvalování informací ze strany organizátorů hry.
+            </p>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
