@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="img/logo16.ico">
+    <link rel="image_src" href="img/logo512.png"/>
+    <link rel="stylesheet" href="css/BasePage.css">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="larp, nákaza, zombie, apokalypsa, čr">
+    <meta name="description" content="Nákaza, aneb jak to vypadalo na začátku zombie apokalypsy.">
+
+    <title>
+        Nákaza
+    </title>
+</head>
+
+<body>
+<div class="page">
+    <div class="header">
+        <div class="logo">
+            <img src="img/logo128.png" alt="logoHry">
+        </div>
+        <div class="login">
+            <img src="files/upload/hrac1.png" class="avatar" alt="AvatarHráčoviPostavy" />
+
+            <a href="characterDetail.html">Moje postava</a>
+        </div>
+    </div>
+
+    <div class="menu">
+        <div class="items">
+            <span class="item"><a href="homePage.html">Domů</a></span>
+            <span class="item choosen"><a href="aboutGame.html">O hře</a></span>
+            <span class="item"><a href="aboutWorld.html">O světě</a></span>
+            <span class="item"><a href="createCharacter.html">Tvorba postavy</a></span>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="left">
+            <h1>Vytvoření příběhu</h1>
+
+            <form>
+                <fieldset>
+                    <div class="field">
+                        <div class="label">Název</div>
+                        <div class="input">
+                            <input type="text" name="name"/>
+                        </div>
+                        <div class="error">Jméno musí být zadané. Jméno musí být unikátní</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="label">Veřejný popis</div>
+                        <div class="input">
+                            <textarea>Sem patří popis, který uvidí všichni</textarea>
+                        </div>
+                        <div class="error">Veřejný popis musí být zadaný</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="label">Tajný popis</div>
+                        <div class="input">
+                            <textarea>Sem patří popis, který uvidí pouze ti, kdo si již příběh zadali.</textarea>
+                        </div>
+                        <div class="error"></div>
+                    </div>
+
+                    <h2>Štítky charakterizující tento příběh.</h2>
+
+                    <div class="labels">
+                        <div class="required">
+                            <input type="text" class="autoCompletable required" />
+                            <input type="text" class="autoCompletable required" />
+                            <input type="button" class="button add" />
+                        </div>
+                        <div class="optional">
+                            <input type="text" class="autoCompletable optional" />
+                            <input type="button" class="button add" />
+                        </div>
+                        <div class="error">
+                            Nezadali jste ani jeden požadovaný štítek
+                        </div>
+                    </div>
+
+                    <div class="participant">
+                        <div class="field">
+                            <div class="label">Tajný popis</div>
+                            <div class="input">
+                                <textarea>Sem patří popis, který uvidí pouze ten, kdo se zapsal jako tato postava.</textarea>
+                            </div>
+                            <div class="error"></div>
+                        </div>
+
+                        <div class="group">
+                            <select>
+                                <option>Přeživší</option>
+                                <option>Zombie</option>
+                                <option>Armáda</option>
+                            </select>
+                        </div>
+
+                        <!-- Každá role může mít nějaké štítky -->
+                        <div class="labels">
+                            <div class="required">
+                                <input type="text" class="autoCompletable required" />
+                                <input type="text" class="autoCompletable required" />
+                                <input type="button" class="button add" />
+                            </div>
+                            <div class="optional">
+                                <input type="text" class="autoCompletable optional" />
+                                <input type="button" class="button add" />
+                            </div>
+                            <div class="error">
+                                Nezadali jste ani jeden požadovaný štítek
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="right">
+            <h2>Poslední přidané příběhy</h2>
+
+            <div class="story">
+                <span class="publicDescription"><a href="storyDetailPublic.html">Description of story</a></span>
+
+                <div class="labels">
+                    <div class="label">Detektivní</div>
+                    <div class="label">Akční</div>
+                </div>
+            </div>
+
+            <div class="story">
+                <span class="publicDescription"><a href="storyDetailPublic.html">Description of story</a></span>
+
+                <div class="labels">
+                    <div class="label">Detektivní</div>
+                    <div class="label">Akční</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
