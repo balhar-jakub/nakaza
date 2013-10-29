@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="img/logo16.ico">
+    <link rel="image_src" href="img/logo512.png"/>
+    <link rel="stylesheet" href="css/BasePage.css">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="larp, nákaza, zombie, apokalypsa, čr">
+    <meta name="description" content="Nákaza, aneb jak to vypadalo na začátku zombie apokalypsy.">
+
+    <title>
+        Nákaza
+    </title>
+</head>
+
+<body>
+<div class="page">
+    <div class="header">
+        <div class="logo">
+            <img src="img/logo128.png" alt="logoHry">
+        </div>
+        <div class="login">
+            <a href="registration.html">Registrace</a> |
+            <a href="login.html">Login</a>
+        </div>
+    </div>
+
+    <div class="menu">
+        <div class="items">
+            <span class="item"><a href="homePage.html">Domů</a></span>
+            <span class="item choosen"><a href="aboutGame.html">O hře</a></span>
+            <span class="item"><a href="aboutWorld.html">O světě</a></span>
+            <span class="item"><a href="createCharacter.html">Tvorba postavy</a></span>
+        </div>
+    </div>
+
+    <div class="content">
+        <!--
+            Tři stavy - Nepřihlášen, Postava už existuje, Tvorba nové postavy.
+        -->
+        <div class="left">
+            <h1>Tvorba postavy</h1>
+
+            <div class="info">
+                Zbývá <span class="availablePoints">20</span> bodů schopnosti.
+            </div>
+
+            <div class="availableStories">
+                <div class="story">Příběh 1</div>
+                <div class="story">Příběh 2</div>
+                <div class="story">Příběh 3</div>
+            </div>
+            <div class="myStories">
+                <div class="story">Můj příběh 1</div>
+                <div class="story">2 Další příběh</div>
+                <div class="story">Podivný příběh, který envíš jestli chceš.</div>
+            </div>
+        </div>
+
+        <div class="right">
+            <h2>Vaše postava</h2>
+            <!-- Additional information about page -->
+            <!-- At HomePage there is information about completed characters -->
+            <!-- Last 5 inserted players -->
+            <div class="character">
+                <div class="avatar">
+                    <a href="characterDetail.html">
+                        <img src="files/upload/hrac1.png" alt="characterAvatar"/>
+                    </a>
+                </div>
+                <div class="about">
+                    Quisque pulvinar nisi quis semper rhoncus. Fusce at diam mollis, facilisis justo ut, sodales lacus.
+                    Maecenas enim dolor, sollicitudin eget consequat non, pulvinar non lorem. Pellentesque eget vehicula
+                    orci. Mauris interdum sollicitudin turpis vitae iaculis. Cras est lorem, condimentum vitae ultricies
+                    id, varius a odio. Nunc sodales augue consequat leo viverra, et pharetra mauris imperdiet. Sed ut
+                    adipiscing neque. Duis vehicula malesuada enim. Aenean quis dapibus justo.
+                </div>
+            </div>
+
+            <div class="stories">
+                <div class="story"><a href="storyDetail.html">Jméno příběhu číslo 1</a></div>
+                <div class="story"><a href="storyDetail.html">Jméno příběhu číslo 2</a></div>
+                <div class="story"><a href="storyDetail.html">Jméno příběhu číslo 3</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
