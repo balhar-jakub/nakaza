@@ -42,6 +42,7 @@
         <div class="left">
             <h1>Přihlášení</h1>
 
+
             <div class="feedback">
                 Uživatel se zadaným jménem a heslem neexistuje.
             </div>
@@ -51,11 +52,17 @@
                     <div class="field">
                         <div class="label">Zadejte své přihlašovací heslo: </div>
                         <div class="input"><input type="text" id="login" name="login" value="email@email.cz" /></div>
+                        <div class="error"></div>
                     </div>
 
                     <div class="field">
                         <div class="label">Zadejte své heslo: </div>
                         <div class="input"><input type="password" id="password" name="password" value="heslo" /></div>
+                        <div class="error"></div>
+                    </div>
+
+                    <div class="field">
+                        <input type="button" value="Přihlásit">
                     </div>
                 </fieldset>
             </form>

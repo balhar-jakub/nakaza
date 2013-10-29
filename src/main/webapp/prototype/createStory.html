@@ -70,18 +70,23 @@
 
                     <div class="labels">
                         <div class="required">
+                            <div>Povinné:</div>
                             <input type="text" class="autoCompletable required" />
                             <input type="text" class="autoCompletable required" />
-                            <input type="button" class="button add" />
+                            <input type="button" class="button add" value="Další"/>
                         </div>
                         <div class="optional">
+                            <div>Volitelné:</div>
                             <input type="text" class="autoCompletable optional" />
-                            <input type="button" class="button add" />
+                            <input type="button" class="button add" value="Další"/>
                         </div>
                         <div class="error">
                             Nezadali jste ani jeden požadovaný štítek
                         </div>
                     </div>
+                    <div class="clear"></div>
+
+                    <h2>Účastníci příběhu</h2>
 
                     <div class="participant">
                         <div class="field">
@@ -92,29 +97,40 @@
                             <div class="error"></div>
                         </div>
 
-                        <div class="group">
-                            <select>
-                                <option>Přeživší</option>
-                                <option>Zombie</option>
-                                <option>Armáda</option>
-                            </select>
+                        <div class="field">
+                            <div class="label">Rasa</div>
+                            <div class="select">
+                                <select>
+                                    <option>Přeživší</option>
+                                    <option>Zombie</option>
+                                    <option>Armáda</option>
+                                </select>
+                            </div>
+                            <div class="error"></div>
                         </div>
 
                         <!-- Každá role může mít nějaké štítky -->
                         <div class="labels">
                             <div class="required">
+                                <div>Povinné:</div>
                                 <input type="text" class="autoCompletable required" />
                                 <input type="text" class="autoCompletable required" />
-                                <input type="button" class="button add" />
+                                <input type="button" class="button add" value="Další" />
                             </div>
                             <div class="optional">
+                                <div>Volitelné:</div>
                                 <input type="text" class="autoCompletable optional" />
-                                <input type="button" class="button add" />
+                                <input type="button" class="button add" value="Další" />
                             </div>
                             <div class="error">
                                 Nezadali jste ani jeden požadovaný štítek
                             </div>
                         </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="field">
+                        <input type="button" value="Uložit nový příběh">
                     </div>
                 </fieldset>
             </form>
@@ -130,6 +146,7 @@
                     <div class="label">Detektivní</div>
                     <div class="label">Akční</div>
                 </div>
+                <div class="clear"></div>
             </div>
 
             <div class="story">
@@ -139,6 +156,7 @@
                     <div class="label">Detektivní</div>
                     <div class="label">Akční</div>
                 </div>
+                <div class="clear"></div>
             </div>
         </div>
     </div>

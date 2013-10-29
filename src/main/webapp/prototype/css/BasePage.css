@@ -128,6 +128,15 @@ p {
     float: left;
 }
 
+.left .character .about{
+    float: left;
+    width: 80%;
+}
+
+.left .character .avatar img {
+    float:left;
+}
+
 .menu .items {
     margin-left: auto;
     margin-right: auto;
@@ -155,4 +164,94 @@ p {
 
 .right .text{
     margin-right: 5px;
+}
+
+.error, .feedback {
+    color: red;
+}
+
+.field {
+    width: 100%;
+    height: 30px;
+}
+
+form .label, .input, .textarea, .error, .select, .textarea {
+    width: 33%;
+    float: left;
+    height: 40px;
+}
+
+.feedback{
+    height: 40px;
+}
+
+.login img {
+    height: 90px;
+    float:right;
+}
+
+.login a {
+    float:left;
+}
+
+.age {
+    font-weight: bold;
+}
+
+.age span {
+    font-weight: normal;
+}
+
+.description {
+    margin-top: 8px;
+}
+
+.story {
+    margin: 10px;
+}
+
+.story .description, .participant .description {
+    margin-bottom: 5px;
+}
+
+.story .labels .label, .participant .labels .label, .left .labels .label {
+    margin-left: 10px;
+    margin-right: 10px;
+    float:left;
+}
+
+.clear {
+    clear:both;
+}
+
+.participant {
+    margin: 10px;
+}
+
+.participant .group {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.participant .group span {
+    font-weight: normal;
+}
+
+table{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.storyLines {
+    width: 100%;
+}
+
+.availableStories {
+    float:left;
+    width: 49%;
+}
+
+.myStories {
+    float:left;
+    width: 49%;
 }
