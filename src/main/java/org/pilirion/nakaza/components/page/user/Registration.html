@@ -1,0 +1,63 @@
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+    <div class="left">
+        <h1>Registrace</h1>
+
+        <form>
+            <fieldset>
+                <div class="field">
+                    <div class="label">Zadejte svůj email(Bude sloužit jako login): </div>
+                    <div class="input"><input type="text" id="login" name="login" value="login"/></div>
+                    <div class="error">Zadali jste chybný login</div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Zadejte své jméno: </div>
+                    <div class="input"><input type="text" id="name" name="name" value=""/></div>
+                    <div class="error">Jméno musí být zadáno</div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Zadejte své datum narození: </div>
+                    <div class="input"><input type="text" id="dateOfBirth" name="dateOfBirth" value=""/></div>
+                    <div class="error">Chybný formát data narození</div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Zadejte heslo: </div>
+                    <div class="input"><input type="text" id="password" name="password" value=""/></div>
+                    <div class="error">Chybný formát hesla. Heslo je příliš krátké.</div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Zadejte heslo znovu: </div>
+                    <div class="input"><input type="text" id="passwordAgain" name="passwordAgain" value=""/></div>
+                    <div class="error">Chybný formát hesla. Heslo není stejně jako poprvé heslo.</div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Zadejte svou fotografii: </div>
+                    <div class="input"><input type="text" id="photo" name="photo" value=""/></div>
+                    <div class="error">Fotografie musí být zadána.</div>
+                </div>
+
+                <div class="field">
+                    <input type="button" value="Zaregistrovat">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="right">
+        <h2>Informace</h2>
+
+        <p class="text">
+            V rámci registrace je potřeba zadat několik nezbytných osobních údajů, jako vaše jméno
+            a email pro komunikaci.
+        </p>
+
+        <p class="text">
+            Skrz email budete dostávat informace o schvalování informací ze strany organizátorů hry.
+        </p>
+
+    </div>
+</wicket:extend>

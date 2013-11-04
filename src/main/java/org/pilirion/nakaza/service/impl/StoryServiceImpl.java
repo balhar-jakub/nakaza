@@ -1,10 +1,47 @@
 package org.pilirion.nakaza.service.impl;
 
+import org.pilirion.nakaza.dao.StoryDAO;
+import org.pilirion.nakaza.entity.NakazaStory;
+import org.pilirion.nakaza.service.StoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Jakub Balhar
  * Date: 31.10.13
  * Time: 16:53
  */
-public class StoryServiceImpl {
+@Repository
+public class StoryServiceImpl implements StoryService{
+    @Autowired
+    StoryDAO storyDAO;
+
+    @Override
+    public NakazaStory getById(Serializable id) {
+        return storyDAO.findById(id, false);
+    }
+
+    @Override
+    public void saveOrUpdate(NakazaStory story) {
+        storyDAO.saveOrUpdate(story);
+    }
+
+    @Override
+    public List<NakazaStory> getAll() {
+        return storyDAO.findAll();
+    }
+
+    @Override
+    public void delete(NakazaStory story) {
+        storyDAO.makeTransient(story);
+    }
+
+    @Override
+    public List<NakazaStory> findByExample(NakazaStory story) {
+        return storyDAO.findByExample(story,new String[]{});
+    }
 }

@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 <head>
-    <wicket:link>
-        <link rel="shortcut icon" href="img/logo16.ico">
-        <link rel="image_src" href="img/logo512.png"/>
-    </wicket:link>
+    <link rel="shortcut icon" href="img/logo16.ico">
+    <link rel="image_src" href="img/logo512.png"/>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="larp, nákaza, zombie, apokalypsa, čr">
@@ -18,33 +16,26 @@
 <body>
 <div class="page">
     <div class="header">
-        <wicket:link>
-            <div class="logo"><img src="img/logo256.png" alt="logoHry"></div>
-        </wicket:link>
-        <div class="login">
-            <a href=""></a>
+        <div class="logo">
+            <img wicket:id="logo" src="img/logo128.png" alt="logoHry">
         </div>
-        <!-- Levá část Headeru je obrázek ke hře. -->
-        <!-- Pravá část headeru obsahuje přihlašování.
-             Potenciálně info o tom, že je uživatel přihlášený.-->
+        <div wicket:id="loginBox"></div>
+        <div wicket:id="loggedBox"></div>
     </div>
 
     <div class="menu">
-
+        <div class="items">
+            <span class="item"><a wicket:id="homePage">Domů</a></span>
+            <span class="item choosen"><a wicket:id="aboutGame">O hře</a></span>
+            <span class="item"><a wicket:id="aboutWorld">O světě</a></span>
+            <span class="item"><a wicket:id="createCharacter">Tvorba postavy</a></span>
+        </div>
     </div>
 
     <div class="content">
-        <div class="left">
+        <wicket:child>
 
-        </div>
-
-        <div class="right">
-
-        </div>
-    </div>
-
-    <div class="footer">
-        &copy; nakaza.pilirion.org, 2013 | Back-end: Jakub Balhar, Bára Kořistková | Layout: Jakub Balhar
+        </wicket:child>
     </div>
 </div>
 </body>

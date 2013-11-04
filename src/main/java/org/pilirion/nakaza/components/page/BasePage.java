@@ -1,5 +1,7 @@
 package org.pilirion.nakaza.components.page;
 
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.http.WebResponse;
 
@@ -12,6 +14,16 @@ import org.apache.wicket.request.http.WebResponse;
 public class BasePage extends WebPage {
     public BasePage(){
 
+    }
+
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        response.render(JavaScriptHeaderItem.forReference(getApplication().getJavaScriptLibrarySettings()
+                .getJQueryReference()));
+
+        //response.render(JavaScriptHeaderItem.forUrl("/files/js/jquery.nivo.slider.js"));
+        //response.render(CssHeaderItem.forUrl("/files/css/smoothness/jquery-ui-1.8.24.custom.css"));
+        super.renderHead(response);
     }
 
     @Override

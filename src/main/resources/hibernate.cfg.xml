@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.current_session_context_class">
+            org.hibernate.context.ThreadLocalSessionContext
+        </property>
+        <property name="hibernate.cache.provider_class">
+            org.hibernate.cache.NoCacheProvider
+        </property>
+        <property name="connection.url">jdbc:postgresql://localhost/nakaza</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.username">nakaza</property>
+        <property name="connection.password">nakaza</property>
+
+        <mapping class="org.pilirion.nakaza.entity.NakazaLabel"/>
+        <mapping class="org.pilirion.nakaza.entity.NakazaParticipant"/>
+        <mapping class="org.pilirion.nakaza.entity.NakazaStory"/>
+        <mapping class="org.pilirion.nakaza.entity.NakazaUser"/>
+
+    </session-factory>
+</hibernate-configuration>

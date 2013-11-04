@@ -1,0 +1,81 @@
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+    <div class="left">
+        <h1>Tvorba nové postavy</h1>
+
+        <form>
+            <fieldset>
+                <div class="field">
+                    <div class="label">Jméno postavy:</div>
+                    <div class="input"><input type="text" name="name" /></div>
+                    <div class="error">Jméno postavy nesmí být prázdné</div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Věk postavy:</div>
+                    <div class="input"><input type="number" name="age" /></div>
+                    <div class="error">Věk postavy musí být neprázdný a větší než 10.</div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Skupina postavy:</div>
+                    <div class="select">
+                        <select>
+                            <option>Přeživší</option>
+                            <option>Zombie</option>
+                            <option>Armáda</option>
+                        </select>
+                    </div>
+                    <div class="error"></div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Krátký popis vaší postavy:</div>
+                    <div class="textarea">
+                        <textarea name="description">Sem napište krátký popis vaší postavy, jejího charakteru apod.</textarea>
+                    </div>
+                    <div class="error">Popis vaší postavy musí být neprázdný.</div>
+                </div>
+
+                <div class="field">
+                    <input type="button" value="Vytvořit">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="right">
+        <h2>Registrované postavy</h2>
+        <!-- Additional information about page -->
+        <!-- At HomePage there is information about completed characters -->
+        <!-- Last 5 inserted players -->
+        <div class="character">
+            <div class="avatar">
+                <a href="characterDetail.html">
+                    <img src="files/upload/hrac1.png" alt="characterAvatar"/>
+                </a>
+            </div>
+            <div class="about">
+                Quisque pulvinar nisi quis semper rhoncus. Fusce at diam mollis, facilisis justo ut, sodales lacus.
+                Maecenas enim dolor, sollicitudin eget consequat non, pulvinar non lorem. Pellentesque eget vehicula
+                orci. Mauris interdum sollicitudin turpis vitae iaculis. Cras est lorem, condimentum vitae ultricies
+                id, varius a odio. Nunc sodales augue consequat leo viverra, et pharetra mauris imperdiet. Sed ut
+                adipiscing neque. Duis vehicula malesuada enim. Aenean quis dapibus justo.
+            </div>
+        </div>
+
+        <div class="character">
+            <div class="avatar">
+                <a href="characterDetail.html">
+                    <img src="files/upload/hrac1.png" alt="characterAvatar"/>
+                </a>
+            </div>
+            <div class="about">
+                Quisque pulvinar nisi quis semper rhoncus. Fusce at diam mollis, facilisis justo ut, sodales lacus.
+                Maecenas enim dolor, sollicitudin eget consequat non, pulvinar non lorem. Pellentesque eget vehicula
+                orci. Mauris interdum sollicitudin turpis vitae iaculis. Cras est lorem, condimentum vitae ultricies
+                id, varius a odio. Nunc sodales augue consequat leo viverra, et pharetra mauris imperdiet. Sed ut
+                adipiscing neque. Duis vehicula malesuada enim. Aenean quis dapibus justo.
+            </div>
+        </div>
+    </div>
+</wicket:extend>

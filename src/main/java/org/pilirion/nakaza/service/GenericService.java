@@ -1,5 +1,7 @@
 package org.pilirion.nakaza.service;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Jakub Balhar
@@ -7,4 +9,13 @@ package org.pilirion.nakaza.service;
  * Time: 16:55
  */
 public interface GenericService<T, Serializable> {
+    T getById(Serializable id);
+
+    void saveOrUpdate(T entity);
+
+    List<T> getAll();
+
+    void delete(T entity);
+
+    List<T> findByExample(T entity);
 }
