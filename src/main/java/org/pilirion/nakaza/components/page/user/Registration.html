@@ -2,46 +2,46 @@
     <div class="left">
         <h1>Registrace</h1>
 
-        <form>
+        <form wicket:id="registration">
             <fieldset>
                 <div class="field">
                     <div class="label">Zadejte svůj email(Bude sloužit jako login): </div>
-                    <div class="input"><input type="text" id="login" name="login" value="login"/></div>
-                    <div class="error">Zadali jste chybný login</div>
+                    <div class="input"><input type="email" wicket:id="email" id="login" name="login" value="login"/></div>
+                    <div class="error" wicket:id="emailFeedback"></div>
                 </div>
 
                 <div class="field">
                     <div class="label">Zadejte své jméno: </div>
-                    <div class="input"><input type="text" id="name" name="name" value=""/></div>
-                    <div class="error">Jméno musí být zadáno</div>
+                    <div class="input"><input type="text" wicket:id="name" id="name" name="name" value=""/></div>
+                    <div class="error" wicket:id="nameFeedback"></div>
                 </div>
 
                 <div class="field">
                     <div class="label">Zadejte své datum narození: </div>
-                    <div class="input"><input type="text" id="dateOfBirth" name="dateOfBirth" value=""/></div>
-                    <div class="error">Chybný formát data narození</div>
+                    <div class="input"><input type="text" wicket:id="dateOfBirth" id="dateOfBirth" name="dateOfBirth" value=""/></div>
+                    <div class="error" wicket:id="dateOfBirthFeedback"></div>
                 </div>
 
                 <div class="field">
                     <div class="label">Zadejte heslo: </div>
-                    <div class="input"><input type="text" id="password" name="password" value=""/></div>
-                    <div class="error">Chybný formát hesla. Heslo je příliš krátké.</div>
+                    <div class="input"><input type="password" wicket:id="password" id="password" name="password" value=""/></div>
+                    <div class="error" wicket:id="passwordFeedback"></div>
                 </div>
 
                 <div class="field">
                     <div class="label">Zadejte heslo znovu: </div>
-                    <div class="input"><input type="text" id="passwordAgain" name="passwordAgain" value=""/></div>
-                    <div class="error">Chybný formát hesla. Heslo není stejně jako poprvé heslo.</div>
+                    <div class="input"><input type="password" wicket:id="passwordAgain" id="passwordAgain" name="passwordAgain" value=""/></div>
+                    <div class="error" wicket:id="passwordAgainFeedback"></div>
                 </div>
 
                 <div class="field">
                     <div class="label">Zadejte svou fotografii: </div>
-                    <div class="input"><input type="text" id="photo" name="photo" value=""/></div>
-                    <div class="error">Fotografie musí být zadána.</div>
+                    <div class="input"><input type="file" wicket:id="image" id="photo" name="photo" value=""/></div>
+                    <div class="error" wicket:id="imageFeedback"></div>
                 </div>
 
                 <div class="field">
-                    <input type="button" value="Zaregistrovat">
+                    <input wicket:id="submit" type="submit" value="Zaregistrovat">
                 </div>
             </fieldset>
         </form>

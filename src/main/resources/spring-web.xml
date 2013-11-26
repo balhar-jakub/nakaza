@@ -65,7 +65,10 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 		</property>
 		<property name="annotatedClasses">
 			<list>
-
+                <value>org.pilirion.nakaza.entity.NakazaLabel</value>
+                <value>org.pilirion.nakaza.entity.NakazaParticipant</value>
+                <value>org.pilirion.nakaza.entity.NakazaStory</value>
+                <value>org.pilirion.nakaza.entity.NakazaUser</value>
 			</list>
 		</property>
 	</bean>

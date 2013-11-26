@@ -26,8 +26,8 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public void saveOrUpdate(NakazaLabel label) {
-        labelDAO.saveOrUpdate(label);
+    public boolean saveOrUpdate(NakazaLabel label) {
+        return labelDAO.saveOrUpdate(label);
     }
 
     @Override

@@ -1,19 +1,49 @@
 package org.pilirion.nakaza.components.page;
 
+import org.apache.wicket.authentication.IAuthenticationStrategy;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.http.WebResponse;
+import org.apache.wicket.request.resource.PackageResourceReference;
+import org.pilirion.nakaza.components.page.character.CreateCharacter;
+import org.pilirion.nakaza.components.page.statics.AboutGame;
+import org.pilirion.nakaza.components.page.statics.AboutWorld;
+import org.pilirion.nakaza.components.page.statics.HomePage;
+import org.pilirion.nakaza.components.panel.user.LoggedBoxPanel;
+import org.pilirion.nakaza.components.panel.user.LoginBoxPanel;
+import org.pilirion.nakaza.security.NakazaAuthenticatedWebSession;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Jakub Balhar
- * Date: 4.9.13
- * Time: 18:08
+ *
  */
 public class BasePage extends WebPage {
     public BasePage(){
+        if(!NakazaAuthenticatedWebSession.get().isSignedIn()){
+            IAuthenticationStrategy strategy = getApplication().getSecuritySettings()
+                    .getAuthenticationStrategy();
+            String[] data = strategy.load();
+            if(data != null && data.length > 1){
+                NakazaAuthenticatedWebSession.get().signIn(data[0], data[1]);
+            }
+        }
 
+        Link aboutPage = new BookmarkablePageLink("homePage", HomePage.class);
+        add(aboutPage);
+
+        Link aboutGame = new BookmarkablePageLink("aboutGame", AboutGame.class);
+        add(aboutGame);
+
+        Link aboutWorld = new BookmarkablePageLink("aboutWorld", AboutWorld.class);
+        add(aboutWorld);
+
+        Link createCharacter = new BookmarkablePageLink("createCharacter", CreateCharacter.class);
+        add(createCharacter);
+
+        add(new LoginBoxPanel("loginBox"));
+        add(new LoggedBoxPanel("loggedBox"));
     }
 
     @Override
@@ -21,8 +51,8 @@ public class BasePage extends WebPage {
         response.render(JavaScriptHeaderItem.forReference(getApplication().getJavaScriptLibrarySettings()
                 .getJQueryReference()));
 
-        //response.render(JavaScriptHeaderItem.forUrl("/files/js/jquery.nivo.slider.js"));
-        //response.render(CssHeaderItem.forUrl("/files/css/smoothness/jquery-ui-1.8.24.custom.css"));
+        response.render(JavaScriptHeaderItem.forReference(new PackageResourceReference(BasePage.class,"js/jquery-ui.min.js")));
+
         super.renderHead(response);
     }
 

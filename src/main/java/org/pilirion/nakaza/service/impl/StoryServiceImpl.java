@@ -26,8 +26,8 @@ public class StoryServiceImpl implements StoryService{
     }
 
     @Override
-    public void saveOrUpdate(NakazaStory story) {
-        storyDAO.saveOrUpdate(story);
+    public boolean saveOrUpdate(NakazaStory story) {
+        return storyDAO.saveOrUpdate(story);
     }
 
     @Override

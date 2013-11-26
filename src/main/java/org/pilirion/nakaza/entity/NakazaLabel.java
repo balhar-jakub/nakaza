@@ -2,10 +2,8 @@ package org.pilirion.nakaza.entity;
 
 import org.pilirion.nakaza.api.Identifiable;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -16,11 +14,13 @@ import java.util.List;
  */
 @javax.persistence.Table(name = "nakaza_label", schema = "public", catalog = "")
 @Entity
-public class NakazaLabel implements Identifiable<Integer> {
+public class NakazaLabel implements Identifiable<Integer>, Serializable {
     private int id;
 
     @javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_key_gen")
+    @SequenceGenerator(name = "id_key_gen", sequenceName = "nakaza_label_ids", allocationSize = 1)
     public Integer getId() {
         return id;
     }

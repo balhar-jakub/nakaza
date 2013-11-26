@@ -26,8 +26,8 @@ public class ParticipantServiceImpl implements ParticipantService{
     }
 
     @Override
-    public void saveOrUpdate(NakazaParticipant participant) {
-        participantDAO.makePersistent(participant);
+    public boolean saveOrUpdate(NakazaParticipant participant) {
+        return participantDAO.saveOrUpdate(participant);
     }
 
     @Override

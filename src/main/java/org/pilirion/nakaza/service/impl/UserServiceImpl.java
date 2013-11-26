@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveOrUpdate(NakazaUser user) {
-        userDAO.saveOrUpdate(user);
+    public boolean saveOrUpdate(NakazaUser user) {
+        return userDAO.saveOrUpdate(user);
     }
 
     @Override
@@ -42,5 +42,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<NakazaUser> findByExample(NakazaUser user) {
         return userDAO.findByExample(user, new String[]{});
+    }
+
+    @Override
+    public NakazaUser authenticate(String username, String password) {
+        return userDAO.authenticate(username, password);
     }
 }

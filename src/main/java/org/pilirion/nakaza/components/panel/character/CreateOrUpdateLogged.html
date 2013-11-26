@@ -1,0 +1,39 @@
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+    <h1>Tvorba nové postavy</h1>
+
+    <form wicket:id="character">
+        <fieldset>
+            <div class="field">
+                <div class="label">Jméno postavy:</div>
+                <div class="input"><input type="text" wicket:id="name" name="name" /></div>
+                <div wicket:id="nameFeedback" class="error">Jméno postavy nesmí být prázdné</div>
+            </div>
+
+            <div class="field">
+                <div class="label">Věk postavy:</div>
+                <div class="input"><input type="text" wicket:id="age" name="age" /></div>
+                <div wicket:id="ageFeedback" class="error">Věk postavy musí být neprázdný a větší než 10.</div>
+            </div>
+
+            <div class="field">
+                <div class="label">Skupina postavy:</div>
+                <div class="select" wicket:id="group">
+
+                </div>
+                <div wicket:id="groupFeedback" class="error"></div>
+            </div>
+
+            <div class="field">
+                <div class="label">Krátký popis vaší postavy:</div>
+                <div class="textarea">
+                    <textarea name="description" wicket:id="description">Sem napište krátký popis vaší postavy, jejího charakteru apod.</textarea>
+                </div>
+                <div wicket:id="descriptionFeedback" class="error">Popis vaší postavy musí být neprázdný.</div>
+            </div>
+
+            <div class="field">
+                <input wicket:id="submit" type="submit" value="Vytvořit">
+            </div>
+        </fieldset>
+    </form>
+</wicket:panel>

@@ -93,6 +93,8 @@
     <orderEntry type="library" name="Maven: commons-dbcp:commons-dbcp:1.4" level="project" />
     <orderEntry type="library" name="Maven: commons-pool:commons-pool:1.5.4" level="project" />
     <orderEntry type="library" name="Maven: postgresql:postgresql:9.1-901.jdbc4" level="project" />
+    <orderEntry type="library" name="Maven: com.mortennobel:java-image-scaling:0.8.4" level="project" />
+    <orderEntry type="library" name="Maven: com.jhlabs:filters:2.0.235" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.14" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:0.9.24" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:0.9.24" level="project" />

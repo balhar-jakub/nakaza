@@ -11,7 +11,7 @@ import java.util.List;
 public interface GenericService<T, Serializable> {
     T getById(Serializable id);
 
-    void saveOrUpdate(T entity);
+    boolean saveOrUpdate(T entity);
 
     List<T> getAll();
 

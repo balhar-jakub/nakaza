@@ -9,4 +9,5 @@ import org.pilirion.nakaza.entity.NakazaUser;
  * Time: 16:57
  */
 public interface UserService extends GenericService<NakazaUser, Integer> {
+    NakazaUser authenticate(String username, String password);
 }

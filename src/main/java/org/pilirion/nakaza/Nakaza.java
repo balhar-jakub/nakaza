@@ -17,6 +17,7 @@ import org.pilirion.nakaza.components.page.story.CreateStory;
 import org.pilirion.nakaza.components.page.story.StoryDetail;
 import org.pilirion.nakaza.components.page.user.Login;
 import org.pilirion.nakaza.components.page.user.Registration;
+import org.pilirion.nakaza.security.NakazaAuthenticatedWebSession;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -35,7 +36,7 @@ public class Nakaza extends AuthenticatedWebApplication implements ApplicationCo
 
     @Override
     protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
-        return null;
+        return NakazaAuthenticatedWebSession.class;
     }
 
     @Override
@@ -80,5 +81,9 @@ public class Nakaza extends AuthenticatedWebApplication implements ApplicationCo
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.ctx = applicationContext;
+    }
+
+    public static String getBaseContext(){
+        return "upload/";
     }
 }

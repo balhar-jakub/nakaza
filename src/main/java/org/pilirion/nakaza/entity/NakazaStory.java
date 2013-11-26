@@ -2,25 +2,22 @@ package org.pilirion.nakaza.entity;
 
 import org.pilirion.nakaza.api.Identifiable;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Jakub Balhar
- * Date: 31.10.13
- * Time: 16:30
+ *
  */
 @javax.persistence.Table(name = "nakaza_story", schema = "public", catalog = "")
 @Entity
-public class NakazaStory implements Identifiable<Integer> {
+public class NakazaStory implements Identifiable<Integer>, Serializable {
     private int id;
 
     @javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_key_gen")
+    @SequenceGenerator(name = "id_key_gen", sequenceName = "nakaza_story_ids", allocationSize = 1)
     public Integer getId() {
         return id;
     }

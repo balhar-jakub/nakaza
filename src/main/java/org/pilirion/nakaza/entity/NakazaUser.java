@@ -2,11 +2,10 @@ package org.pilirion.nakaza.entity;
 
 import org.pilirion.nakaza.api.Identifiable;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import java.sql.Timestamp;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,11 +16,13 @@ import java.util.List;
  */
 @javax.persistence.Table(name = "nakaza_user", schema = "public", catalog = "")
 @Entity
-public class NakazaUser implements Identifiable<Integer> {
+public class NakazaUser implements Identifiable<Integer>, Serializable {
     private int id;
 
     @javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_key_gen")
+    @SequenceGenerator(name = "id_key_gen", sequenceName = "nakaza_user_ids", allocationSize = 1)
     public Integer getId() {
         return id;
     }
@@ -54,16 +55,16 @@ public class NakazaUser implements Identifiable<Integer> {
         this.name = name;
     }
 
-    private Timestamp dateOfBrith;
+    private Date dateOfBirth;
 
-    @javax.persistence.Column(name = "date_of_brith", nullable = false, insertable = true, updatable = true, length = 29, precision = 6)
+    @javax.persistence.Column(name = "date_of_birth", nullable = false, insertable = true, updatable = true, length = 29, precision = 6)
     @Basic
-    public Timestamp getDateOfBrith() {
-        return dateOfBrith;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDateOfBrith(Timestamp dateOfBrith) {
-        this.dateOfBrith = dateOfBrith;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     private String password;
@@ -90,6 +91,29 @@ public class NakazaUser implements Identifiable<Integer> {
         this.image = image;
     }
 
+    private Integer role;
+
+    @javax.persistence.Column(name = "role", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    @Basic
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
+    private NakazaCharacter character;
+
+    @Embedded
+    public NakazaCharacter getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(NakazaCharacter character) {
+        this.character = character;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -98,7 +122,7 @@ public class NakazaUser implements Identifiable<Integer> {
         NakazaUser that = (NakazaUser) o;
 
         if (id != that.id) return false;
-        if (dateOfBrith != null ? !dateOfBrith.equals(that.dateOfBrith) : that.dateOfBrith != null) return false;
+        if (dateOfBirth != null ? !dateOfBirth.equals(that.dateOfBirth) : that.dateOfBirth != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
         if (image != null ? !image.equals(that.image) : that.image != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
@@ -112,7 +136,7 @@ public class NakazaUser implements Identifiable<Integer> {
         int result = id;
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (dateOfBrith != null ? dateOfBrith.hashCode() : 0);
+        result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (image != null ? image.hashCode() : 0);
         return result;
@@ -128,5 +152,12 @@ public class NakazaUser implements Identifiable<Integer> {
 
     public void setId_story(List<NakazaStory> id_story) {
         this.id_story = id_story;
+    }
+
+    public static NakazaUser getEmptyUser() {
+        NakazaUser emptyUser = new NakazaUser();
+        emptyUser.setId_story(new ArrayList<NakazaStory>());
+        emptyUser.setCharacter(new NakazaCharacter());
+        return emptyUser;
     }
 }

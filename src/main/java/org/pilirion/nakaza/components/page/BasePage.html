@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 <head>
-    <link rel="shortcut icon" href="img/logo16.ico">
-    <link rel="image_src" href="img/logo512.png"/>
+    <wicket:link>
+        <link rel="shortcut icon" href="img/logo16.ico">
+        <link rel="image_src" href="img/logo512.png"/>
+        <link rel="stylesheet" href="css/BasePage.css"/>
+    </wicket:link>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="larp, nákaza, zombie, apokalypsa, čr">
@@ -17,7 +20,9 @@
 <div class="page">
     <div class="header">
         <div class="logo">
-            <img wicket:id="logo" src="img/logo128.png" alt="logoHry">
+            <wicket:link>
+                <img src="img/logo128.png" alt="logoHry">
+            </wicket:link>
         </div>
         <div wicket:id="loginBox"></div>
         <div wicket:id="loggedBox"></div>

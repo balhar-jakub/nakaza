@@ -1,8 +1,18 @@
 package org.pilirion.nakaza.utils;
 
+import com.mortennobel.imagescaling.DimensionConstrain;
+import com.mortennobel.imagescaling.ResampleOp;
+import org.apache.wicket.Application;
+import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.util.file.Files;
+import org.apache.wicket.util.lang.Packages;
+import org.pilirion.nakaza.Nakaza;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,6 +21,36 @@ import java.io.File;
  * Time: 14:06
  */
 public class FileUtils {
+    public static String saveImageFileAndReturnPath(FileUpload upload, String name, int maxHeight, int maxWidth){
+        ServletContext context = ((Nakaza) Application.get()).getServletContext();
+        String realPath = context.getRealPath("/WEB-INF/classes/" + Packages.absolutePath(Nakaza.class, Nakaza.getBaseContext()));;
+        File baseFile = new File(realPath);
+
+        String fileType = FileUtils.getFileType(upload.getClientFileName());
+        String fileName = Pwd.getMD5(upload.getClientFileName() + name) + "." + fileType;
+        // Create a new file
+        try {
+
+            File newFile = new File(baseFile, fileName);
+            ResampleOp resampleOp = new ResampleOp(DimensionConstrain.createMaxDimension(maxWidth, maxHeight));
+            BufferedImage imageGame = ImageIO.read(upload.getInputStream());
+            BufferedImage imageGameSized = resampleOp.filter(imageGame, null);
+
+            // Check new file, delete if it already existed
+            FileUtils.cleanFileIfExists(newFile);
+            baseFile.mkdirs();
+            // Save to new file
+            if(!newFile.createNewFile()){
+                throw new IllegalStateException("Unable to write file " + newFile.getAbsolutePath());
+            }
+            ImageIO.write(imageGameSized, fileType, newFile);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Nakaza.getBaseContext() + fileName;
+    }
+
     public static String getFileType(String fileName){
         String[] fileParts = fileName.trim().split("\\.");
         if(fileParts.length > 0){

@@ -4,17 +4,14 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.pilirion.nakaza.components.page.BasePage;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Jakub Balhar
- * Date: 4.11.13
- * Time: 7:47
+ *
  */
 public class HomePage extends BasePage{
-    public HomePage(PageParameters params){
-        init(params);
+    public HomePage(){
+        init();
     }
 
-    private void init(PageParameters params){
+    private void init(){
 
     }
 }
