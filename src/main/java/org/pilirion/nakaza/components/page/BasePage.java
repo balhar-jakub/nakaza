@@ -8,10 +8,12 @@ import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.http.WebResponse;
 import org.apache.wicket.request.resource.PackageResourceReference;
+import org.pilirion.nakaza.components.page.character.CharacterList;
 import org.pilirion.nakaza.components.page.character.CreateCharacter;
 import org.pilirion.nakaza.components.page.statics.AboutGame;
 import org.pilirion.nakaza.components.page.statics.AboutWorld;
 import org.pilirion.nakaza.components.page.statics.HomePage;
+import org.pilirion.nakaza.components.page.story.StoryList;
 import org.pilirion.nakaza.components.panel.user.LoggedBoxPanel;
 import org.pilirion.nakaza.components.panel.user.LoginBoxPanel;
 import org.pilirion.nakaza.security.NakazaAuthenticatedWebSession;
@@ -30,17 +32,20 @@ public class BasePage extends WebPage {
             }
         }
 
-        Link aboutPage = new BookmarkablePageLink("homePage", HomePage.class);
+        Link aboutPage = new BookmarkablePageLink<BasePage>("homePage", HomePage.class);
         add(aboutPage);
 
-        Link aboutGame = new BookmarkablePageLink("aboutGame", AboutGame.class);
+        Link aboutGame = new BookmarkablePageLink<BasePage>("aboutGame", AboutGame.class);
         add(aboutGame);
 
-        Link aboutWorld = new BookmarkablePageLink("aboutWorld", AboutWorld.class);
+        Link aboutWorld = new BookmarkablePageLink<BasePage>("aboutWorld", AboutWorld.class);
         add(aboutWorld);
 
-        Link createCharacter = new BookmarkablePageLink("createCharacter", CreateCharacter.class);
-        add(createCharacter);
+        Link characters = new BookmarkablePageLink<BasePage>("characters", CharacterList.class);
+        add(characters);
+
+        Link stories = new BookmarkablePageLink<BasePage>("stories", StoryList.class);
+        add(stories);
 
         add(new LoginBoxPanel("loginBox"));
         add(new LoggedBoxPanel("loggedBox"));

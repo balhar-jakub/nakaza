@@ -1,5 +1,7 @@
 package org.pilirion.nakaza;
 
+import org.apache.wicket.ConverterLocator;
+import org.apache.wicket.IConverterLocator;
 import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
@@ -17,8 +19,11 @@ import org.pilirion.nakaza.components.page.story.CreateStory;
 import org.pilirion.nakaza.components.page.story.StoryDetail;
 import org.pilirion.nakaza.components.page.user.Login;
 import org.pilirion.nakaza.components.page.user.Registration;
+import org.pilirion.nakaza.converter.LabelConverter;
+import org.pilirion.nakaza.entity.NakazaLabel;
 import org.pilirion.nakaza.security.NakazaAuthenticatedWebSession;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
@@ -33,6 +38,9 @@ import org.springframework.stereotype.Component;
 public class Nakaza extends AuthenticatedWebApplication implements ApplicationContextAware {
     private static final String DEFAULT_ENCODING = "UTF-8";
     private ApplicationContext ctx;
+
+    @Autowired
+    private LabelConverter labelConverter;
 
     @Override
     protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
@@ -85,5 +93,14 @@ public class Nakaza extends AuthenticatedWebApplication implements ApplicationCo
 
     public static String getBaseContext(){
         return "upload/";
+    }
+
+    protected IConverterLocator newConverterLocator() {
+        ConverterLocator locator = (ConverterLocator) super.newConverterLocator();
+
+        locator.set(NakazaLabel.class, labelConverter);
+
+        return locator;
+
     }
 }

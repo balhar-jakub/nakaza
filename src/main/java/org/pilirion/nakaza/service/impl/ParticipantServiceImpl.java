@@ -44,4 +44,14 @@ public class ParticipantServiceImpl implements ParticipantService{
     public List<NakazaParticipant> findByExample(NakazaParticipant participant) {
         return participantDAO.findByExample(participant,new String[]{});
     }
+
+    @Override
+    public List<NakazaParticipant> getUnique(NakazaParticipant validatableEntity) {
+        throw new UnsupportedOperationException("Not implemented");
+    }
+
+    @Override
+    public List<NakazaParticipant> getFirstChoices(String s, int auto_complete_choices) {
+        throw new UnsupportedOperationException("Not implemented");
+    }
 }

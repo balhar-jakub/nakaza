@@ -13,53 +13,29 @@
         <h1>Tvorba postavy</h1>
 
         <div class="info">
-            Zbývá <span class="availablePoints">20</span> bodů schopnosti.
+            Zbývá <span class="availablePoints" wicket:id="pointsRemaining">20</span> bodů schopnosti.
         </div>
 
+        <form wicket:id="storiesForm">
+            <div class="error" wicket:id="feedback"></div>
         <div class="storyLines">
             <div class="availableStories">
                 <h3>Příběhy, kterých se můžete zůčastnit</h3>
-                <div id="sortable1" class="connectedSortable">
-                    <div class="story">Příběh 1</div>
-                    <div class="story">Příběh 2</div>
-                    <div class="story">Příběh 3</div>
+                <div id="sortable1" class="connectedSortable" wicket:id="availableStories">
+                    <div class="story"><span wicket:id="story">Příběh 1 </span><input type="button" wicket:id="change" value="Přidej" /></div>
                 </div>
             </div>
             <div class="myStories">
                 <h3>Vaše příběhy</h3>
-                <div id="sortable2" class="connectedSortable">
-                    <div class="story">Můj příběh 1</div>
-                    <div class="story">2 Další příběh</div>
-                    <div class="story">Podivný příběh, který envíš jestli chceš.</div>
+                <div id="sortable2" class="connectedSortable" wicket:id="myStories">
+                    <div class="story"><span wicket:id="story">Můj příběh 1 </span><input type="button" wicket:id="change" value="Odeber" /></div>
                 </div>
             </div>
         </div>
+        </form>
     </div>
 
     <div class="right">
-        <h2>Vaše postava</h2>
-        <!-- Additional information about page -->
-        <!-- At HomePage there is information about completed characters -->
-        <!-- Last 5 inserted players -->
-        <div class="character">
-            <div class="avatar">
-                <a href="characterDetail.html">
-                    <img src="files/upload/hrac1.png" alt="characterAvatar"/>
-                </a>
-            </div>
-            <div class="about">
-                Quisque pulvinar nisi quis semper rhoncus. Fusce at diam mollis, facilisis justo ut, sodales lacus.
-                Maecenas enim dolor, sollicitudin eget consequat non, pulvinar non lorem. Pellentesque eget vehicula
-                orci. Mauris interdum sollicitudin turpis vitae iaculis. Cras est lorem, condimentum vitae ultricies
-                id, varius a odio. Nunc sodales augue consequat leo viverra, et pharetra mauris imperdiet. Sed ut
-                adipiscing neque. Duis vehicula malesuada enim. Aenean quis dapibus justo.
-            </div>
-        </div>
-
-        <div class="stories">
-            <div class="story"><a href="storyDetail.html">Jméno příběhu číslo 1</a></div>
-            <div class="story"><a href="storyDetail.html">Jméno příběhu číslo 2</a></div>
-            <div class="story"><a href="storyDetail.html">Jméno příběhu číslo 3</a></div>
-        </div>
+        <div wicket:id="shortCharacters"></div>
     </div>
 </wicket:extend>

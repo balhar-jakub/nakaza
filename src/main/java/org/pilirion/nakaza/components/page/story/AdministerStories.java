@@ -1,20 +1,23 @@
 package org.pilirion.nakaza.components.page.story;
 
-import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.pilirion.nakaza.components.page.BasePage;
+import org.pilirion.nakaza.components.panel.story.AdministerPanel;
+import org.pilirion.nakaza.service.StoryService;
+
 
 /**
- * Created by IntelliJ IDEA.
- * User: Jakub Balhar
- * Date: 4.11.13
- * Time: 7:49
+ *
  */
 public class AdministerStories extends BasePage {
-    public AdministerStories(PageParameters params){
-        init(params);
+    @SpringBean
+    StoryService storyService;
+
+    public AdministerStories(){
+        init();
     }
 
-    private void init(PageParameters params){
-
+    private void init(){
+        add(new AdministerPanel("stories", storyService.getAll()));
     }
 }

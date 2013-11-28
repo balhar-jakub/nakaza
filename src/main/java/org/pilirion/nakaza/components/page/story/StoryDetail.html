@@ -2,91 +2,42 @@
     <div class="left">
         <h1>Detail příběhu</h1>
 
-        <h2>Jméno</h2>
-        <div class="description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam scelerisque, purus et viverra
-            mattis, augue purus adipiscing tellus, vel suscipit ipsum nibh id mauris. Sed diam urna,
-            rhoncus convallis nibh sed, pretium vulputate elit. Interdum et malesuada fames ac ante
-            ipsum primis in faucibus. Phasellus orci neque, adipiscing eu semper at, luctus at nulla.
-            Quisque sit amet metus sagittis, bibendum urna a, fermentum eros. Phasellus leo metus,
-            ultricies at enim eget, posuere tempor lacus. Morbi pulvinar ullamcorper cursus. Cras a
-            nisl nisl. Curabitur posuere vehicula mauris sit amet porttitor. Donec risus orci,
-            tincidunt sed laoreet eget, luctus vitae erat. Suspendisse faucibus, lectus eget feugiat
-            tristique, dui est convallis turpis, quis volutpat eros arcu ac augue. Maecenas ac velit
-            blandit, faucibus metus id, facilisis velit. Duis ultricies ipsum vitae sapien gravida
-            pellentesque. Phasellus lobortis iaculis congue.s
+        <h2 wicket:id="name"></h2>
+        <div class="description" wicket:id="descriptionPublic">
+            Public description of the story
+        </div>
+
+        <div class="description" wicket:id="descriptionPrivate">
+            Private description of the story. Available only if I am already part od the
+            story.
         </div>
 
         <h3>Štítky charakterizující tento příběh.</h3>
 
-        <div class="labels">
-            <div class="label">Label 1</div>
-            <div class="label">Label 2</div>
-            <div class="label">Label 3</div>
-            <div class="label">Label 3</div>
-            <div class="label">Label 3</div>
+        <div class="labels" wicket:id="labels">
+            <div class="label" wicket:id="label">Label 1</div>
         </div>
         <div class="clear"></div>
 
         <h3>Účastníci tohoto příběhu</h3>
 
-        <div class="participant myself">
-            <div class="group">Skupina: <span>Zombie</span></div>
-            <div class="private description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam scelerisque, purus et viverra
-                mattis, augue purus adipiscing tellus, vel suscipit ipsum nibh id mauris. Sed diam urna,
-                rhoncus convallis nibh sed, pretium vulputate elit. Interdum et malesuada fames ac ante
-                ipsum primis in faucibus. Phasellus orci neque, adipiscing eu semper at, luctus at nulla.
-                Quisque sit amet metus sagittis, bibendum urna a, fermentum eros.
-            </div>
-            <div class="labels">
-                <div class="label">Label 1</div>
-                <div class="label">Label 2</div>
-                <div class="label">Label 3</div>
-                <div class="label">Label 3</div>
-                <div class="label">Label 3</div>
-            </div>
+        <div wicket:id="participants">
+            <div class="participant">
+                <div class="description" wicket:id="descriptionPublic"></div>
+                <div class="group">Skupina: <span wicket:id="group">Přeživší</span></div>
+                <div class="private description" wicket:id="descriptionPrivate">
+                    <!-- Shown only if I am participant and furthermore this specific one. -->
+                </div>
+                <div class="labels" wicket:id="labels">
+                    <div class="label" wicket:id="label">Label 3</div>
+                </div>
 
-            <div class="clear"></div>
-        </div>
-
-        <div class="participant">
-            <div class="group">Skupina: <span>Přeživší</span></div>
-            <div class="labels">
-                <div class="label">Label 1</div>
-                <div class="label">Label 2</div>
-                <div class="label">Label 3</div>
-                <div class="label">Label 3</div>
-                <div class="label">Label 3</div>
+                <div class="clear"></div>
             </div>
-
-            <div class="clear"></div>
         </div>
     </div>
 
     <div class="right">
-        <h2>Poslední přidané příběhy</h2>
-
-        <div class="story">
-            <span class="publicDescription"><a href="storyDetailPublic.html">Description of story</a></span>
-
-            <div class="labels">
-                <div class="label">Detektivní</div>
-                <div class="label">Akční</div>
-            </div>
-
-            <div class="clear"></div>
-        </div>
-
-        <div class="story">
-            <span class="publicDescription"><a href="storyDetailPublic.html">Description of story</a></span>
-
-            <div class="labels">
-                <div class="label">Detektivní</div>
-                <div class="label">Akční</div>
-            </div>
-
-            <div class="clear"></div>
-        </div>
+        <div wicket:id="lastAddedStories"></div>
     </div>
 </wicket:extend>

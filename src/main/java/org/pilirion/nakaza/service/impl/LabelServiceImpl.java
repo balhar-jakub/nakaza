@@ -1,5 +1,6 @@
 package org.pilirion.nakaza.service.impl;
 
+import org.hibernate.criterion.Restrictions;
 import org.pilirion.nakaza.dao.LabelDAO;
 import org.pilirion.nakaza.entity.NakazaLabel;
 import org.pilirion.nakaza.service.LabelService;
@@ -43,5 +44,20 @@ public class LabelServiceImpl implements LabelService {
     @Override
     public List<NakazaLabel> findByExample(NakazaLabel label) {
         return labelDAO.findByExample(label, new String[]{});
+    }
+
+    @Override
+    public List<NakazaLabel> getUnique(NakazaLabel label) {
+        return labelDAO.findByCriteria(Restrictions.eq("name", label.getName()));
+    }
+
+    @Override
+    public List<NakazaLabel> getFirstChoices(String s, int auto_complete_choices) {
+        return labelDAO.getFirstChoices(s, auto_complete_choices);
+    }
+
+    @Override
+    public List<NakazaLabel> getByAutoCompletable(String labelName) {
+        return labelDAO.findByCriteria(Restrictions.eq("name",labelName));
     }
 }

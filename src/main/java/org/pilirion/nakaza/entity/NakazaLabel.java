@@ -1,5 +1,6 @@
 package org.pilirion.nakaza.entity;
 
+import org.apache.wicket.extensions.ajax.markup.html.autocomplete.IAutoCompletable;
 import org.pilirion.nakaza.api.Identifiable;
 
 import javax.persistence.*;
@@ -7,14 +8,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Jakub Balhar
- * Date: 31.10.13
- * Time: 16:30
+ *
  */
 @javax.persistence.Table(name = "nakaza_label", schema = "public", catalog = "")
 @Entity
-public class NakazaLabel implements Identifiable<Integer>, Serializable {
+public class NakazaLabel implements Identifiable<Integer>, Serializable, IAutoCompletable {
     private int id;
 
     @javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
@@ -77,7 +75,7 @@ public class NakazaLabel implements Identifiable<Integer>, Serializable {
 
     private List<NakazaParticipant> id_participant;
 
-    @ManyToMany(mappedBy = "id_label")
+    @ManyToMany(mappedBy = "labels")
     public List<NakazaParticipant> getId_participant() {
         return id_participant;
     }
@@ -88,12 +86,18 @@ public class NakazaLabel implements Identifiable<Integer>, Serializable {
 
     private List<NakazaStory> id_story;
 
-    @ManyToMany(mappedBy = "id_label")
+    @ManyToMany(mappedBy = "labels")
     public List<NakazaStory> getId_story() {
         return id_story;
     }
 
     public void setId_story(List<NakazaStory> id_story) {
         this.id_story = id_story;
+    }
+
+    @Override
+    @Transient
+    public String getAutoCompleteData() {
+        return name;
     }
 }

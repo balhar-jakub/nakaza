@@ -9,10 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Jakub Balhar
- * Date: 31.10.13
- * Time: 16:30
+ *
  */
 @javax.persistence.Table(name = "nakaza_user", schema = "public", catalog = "")
 @Entity
@@ -84,7 +81,7 @@ public class NakazaUser implements Identifiable<Integer>, Serializable {
     @javax.persistence.Column(name = "image", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     @Basic
     public String getImage() {
-        return image;
+        return (image != null) ? image : NakazaUser.getDefaultPersonImage();
     }
 
     public void setImage(String image) {
@@ -101,6 +98,18 @@ public class NakazaUser implements Identifiable<Integer>, Serializable {
 
     public void setRole(Integer role) {
         this.role = role;
+    }
+
+    private Integer remainingPoints;
+
+    @javax.persistence.Column(name = "remaining_points", nullable = false, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    @Basic
+    public Integer getRemainingPoints() {
+        return remainingPoints;
+    }
+
+    public void setRemainingPoints(Integer remainingPoints) {
+        this.remainingPoints = remainingPoints;
     }
 
     private NakazaCharacter character;
@@ -142,22 +151,26 @@ public class NakazaUser implements Identifiable<Integer>, Serializable {
         return result;
     }
 
-    private List<NakazaStory> id_story;
+    private List<NakazaStory> stories;
 
     @javax.persistence.JoinTable(name = "nakaza_user_has_story", catalog = "", schema = "public", joinColumns = @javax.persistence.JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false), inverseJoinColumns = @javax.persistence.JoinColumn(name = "id_story", referencedColumnName = "id", nullable = false))
     @ManyToMany
-    public List<NakazaStory> getId_story() {
-        return id_story;
+    public List<NakazaStory> getStories() {
+        return stories;
     }
 
-    public void setId_story(List<NakazaStory> id_story) {
-        this.id_story = id_story;
+    public void setStories(List<NakazaStory> stories) {
+        this.stories = stories;
     }
 
     public static NakazaUser getEmptyUser() {
         NakazaUser emptyUser = new NakazaUser();
-        emptyUser.setId_story(new ArrayList<NakazaStory>());
+        emptyUser.setStories(new ArrayList<NakazaStory>());
         emptyUser.setCharacter(new NakazaCharacter());
         return emptyUser;
+    }
+
+    private static String getDefaultPersonImage() {
+        return "img/question_icon.png";
     }
 }

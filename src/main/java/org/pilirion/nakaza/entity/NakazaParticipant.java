@@ -1,9 +1,12 @@
 package org.pilirion.nakaza.entity;
 
+import org.hibernate.annotations.Cascade;
 import org.pilirion.nakaza.api.Identifiable;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -28,7 +31,13 @@ public class NakazaParticipant implements Identifiable<Integer>, Serializable {
 
     private String group;
 
-    @javax.persistence.Column(name = "group", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    @javax.persistence.Column(
+            name = "group",
+            nullable = true,
+            insertable = true,
+            updatable = true,
+            length = 2147483647,
+            precision = 0)
     @Basic
     public String getGroup() {
         return group;
@@ -48,6 +57,18 @@ public class NakazaParticipant implements Identifiable<Integer>, Serializable {
 
     public void setDescriptionPrivate(String descriptionPrivate) {
         this.descriptionPrivate = descriptionPrivate;
+    }
+
+    private String descriptionPublic;
+
+    @javax.persistence.Column(name = "description_public", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    @Basic
+    public String getDescriptionPublic() {
+        return descriptionPublic;
+    }
+
+    public void setDescriptionPublic(String descriptionPublic) {
+        this.descriptionPublic = descriptionPublic;
     }
 
     @Override
@@ -73,15 +94,57 @@ public class NakazaParticipant implements Identifiable<Integer>, Serializable {
         return result;
     }
 
-    private List<NakazaLabel> id_label;
+    private List<NakazaLabel> labels;
 
     @javax.persistence.JoinTable(name = "nakaza_participant_has_label", catalog = "", schema = "public", joinColumns = @javax.persistence.JoinColumn(name = "id_participant", referencedColumnName = "id", nullable = false), inverseJoinColumns = @javax.persistence.JoinColumn(name = "id_label", referencedColumnName = "id", nullable = false))
     @ManyToMany
-    public List<NakazaLabel> getId_label() {
-        return id_label;
+    public List<NakazaLabel> getLabels() {
+        return labels;
     }
 
-    public void setId_label(List<NakazaLabel> id_label) {
-        this.id_label = id_label;
+    public void setLabels(List<NakazaLabel> labels) {
+        this.labels = labels;
+    }
+
+    private NakazaStory story;
+
+    @ManyToOne(cascade = javax.persistence.CascadeType.ALL)
+    @JoinColumn(
+            name = "story",
+            referencedColumnName = "id",
+            insertable = true,
+            updatable = true
+    )
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    public NakazaStory getStory() {
+        return story;
+    }
+
+    public void setStory(NakazaStory story) {
+        this.story = story;
+    }
+
+    private NakazaUser user;
+
+    @ManyToOne(cascade = javax.persistence.CascadeType.ALL)
+    @JoinColumn(
+            name = "id_user",
+            referencedColumnName = "id",
+            insertable = true,
+            updatable = true
+    )
+    public NakazaUser getUser() {
+        return user;
+    }
+
+    public void setUser(NakazaUser user) {
+        this.user = user;
+    }
+
+
+    public static NakazaParticipant getEmptyParticipant() {
+        NakazaParticipant participant = new NakazaParticipant();
+        participant.setLabels(new ArrayList<NakazaLabel>());
+        return participant;
     }
 }

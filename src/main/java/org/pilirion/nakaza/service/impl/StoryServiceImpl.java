@@ -44,4 +44,19 @@ public class StoryServiceImpl implements StoryService{
     public List<NakazaStory> findByExample(NakazaStory story) {
         return storyDAO.findByExample(story,new String[]{});
     }
+
+    @Override
+    public List<NakazaStory> getUnique(NakazaStory validatableEntity) {
+        throw new UnsupportedOperationException("Not implemented");
+    }
+
+    @Override
+    public List<NakazaStory> getFirstChoices(String s, int auto_complete_choices) {
+        throw new UnsupportedOperationException("Not implemented");
+    }
+
+    @Override
+    public List<NakazaStory> getLastAdded(int maxStories) {
+        return storyDAO.getLastAdded(maxStories);
+    }
 }
