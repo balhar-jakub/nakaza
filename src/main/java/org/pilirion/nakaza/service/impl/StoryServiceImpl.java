@@ -1,5 +1,6 @@
 package org.pilirion.nakaza.service.impl;
 
+import org.hibernate.criterion.Restrictions;
 import org.pilirion.nakaza.dao.StoryDAO;
 import org.pilirion.nakaza.entity.NakazaStory;
 import org.pilirion.nakaza.service.StoryService;
@@ -58,5 +59,10 @@ public class StoryServiceImpl implements StoryService{
     @Override
     public List<NakazaStory> getLastAdded(int maxStories) {
         return storyDAO.getLastAdded(maxStories);
+    }
+
+    @Override
+    public List<NakazaStory> getAllApproved(int groupId) {
+        return storyDAO.getAllAproved(groupId);
     }
 }

@@ -7,6 +7,7 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.pilirion.nakaza.Nakaza;
@@ -37,7 +38,7 @@ public class ListShortCharacters extends Panel {
                 PageParameters params = new PageParameters();
                 params.add("id", user.getId());
                 Link characterDetail = new BookmarkablePageLink<BasePage>("characterDetail", CharacterDetail.class, params);
-                characterDetail.add(new Image("characterImage", new PackageResourceReference(Nakaza.class, user.getImage())));
+                characterDetail.add(new Label("characterName", Model.of(user.getCharacter().getName())));
                 item.add(characterDetail);
 
                 item.add(new Label("description", character.getDescription()).setEscapeModelStrings(false));

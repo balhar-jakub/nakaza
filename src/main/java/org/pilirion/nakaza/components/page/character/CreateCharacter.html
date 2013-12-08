@@ -1,9 +1,19 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-    <div class="left">
-        <div wicket:id="createOrUpdateLogged"></div>
-    </div>
+    <div class="w-col w-col-8 content">
+        <div class="left-menu" wicket:id="leftMenus">
 
-    <div class="right">
-        <div wicket:id="shortCharacters"></div>
+        </div>
+        <div class="middle-cotent">
+            <div wicket:id="createOrUpdateLogged"></div>
+        </div>
+    </div>
+    <div class="w-col w-col-2 right-info">
+        <div class="right-menu">
+            <div class="sign-in" wicket:id="signInPanel">
+
+            </div>
+            <div class="right-menu-header rotate">Postavy</div>
+            <div wicket:id="shortCharacters" class="right-menu-content"></div>
+        </div>
     </div>
 </wicket:extend>

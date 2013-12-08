@@ -1,47 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 <head>
+    <meta charset="utf-8">
+    <title>Nákaza</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <wicket:link>
-        <link rel="shortcut icon" href="img/logo16.ico">
-        <link rel="image_src" href="img/logo512.png"/>
-        <link rel="stylesheet" href="css/BasePage.css"/>
+        <link rel="stylesheet" type="text/css" href="css/normalize.css">
+        <link rel="stylesheet" type="text/css" href="css/webflow.css">
+        <link rel="stylesheet" type="text/css" href="css/nakaza.css">
+        <link rel="icon" type="image/x-icon" href="img/logo16.ico">
+        <link rel="apple-touch-icon" href="img/logo16.ico">
     </wicket:link>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="keywords" content="larp, nákaza, zombie, apokalypsa, čr">
-    <meta name="description" content="Nákaza, aneb jak to vypadalo na začátku zombie apokalypsy.">
-
-    <title>
-        <wicket:message key="title">Nákaza</wicket:message>
-    </title>
 </head>
-
 <body>
-<div class="page">
-    <div class="header">
-        <div class="logo">
+<div class="w-clearfix header">
+    <div class="menu">
+        <a class="menu-item" href="www.pilirion.org">Pilirion</a>
+        <a class="menu-item" href="www.larpovadatabaze.cz">Larpová databáze</a>
+        <a class="menu-item" href="www.larp.cz">Larp.cz</a>
+    </div>
+</div>
+<div class="logo">
+    <div class="w-row">
+        <div class="w-col w-col-2"></div>
+        <div class="w-col w-col-10 image-section">
             <wicket:link>
-                <img src="img/logo128.png" alt="logoHry">
+                <img class="logo_image" src="img/nakaza_logo.png" alt="nakaza_logo.png">
             </wicket:link>
         </div>
-        <div wicket:id="loginBox"></div>
-        <div wicket:id="loggedBox"></div>
     </div>
+</div>
+<div class="w-row main">
+    <div class="w-col w-col-1"></div>
+    <wicket:child>
 
-    <div class="menu">
-        <div class="items">
-            <span class="item"><a wicket:id="homePage">Domů</a></span>
-            <span class="item"><a wicket:id="aboutGame">O hře</a></span>
-            <span class="item"><a wicket:id="aboutWorld">O světě</a></span>
-            <span class="item"><a wicket:id="characters">Postavy</a></span>
-            <span class="item"><a wicket:id="stories">Příběhy</a></span>
-        </div>
-    </div>
-
-    <div class="content">
-        <wicket:child>
-
-        </wicket:child>
+    </wicket:child>
+    <div class="w-col w-col-1"></div>
+</div>
+<div class="footer">
+    <div class="footer-content"><strong>Design</strong>: Jindřích "Estanor" Mašek
+        <br><strong>Developers</strong>: Bára Kořistková, Jakub Balhar
+        <br><strong>Story:</strong> Lukáš "Finmer" Beran
     </div>
 </div>
 </body>

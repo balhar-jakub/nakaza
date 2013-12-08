@@ -3,6 +3,7 @@ package org.pilirion.nakaza.components.page.user;
 import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
@@ -17,7 +18,14 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.pilirion.nakaza.behavior.AjaxFeedbackUpdatingBehavior;
 import org.pilirion.nakaza.components.form.*;
 import org.pilirion.nakaza.components.page.BasePage;
+import org.pilirion.nakaza.components.page.character.CharacterList;
+import org.pilirion.nakaza.components.page.statics.AboutGame;
+import org.pilirion.nakaza.components.page.statics.AboutWorld;
 import org.pilirion.nakaza.components.page.statics.HomePage;
+import org.pilirion.nakaza.components.page.story.StoryList;
+import org.pilirion.nakaza.components.panel.layout.ButtonLike;
+import org.pilirion.nakaza.components.panel.layout.LeftMenus;
+import org.pilirion.nakaza.components.panel.layout.NakazaSignInPanel;
 import org.pilirion.nakaza.entity.NakazaUser;
 import org.pilirion.nakaza.security.NakazaAuthenticatedWebSession;
 import org.pilirion.nakaza.security.NakazaRoles;
@@ -26,6 +34,7 @@ import org.pilirion.nakaza.utils.FileUtils;
 import org.pilirion.nakaza.utils.Pwd;
 import org.pilirion.nakaza.utils.RandomString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,12 +49,27 @@ public class Registration extends BasePage {
     }
 
     private void init(){
+        add(new NakazaSignInPanel("signInPanel"));
+
+        List<ButtonLike> upper = new ArrayList<ButtonLike>();
+        upper.add(new ButtonLike("Domů", HomePage.class));
+        upper.add(new ButtonLike("O hře", AboutGame.class));
+        upper.add(new ButtonLike("O světě", AboutWorld.class));
+        upper.add(new ButtonLike("Příběhy", StoryList.class));
+        upper.add(new ButtonLike("Postavy", CharacterList.class));
+        List<ButtonLike> lower = new ArrayList<ButtonLike>();
+        add(new LeftMenus("leftMenus", upper, lower));
+
         NakazaUser logged = ((NakazaAuthenticatedWebSession)(NakazaAuthenticatedWebSession.get())).getLoggedUser();
         boolean isPwdRequired = false;
+        String header = "Registrace";
         if(logged == null) {
             logged = NakazaUser.getEmptyUser();
             isPwdRequired = true;
+        } else {
+            header = "Editace";
         }
+        add(new Label("registrationHeader", header));
 
         Form<NakazaUser> registration = new Form<NakazaUser>("registration",
                 new CompoundPropertyModel<NakazaUser>(logged)){
@@ -62,6 +86,7 @@ public class Registration extends BasePage {
                             new RandomString(5).nextString(), 120, 120));
                 }
                 user.setPassword(Pwd.getSHA(user.getPassword()));
+                user.setRemainingPoints(20);
                 if(userService.saveOrUpdate(user)){
                     throw new RestartResponseException(HomePage.class);
                 }

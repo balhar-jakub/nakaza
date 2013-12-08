@@ -1,9 +1,19 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-    <div class="left">
-        <div wicket:id="createStory"></div>
-    </div>
+    <div class="w-col w-col-8 content">
+        <div class="left-menu" wicket:id="leftMenus">
 
-    <div class="right">
-        <div wicket:id="lastAddedStories"></div>
+        </div>
+        <div class="middle-cotent">
+            <div wicket:id="createStory"></div>
+        </div>
+    </div>
+    <div class="w-col w-col-2 right-info">
+        <div class="right-menu">
+            <div class="sign-in" wicket:id="signInPanel">
+
+            </div>
+            <div class="right-menu-header rotate right-shift">Nejnovější příběhy</div>
+            <div wicket:id="lastAddedStories" class="right-menu-content"></div>
+        </div>
     </div>
 </wicket:extend>

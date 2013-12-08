@@ -1,16 +1,19 @@
 <wicket:panel xmlns:wicket="http://wicket.apache.org">
     <div wicket:id="characters">
-        <div class="character">
-            <div class="avatar">
-                <a wicket:id="characterDetail">
-                    <img wicket:id="characterImage" alt="characterAvatar"/>
-                </a>
-            </div>
-            <div class="about" wicket:id="description">
+        <div class="right-menu-section">
+            <div class="character">
+                <div class="name">
+                    <a wicket:id="characterDetail">
+                        <span wicket:id="characterName">Name</span>
+                    </a>
+                </div>
 
+                <div class="about" wicket:id="description">
+
+                </div>
             </div>
+
+            <div class="stories" wicket:id="shortStories"></div>
         </div>
-
-        <div class="stories" wicket:id="shortStories"></div>
     </div>
 </wicket:panel>

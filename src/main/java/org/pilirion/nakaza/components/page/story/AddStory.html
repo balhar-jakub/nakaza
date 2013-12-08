@@ -1,41 +1,63 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-    <script type="text/javascript">
-        $(function() {
-            $( "#sortable1, #sortable2" ).sortable({
-                connectWith: ".connectedSortable"
-            }).disableSelection();
-        });
-    </script>
-    <!--
-        Tři stavy - Nepřihlášen, Postava už existuje, Tvorba nové postavy.
-    -->
-    <div class="left">
-        <h1>Tvorba postavy</h1>
+    <div class="w-col w-col-8 content">
+        <div class="left-menu" wicket:id="leftMenus">
 
-        <div class="info">
-            Zbývá <span class="availablePoints" wicket:id="pointsRemaining">20</span> bodů schopnosti.
         </div>
+        <div class="middle-cotent">
+            <h1>Tvorba postavy</h1>
 
-        <form wicket:id="storiesForm">
-            <div class="error" wicket:id="feedback"></div>
-        <div class="storyLines">
-            <div class="availableStories">
-                <h3>Příběhy, kterých se můžete zůčastnit</h3>
-                <div id="sortable1" class="connectedSortable" wicket:id="availableStories">
-                    <div class="story"><span wicket:id="story">Příběh 1 </span><input type="button" wicket:id="change" value="Přidej" /></div>
-                </div>
+            <div class="info">
+                Zbývá <span class="availablePoints" wicket:id="pointsRemaining">20</span> bodů schopnosti.
             </div>
-            <div class="myStories">
-                <h3>Vaše příběhy</h3>
-                <div id="sortable2" class="connectedSortable" wicket:id="myStories">
-                    <div class="story"><span wicket:id="story">Můj příběh 1 </span><input type="button" wicket:id="change" value="Odeber" /></div>
+
+            <form wicket:id="storiesForm">
+                <div class="error" wicket:id="feedback"></div>
+                <div class="storyLines">
+                    <div class="availableStories">
+                        <h3>Příběhy, kterých se můžete zůčastnit</h3>
+
+                        <div id="sortable1" class="connectedSortable" wicket:id="availableStories">
+                            <div class="story">
+                                <span wicket:id="storyPoints" class="storyPoints"></span>
+                                <a wicket:id="storyDetail">
+                                    <span wicket:id="story" class="storyName">Příběh 1 </span>
+                                </a>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="participants" wicket:id="participants">
+                                <div class="participant">
+                                    <span wicket:id="participantDescription"></span>
+                                    <input type="button" wicket:id="change" class="storyChange" value="Přidej"/>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="myStories">
+                        <h3>Vaše příběhy</h3>
+
+                        <div id="sortable2" class="connectedSortable" wicket:id="myStories">
+                            <div class="story">
+                                <span wicket:id="storyPoints" class="storyPoints"></span>
+                                <a wicket:id="storyDetail">
+                                    <span wicket:id="story" class="storyName">Příběh 1 </span>
+                                </a>
+                                <input type="button" wicket:id="change" class="storyChange" value="Odeber"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
-        </form>
     </div>
+    <div class="w-col w-col-2 right-info">
+        <div class="right-menu">
+            <div class="sign-in" wicket:id="signInPanel">
 
-    <div class="right">
-        <div wicket:id="shortCharacters"></div>
+            </div>
+            <div class="right-menu-header rotate right-shift">Nejnovější postavy</div>
+            <div wicket:id="shortCharacters" class="right-menu-content"></div>
+        </div>
     </div>
 </wicket:extend>

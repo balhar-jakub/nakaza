@@ -31,24 +31,6 @@ public class BasePage extends WebPage {
                 NakazaAuthenticatedWebSession.get().signIn(data[0], data[1]);
             }
         }
-
-        Link aboutPage = new BookmarkablePageLink<BasePage>("homePage", HomePage.class);
-        add(aboutPage);
-
-        Link aboutGame = new BookmarkablePageLink<BasePage>("aboutGame", AboutGame.class);
-        add(aboutGame);
-
-        Link aboutWorld = new BookmarkablePageLink<BasePage>("aboutWorld", AboutWorld.class);
-        add(aboutWorld);
-
-        Link characters = new BookmarkablePageLink<BasePage>("characters", CharacterList.class);
-        add(characters);
-
-        Link stories = new BookmarkablePageLink<BasePage>("stories", StoryList.class);
-        add(stories);
-
-        add(new LoginBoxPanel("loginBox"));
-        add(new LoggedBoxPanel("loggedBox"));
     }
 
     @Override
@@ -57,6 +39,7 @@ public class BasePage extends WebPage {
                 .getJQueryReference()));
 
         response.render(JavaScriptHeaderItem.forReference(new PackageResourceReference(BasePage.class,"js/jquery-ui.min.js")));
+        response.render(JavaScriptHeaderItem.forReference(new PackageResourceReference(BasePage.class,"js/webflow.js")));
 
         super.renderHead(response);
     }

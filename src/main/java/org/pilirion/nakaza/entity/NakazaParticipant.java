@@ -32,7 +32,7 @@ public class NakazaParticipant implements Identifiable<Integer>, Serializable {
     private String group;
 
     @javax.persistence.Column(
-            name = "group",
+            name = "group_id",
             nullable = true,
             insertable = true,
             updatable = true,
@@ -108,14 +108,13 @@ public class NakazaParticipant implements Identifiable<Integer>, Serializable {
 
     private NakazaStory story;
 
-    @ManyToOne(cascade = javax.persistence.CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(
             name = "story",
             referencedColumnName = "id",
             insertable = true,
             updatable = true
     )
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     public NakazaStory getStory() {
         return story;
     }
@@ -146,5 +145,20 @@ public class NakazaParticipant implements Identifiable<Integer>, Serializable {
         NakazaParticipant participant = new NakazaParticipant();
         participant.setLabels(new ArrayList<NakazaLabel>());
         return participant;
+    }
+
+    @Transient
+    public String getGroupText() {
+        String groupText;
+        if(getGroup().equals("0")) {
+            groupText = "Zombie";
+        } else if(getGroup().equals("1")) {
+            groupText = "Přeživší";
+        } else if(getGroup().equals("2")) {
+            groupText = "Armáda";
+        } else {
+            groupText = "";
+        }
+        return groupText;
     }
 }

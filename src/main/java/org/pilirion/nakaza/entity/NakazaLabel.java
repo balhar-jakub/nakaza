@@ -73,28 +73,6 @@ public class NakazaLabel implements Identifiable<Integer>, Serializable, IAutoCo
         return result;
     }
 
-    private List<NakazaParticipant> id_participant;
-
-    @ManyToMany(mappedBy = "labels")
-    public List<NakazaParticipant> getId_participant() {
-        return id_participant;
-    }
-
-    public void setId_participant(List<NakazaParticipant> id_participant) {
-        this.id_participant = id_participant;
-    }
-
-    private List<NakazaStory> id_story;
-
-    @ManyToMany(mappedBy = "labels")
-    public List<NakazaStory> getId_story() {
-        return id_story;
-    }
-
-    public void setId_story(List<NakazaStory> id_story) {
-        this.id_story = id_story;
-    }
-
     @Override
     @Transient
     public String getAutoCompleteData() {

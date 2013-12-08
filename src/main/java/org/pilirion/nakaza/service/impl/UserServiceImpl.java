@@ -64,13 +64,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<NakazaCharacter> getCharacters() {
+    public List<NakazaUser> getCharacters() {
         List<NakazaUser> users = userDAO.findByCriteria(Restrictions.isNotNull("character.name"));
-        List<NakazaCharacter> characters = new ArrayList<NakazaCharacter>();
-        for(NakazaUser user: users) {
-            characters.add(user.getCharacter());
-        }
-        return characters;
+        return users;
     }
 
     @Override

@@ -1,29 +1,37 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-<div class="left">
-    <h1>O vaší postavě</h1>
+    <div class="w-col w-col-8 content">
+        <div class="left-menu" wicket:id="leftMenus">
 
-    <div class="avatarImage">
-        <img wicket:id="avatarImage" class="avatar" alt="AvatarHracoviPostavy"/>
+        </div>
+        <div class="middle-cotent">
+            <h1>O vaší postavě</h1>
+
+            <div class="avatarImage">
+                <img wicket:id="avatarImage" class="avatar" alt="AvatarHracoviPostavy"/>
+            </div>
+
+            <h2 wicket:id="name">Jméno postavy</h2>
+
+            <div class="age">Věk: <span wicket:id="age">28</span></div>
+
+            <div class="description" wicket:id="descriptionPublic">
+                Popis vaší postavy.
+            </div>
+
+            <div wicket:id="listStories">
+                <!-- It contains list of stories, you are associated with. -->
+            </div>
+        </div>
     </div>
+    <div class="w-col w-col-2 right-info">
+        <div class="right-menu">
+            <div class="sign-in" wicket:id="signInPanel">
 
-    <h2 wicket:id="name">Jméno postavy</h2>
-
-    <div class="age">Věk: <span wicket:id="age">28</span></div>
-
-    <div class="description" wicket:id="descriptionPublic">
-        Popis vaší postavy.
+            </div>
+            <div class="right-menu-header rotate right-shift">Soupis příběhů.</div>
+            <div wicket:id="shortStories" class="right-menu-content">
+                <!-- It contains list of stories, you are associated with as only their names. -->
+            </div>
+        </div>
     </div>
-
-    <div wicket:id="listStories">
-        <!-- It contains list of stories, you are associated with. -->
-    </div>
-</div>
-
-<div class="right">
-    <h2>Soupis příběhů.</h2>
-
-    <div wicket:id="shortStories">
-        <!-- It contains list of stories, you are associated with as only their names. -->
-    </div>
-</div>
 </wicket:extend>

@@ -1,5 +1,23 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-    <h2>Byli jste odhlášeni</h2>
+    <div class="w-col w-col-8 content">
+        <div class="left-menu" wicket:id="leftMenus">
 
-    <a wicket:id="homePageLink">Domovská stránka</a>
+        </div>
+        <div class="middle-cotent">
+            <h2>Byli jste odhlášeni</h2>
+
+            <a wicket:id="homePageLink">Domovská stránka</a>
+        </div>
+    </div>
+    <div class="w-col w-col-2 right-info">
+        <div class="right-menu">
+            <div class="sign-in" wicket:id="signInPanel">
+
+            </div>
+            <div class="right-menu-header rotate">Novinky</div>
+            <div wicket:id="newsPanel" class="right-menu-content">
+
+            </div>
+        </div>
+    </div>
 </wicket:extend>

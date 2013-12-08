@@ -13,4 +13,6 @@ import java.util.List;
  */
 public interface StoryService extends GenericService<NakazaStory> {
     List<NakazaStory> getLastAdded(int maxStories);
+
+    List<NakazaStory> getAllApproved(int groupId);
 }

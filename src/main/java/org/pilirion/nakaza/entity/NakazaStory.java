@@ -139,7 +139,10 @@ public class NakazaStory implements Identifiable<Integer>, Serializable {
 
     private List<NakazaParticipant> participants;
 
-    @OneToMany(mappedBy = "story", fetch = FetchType.EAGER)
+    @OneToMany(
+            mappedBy = "story",
+            fetch = FetchType.EAGER
+    )
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     public List<NakazaParticipant> getParticipants() {
         return participants;

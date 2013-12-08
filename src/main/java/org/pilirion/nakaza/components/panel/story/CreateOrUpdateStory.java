@@ -47,7 +47,10 @@ public class CreateOrUpdateStory extends Panel {
             protected void onSubmit() {
                 NakazaStory story =  getModelObject();
                 story.setParticipants(((StoryParticipantsPanel) ((FormComponent)get("participants"))).getModelObject());
-                storyService.saveOrUpdate(getModelObject());
+                for(NakazaParticipant participant: story.getParticipants()) {
+                    participant.setStory(story);
+                }
+                storyService.saveOrUpdate(story);
             }
 
             @Override

@@ -84,7 +84,7 @@ public class ListStoriesPanel extends Panel {
                 item.add(new ListView<NakazaParticipant>("participants", story.getParticipants()) {
                     @Override
                     protected void populateItem(ListItem<NakazaParticipant> item) {
-                        item.add(new Label("participant", item.getModelObject().getDescriptionPublic()));
+                        item.add(new Label("participant", item.getModelObject().getDescriptionPublic()).setEscapeModelStrings(false));
                     }
                 });
             }

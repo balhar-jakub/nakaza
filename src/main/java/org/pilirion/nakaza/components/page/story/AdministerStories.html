@@ -1,15 +1,27 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-    <div class="left">
-        <h2>Soupis příběhů.</h2>
-
-        <div class="stories short" wicket:id="stories">
+    <div class="w-col w-col-8 content">
+        <div class="left-menu" wicket:id="leftMenus">
 
         </div>
+        <div class="middle-cotent">
+            <h2>Soupis příběhů.</h2>
+
+            <div class="stories short" wicket:id="stories">
+
+            </div>
+        </div>
     </div>
+    <div class="w-col w-col-2 right-info">
+        <div class="right-menu">
+            <div class="sign-in" wicket:id="signInPanel">
 
-    <div class="right">
-        <h2>Administrační panel.</h2>
-
-        Zde je možné spravovat příběhy.
+            </div>
+            <div class="right-menu-header rotate">Administrační panel.</div>
+            <div class="right-menu-content">
+                <div class="right-menu-section">
+                    Zde je možné spravovat příběhy.
+                </div>
+            </div>
+        </div>
     </div>
 </wicket:extend>

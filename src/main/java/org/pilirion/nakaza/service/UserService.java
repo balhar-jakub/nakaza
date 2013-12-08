@@ -14,7 +14,7 @@ import java.util.List;
 public interface UserService extends GenericService<NakazaUser> {
     NakazaUser authenticate(String username, String password);
 
-    List<NakazaCharacter> getCharacters();
+    List<NakazaUser> getCharacters();
 
     List<NakazaUser> getFirstUsersWithCharacters();
 }

@@ -19,7 +19,7 @@ public class FeedbackSelectPanel extends FormComponentPanel<Integer> {
     private String append = "Feedback";
     private IModel<SelectOption> selectModel;
 
-    public FeedbackSelectPanel(String id, Form form) {
+    public FeedbackSelectPanel(String id, Form form, int chosen) {
         super(id);
 
         SelectOption[] options = new SelectOption[] {
@@ -46,6 +46,9 @@ public class FeedbackSelectPanel extends FormComponentPanel<Integer> {
             public void detach() {
             }
         };
+        if(chosen != -1) {
+            selectModel.setObject(options[chosen]);
+        }
         add(new DropDownChoice<SelectOption>("group", selectModel, Arrays.asList(options), choiceRenderer));
 
         ComponentFeedbackMessageFilter filter = new ComponentFeedbackMessageFilter(this);

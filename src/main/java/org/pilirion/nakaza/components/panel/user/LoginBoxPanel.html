@@ -1,7 +1,25 @@
 <wicket:panel xmlns:wicket="http://wicket.apache.org">
-    <!--
-    It shows info about actually logged user.
-    -->
-    <a wicket:id="registration">Registrace</a> |
-    <a wicket:id="login">Login</a>
+    <div class="left-menu-upper-heading sign-in-box">
+        <div class="left-menu-upper-heading-text"><strong>Login(<a wicket:id="registration">Registrace</a>)</strong>
+        </div>
+    </div>
+    <div class="sign-in-content">
+        <div class="w-row right-menu-rows">
+            <span wicket:id="feedback"></span>
+            <form wicket:id="signInForm">
+                <div class="w-col w-col-3 right-menu-row-left">
+                    <wicket:link>
+                        <input type="submit" name="submit" class="right-upper-image" value="">
+                    </wicket:link>
+                </div>
+                <div class="w-col w-col-9 right-menu-row-right">
+                        <input class="right-menu-input" type="text" placeholder="Email" name="email" wicket:id="username"/>
+                        <input class="right-menu-input" type="password" placeholder="Password" name="password" wicket:id="password"/>
+                        <span wicket:id="rememberMeRow">
+                            <input wicket:id="rememberMe" type="checkbox" /> Remember Me
+                        </span>
+                </div>
+            </form>
+        </div>
+    </div>
 </wicket:panel>

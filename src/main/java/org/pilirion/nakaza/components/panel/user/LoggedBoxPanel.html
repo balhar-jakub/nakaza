@@ -1,10 +1,18 @@
 <wicket:panel xmlns:wicket="http://wicket.apache.org">
-    <!--
-    It shows info about actually logged user.
-    -->
-    <img wicket:id="imageOfPerson" class="avatar" alt="AvatarHráčoviPostavy"/>
+    <div class="left-menu-upper-heading sign-in-box">
+        <div class="left-menu-upper-heading-text"><strong>Logged</strong>
+        </div>
+    </div>
+    <div class="sign-in-content">
+        <div class="w-row right-menu-rows">
+            <div class="w-col w-col-3 right-menu-row-left">
 
-    <a wicket:id="characterDetail">Moje postava</a>
-    <a wicket:id="settings">Nastavení</a>
-    <a wicket:id="logout">Odhlásit</a>
+            </div>
+            <div class="w-col w-col-9 right-menu-row-right">
+                <a wicket:id="characterDetail">Moje postava</a>
+                <a wicket:id="settings">Nastavení</a>
+                <a wicket:id="logout">Odhlásit</a>
+            </div>
+        </div>
+    </div>
 </wicket:panel>

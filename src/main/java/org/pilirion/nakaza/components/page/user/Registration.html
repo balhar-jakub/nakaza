@@ -1,63 +1,76 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-    <div class="left">
-        <h1>Registrace</h1>
+    <div class="w-col w-col-8 content">
+        <div class="left-menu" wicket:id="leftMenus">
 
-        <form wicket:id="registration">
-            <fieldset>
-                <div class="field">
-                    <div class="label">Zadejte svůj email(Bude sloužit jako login): </div>
-                    <div class="input"><input type="email" wicket:id="email" id="login" name="login" value="login"/></div>
-                    <div class="error" wicket:id="emailFeedback"></div>
-                </div>
+        </div>
+        <div class="middle-cotent">
+            <h1 wicket:id="registrationHeader">Registrace</h1>
 
-                <div class="field">
-                    <div class="label">Zadejte své jméno: </div>
-                    <div class="input"><input type="text" wicket:id="name" id="name" name="name" value=""/></div>
-                    <div class="error" wicket:id="nameFeedback"></div>
-                </div>
+            <form wicket:id="registration">
+                <fieldset>
+                    <div class="field">
+                        <div class="label">Zadejte svůj email(Bude sloužit jako login):</div>
+                        <div class="input"><input type="email" wicket:id="email" id="login" name="login" value="login"/>
+                        </div>
+                        <div class="error" wicket:id="emailFeedback"></div>
+                    </div>
 
-                <div class="field">
-                    <div class="label">Zadejte své datum narození: </div>
-                    <div class="input"><input type="text" wicket:id="dateOfBirth" id="dateOfBirth" name="dateOfBirth" value=""/></div>
-                    <div class="error" wicket:id="dateOfBirthFeedback"></div>
-                </div>
+                    <div class="field">
+                        <div class="label">Zadejte své jméno:</div>
+                        <div class="input"><input type="text" wicket:id="name" id="name" name="name" value=""/></div>
+                        <div class="error" wicket:id="nameFeedback"></div>
+                    </div>
 
-                <div class="field">
-                    <div class="label">Zadejte heslo: </div>
-                    <div class="input"><input type="password" wicket:id="password" id="password" name="password" value=""/></div>
-                    <div class="error" wicket:id="passwordFeedback"></div>
-                </div>
+                    <div class="field">
+                        <div class="label">Zadejte své datum narození:</div>
+                        <div class="input"><input type="text" wicket:id="dateOfBirth" id="dateOfBirth"
+                                                  name="dateOfBirth" value=""/></div>
+                        <div class="error" wicket:id="dateOfBirthFeedback"></div>
+                    </div>
 
-                <div class="field">
-                    <div class="label">Zadejte heslo znovu: </div>
-                    <div class="input"><input type="password" wicket:id="passwordAgain" id="passwordAgain" name="passwordAgain" value=""/></div>
-                    <div class="error" wicket:id="passwordAgainFeedback"></div>
-                </div>
+                    <div class="field">
+                        <div class="label">Zadejte heslo:</div>
+                        <div class="input"><input type="password" wicket:id="password" id="password" name="password"
+                                                  value=""/></div>
+                        <div class="error" wicket:id="passwordFeedback"></div>
+                    </div>
 
-                <div class="field">
-                    <div class="label">Zadejte svou fotografii: </div>
-                    <div class="input"><input type="file" wicket:id="image" id="photo" name="photo" value=""/></div>
-                    <div class="error" wicket:id="imageFeedback"></div>
-                </div>
+                    <div class="field">
+                        <div class="label">Zadejte heslo znovu:</div>
+                        <div class="input"><input type="password" wicket:id="passwordAgain" id="passwordAgain"
+                                                  name="passwordAgain" value=""/></div>
+                        <div class="error" wicket:id="passwordAgainFeedback"></div>
+                    </div>
 
-                <div class="field">
-                    <input wicket:id="submit" type="submit" value="Zaregistrovat">
-                </div>
-            </fieldset>
-        </form>
+                    <div class="field">
+                        <div class="label">Zadejte svou fotografii:</div>
+                        <div class="input"><input type="file" wicket:id="image" id="photo" name="photo" value=""/></div>
+                        <div class="error" wicket:id="imageFeedback"></div>
+                    </div>
+
+                    <div class="field">
+                        <input wicket:id="submit" type="submit" value="Zaregistrovat">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
     </div>
+    <div class="w-col w-col-2 right-info">
+        <div class="right-menu">
+            <div class="sign-in" wicket:id="signInPanel">
 
-    <div class="right">
-        <h2>Informace</h2>
+            </div>
+            <div class="right-menu-header rotate">Informace</div>
+            <div class="right-menu-content">
+                <div class="right-menu-section">
+                    V rámci registrace je potřeba zadat několik nezbytných osobních údajů, jako vaše jméno
+                    a email pro komunikaci.
+                </div>
 
-        <p class="text">
-            V rámci registrace je potřeba zadat několik nezbytných osobních údajů, jako vaše jméno
-            a email pro komunikaci.
-        </p>
-
-        <p class="text">
-            Skrz email budete dostávat informace o schvalování informací ze strany organizátorů hry.
-        </p>
-
+                <div class="right-menu-section">
+                    Skrz email budete dostávat informace o schvalování informací ze strany organizátorů hry.
+                </div>
+            </div>
+        </div>
     </div>
 </wicket:extend>

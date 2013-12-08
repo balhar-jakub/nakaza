@@ -36,7 +36,7 @@ public class LastAddedStories extends Panel {
                 PageParameters params = new PageParameters();
                 params.add("id", story.getId());
                 Link storyDetail = new BookmarkablePageLink<BasePage>("storyDetail", StoryDetail.class, params);
-                Label publicDescription = new Label("publicDescription", Model.of(story.getDescriptionPublic()));
+                Label publicDescription = new Label("publicDescription", Model.of(story.getName()));
                 storyDetail.add(publicDescription);
                 item.add(storyDetail);
 

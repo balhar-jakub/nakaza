@@ -1,12 +1,10 @@
 package org.pilirion.nakaza.components.panel.user;
 
-import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.request.resource.PackageResourceReference;
-import org.pilirion.nakaza.Nakaza;
+import org.pilirion.nakaza.components.page.BasePage;
 import org.pilirion.nakaza.components.page.character.CharacterDetail;
 import org.pilirion.nakaza.components.page.user.Registration;
 import org.pilirion.nakaza.components.page.user.SignOut;
@@ -26,19 +24,15 @@ public class LoggedBoxPanel extends Panel {
         }
 
         PageParameters params = new PageParameters();
-        params.set("userId",logged.getId());
-        Link characterDetail = new BookmarkablePageLink("characterDetail", CharacterDetail.class, params);
+        params.set("id",logged.getId());
+        Link characterDetail = new BookmarkablePageLink<BasePage>("characterDetail", CharacterDetail.class, params);
         add(characterDetail);
 
-        Link logout = new BookmarkablePageLink("logout", SignOut.class);
+        Link logout = new BookmarkablePageLink<BasePage>("logout", SignOut.class);
         add(logout);
 
-        Link edit = new BookmarkablePageLink("settings", Registration.class);
+        Link edit = new BookmarkablePageLink<BasePage>("settings", Registration.class);
         add(edit);
-
-        final Image loggedUserIcon = new Image("imageOfPerson",
-                new PackageResourceReference(Nakaza.class, logged.getImage() != null ? logged.getImage() : ""));
-        add(loggedUserIcon);
     }
 
     @Override

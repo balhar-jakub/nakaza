@@ -8,14 +8,23 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.pilirion.nakaza.components.page.BasePage;
+import org.pilirion.nakaza.components.page.character.CharacterList;
+import org.pilirion.nakaza.components.page.statics.AboutGame;
+import org.pilirion.nakaza.components.page.statics.AboutWorld;
+import org.pilirion.nakaza.components.page.statics.HomePage;
+import org.pilirion.nakaza.components.panel.layout.ButtonLike;
+import org.pilirion.nakaza.components.panel.layout.LeftMenus;
+import org.pilirion.nakaza.components.panel.layout.NakazaSignInPanel;
 import org.pilirion.nakaza.components.panel.story.LastAddedStories;
 import org.pilirion.nakaza.entity.NakazaLabel;
 import org.pilirion.nakaza.entity.NakazaParticipant;
 import org.pilirion.nakaza.entity.NakazaStory;
 import org.pilirion.nakaza.entity.NakazaUser;
 import org.pilirion.nakaza.security.NakazaAuthenticatedWebSession;
+import org.pilirion.nakaza.security.NakazaRoles;
 import org.pilirion.nakaza.service.StoryService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,6 +40,23 @@ public class StoryDetail extends BasePage {
     }
 
     private void init(PageParameters params){
+        add(new NakazaSignInPanel("signInPanel"));
+
+        List<ButtonLike> upper = new ArrayList<ButtonLike>();
+        upper.add(new ButtonLike("Domů", HomePage.class));
+        upper.add(new ButtonLike("O hře", AboutGame.class));
+        upper.add(new ButtonLike("O světě", AboutWorld.class));
+        upper.add(new ButtonLike("Příběhy", StoryList.class));
+        upper.add(new ButtonLike("Postavy", CharacterList.class));
+        List<ButtonLike> lower = new ArrayList<ButtonLike>();
+        lower.add(new ButtonLike("Nový", CreateStory.class));
+        lower.add(new ButtonLike("Správa", AddStory.class));
+        NakazaUser loggedUser = ((NakazaAuthenticatedWebSession) NakazaAuthenticatedWebSession.get()).getLoggedUser();
+        if(loggedUser != null && loggedUser.getRole() >= NakazaRoles.getRoleByName("Admin")){
+            lower.add(new ButtonLike("Admin", AdministerStories.class));
+        }
+        add(new LeftMenus("leftMenus", upper, lower));
+
         int NONE = -1;
         int id = params.get("id").toInt(NONE);
 
@@ -55,6 +81,7 @@ public class StoryDetail extends BasePage {
         Label name = new Label("name", Model.of(story.getName()));
         add(name);
         Label descriptionPublic = new Label("descriptionPublic", Model.of(story.getDescriptionPublic()));
+        descriptionPublic.setEscapeModelStrings(false);
         add(descriptionPublic);
         Label descriptionPrivate = new Label("descriptionPrivate", Model.of(story.getDescriptionPrivate())){
             @Override
@@ -64,6 +91,7 @@ public class StoryDetail extends BasePage {
                 setVisibilityAllowed(amParticipant);
             }
         };
+        descriptionPrivate.setEscapeModelStrings(false);
         add(descriptionPrivate);
 
         add(new ListView<NakazaLabel>("labels", story.getLabels()) {
@@ -77,9 +105,9 @@ public class StoryDetail extends BasePage {
             @Override
             protected void populateItem(ListItem<NakazaParticipant> item) {
                 NakazaParticipant participant = item.getModelObject();
-                item.add(new Label("group", Model.of(participant.getGroup())));
-                item.add(new Label("descriptionPublic", Model.of(participant.getDescriptionPublic())));
-                final boolean isPrivateVisible = (logged != null) && participant.getUser().equals(logged);
+                item.add(new Label("group", Model.of(participant.getGroupText())));
+                item.add(new Label("descriptionPublic", Model.of(participant.getDescriptionPublic())).setEscapeModelStrings(false));
+                final boolean isPrivateVisible = (logged != null) && participant.getUser() != null && participant.getUser().equals(logged);
                 item.add(new Label("descriptionPrivate",Model.of(participant.getDescriptionPrivate())){
                     @Override
                     protected void onConfigure() {
@@ -87,7 +115,7 @@ public class StoryDetail extends BasePage {
 
                         setVisibilityAllowed(isPrivateVisible);
                     }
-                });
+                }.setEscapeModelStrings(false));
 
                 item.add(new ListView<NakazaLabel>("labels", participant.getLabels()) {
                     @Override

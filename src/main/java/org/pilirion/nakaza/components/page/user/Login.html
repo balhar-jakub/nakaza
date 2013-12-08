@@ -1,13 +1,25 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-    <div class="left">
-        <h1>Přihlášení</h1>
+    <div class="w-col w-col-8 content">
+        <div class="left-menu" wicket:id="leftMenus">
 
-        <div wicket:id="signIn"></div>
+        </div>
+        <div class="middle-cotent">
+            <h1>Přihlášení</h1>
+
+            <div wicket:id="signIn"></div>
+        </div>
     </div>
+    <div class="w-col w-col-2 right-info">
+        <div class="right-menu">
+            <div class="sign-in" wicket:id="signInPanel">
 
-    <div class="right">
-        <h2>Informace</h2>
-
-        Zde se můžete přihlásit do systému pro tvorbu a správu vaší postavy.
+            </div>
+            <div class="right-menu-header rotate">Informace</div>
+            <div class="right-menu-content">
+                <div class="right-menu-section">
+                    Zde se můžete přihlásit do systému pro tvorbu a správu vaší postavy.
+                </div>
+            </div>
+        </div>
     </div>
 </wicket:extend>
