@@ -7,6 +7,7 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.pilirion.nakaza.components.Menu;
 import org.pilirion.nakaza.components.page.BasePage;
 import org.pilirion.nakaza.components.page.character.CharacterList;
 import org.pilirion.nakaza.components.page.statics.AboutGame;
@@ -23,6 +24,7 @@ import org.pilirion.nakaza.entity.NakazaUser;
 import org.pilirion.nakaza.security.NakazaAuthenticatedWebSession;
 import org.pilirion.nakaza.security.NakazaRoles;
 import org.pilirion.nakaza.service.StoryService;
+import org.pilirion.nakaza.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,9 @@ import java.util.List;
 public class StoryDetail extends BasePage {
     @SpringBean
     StoryService storyService;
+    @SpringBean
+    UserService userService;
+
     private boolean amParticipant;
 
     public StoryDetail(PageParameters params){
@@ -42,20 +47,7 @@ public class StoryDetail extends BasePage {
     private void init(PageParameters params){
         add(new NakazaSignInPanel("signInPanel"));
 
-        List<ButtonLike> upper = new ArrayList<ButtonLike>();
-        upper.add(new ButtonLike("Domů", HomePage.class));
-        upper.add(new ButtonLike("O hře", AboutGame.class));
-        upper.add(new ButtonLike("O světě", AboutWorld.class));
-        upper.add(new ButtonLike("Příběhy", StoryList.class));
-        upper.add(new ButtonLike("Postavy", CharacterList.class));
-        List<ButtonLike> lower = new ArrayList<ButtonLike>();
-        lower.add(new ButtonLike("Nový", CreateStory.class));
-        lower.add(new ButtonLike("Správa", AddStory.class));
-        NakazaUser loggedUser = ((NakazaAuthenticatedWebSession) NakazaAuthenticatedWebSession.get()).getLoggedUser();
-        if(loggedUser != null && loggedUser.getRole() >= NakazaRoles.getRoleByName("Admin")){
-            lower.add(new ButtonLike("Admin", AdministerStories.class));
-        }
-        add(new LeftMenus("leftMenus", upper, lower));
+        add(new LeftMenus("leftMenus", Menu.getMainButtons(), Menu.getStoryButtons()));
 
         int NONE = -1;
         int id = params.get("id").toInt(NONE);
@@ -66,7 +58,7 @@ public class StoryDetail extends BasePage {
         }
 
         amParticipant = false;
-        final NakazaUser logged = ((NakazaAuthenticatedWebSession)NakazaAuthenticatedWebSession.get()).getLoggedUser();
+        final NakazaUser logged = userService.getLoggedUser();
         if(logged != null) {
             if(logged.getStories().contains(story)){
                 amParticipant = true;

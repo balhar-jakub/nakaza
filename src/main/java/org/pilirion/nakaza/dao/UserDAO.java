@@ -4,6 +4,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.pilirion.nakaza.api.GenericHibernateDAO;
 import org.pilirion.nakaza.entity.NakazaUser;
 import org.springframework.stereotype.Repository;
@@ -12,10 +13,17 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- *
+ * Implementation of FenericHibernateDAO for NakazaUser
  */
 @Repository
 public class UserDAO extends GenericHibernateDAO<NakazaUser, Serializable> {
+    /**
+     * It is used for purpose of authentication.
+     *
+     * @param username Username
+     * @param password Password, already transformed.
+     * @return If exists, user with given username and password or null, if it does not exists.
+     */
     public NakazaUser authenticate(String username, String password) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from NakazaUser user " +
@@ -25,10 +33,11 @@ public class UserDAO extends GenericHibernateDAO<NakazaUser, Serializable> {
         return (NakazaUser) query.uniqueResult();
     }
 
-    public List<NakazaUser> findByCriteria(Criterion criterion, int limit) {
+    @SuppressWarnings("unchecked")
+    public List<NakazaUser> getFirstWithCharacters(int limit) {
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(getPersistentClass());
         crit.setMaxResults(limit);
-        crit.add(criterion);
+        crit.add(Restrictions.isNotNull("character.name"));
         return crit.list();
     }
 }

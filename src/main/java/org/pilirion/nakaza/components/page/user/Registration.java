@@ -16,6 +16,7 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.pilirion.nakaza.behavior.AjaxFeedbackUpdatingBehavior;
+import org.pilirion.nakaza.components.Menu;
 import org.pilirion.nakaza.components.form.*;
 import org.pilirion.nakaza.components.page.BasePage;
 import org.pilirion.nakaza.components.page.character.CharacterList;
@@ -51,16 +52,10 @@ public class Registration extends BasePage {
     private void init(){
         add(new NakazaSignInPanel("signInPanel"));
 
-        List<ButtonLike> upper = new ArrayList<ButtonLike>();
-        upper.add(new ButtonLike("Domů", HomePage.class));
-        upper.add(new ButtonLike("O hře", AboutGame.class));
-        upper.add(new ButtonLike("O světě", AboutWorld.class));
-        upper.add(new ButtonLike("Příběhy", StoryList.class));
-        upper.add(new ButtonLike("Postavy", CharacterList.class));
         List<ButtonLike> lower = new ArrayList<ButtonLike>();
-        add(new LeftMenus("leftMenus", upper, lower));
+        add(new LeftMenus("leftMenus", Menu.getMainButtons(), lower));
 
-        NakazaUser logged = ((NakazaAuthenticatedWebSession)(NakazaAuthenticatedWebSession.get())).getLoggedUser();
+        NakazaUser logged = userService.getLoggedUser();
         boolean isPwdRequired = false;
         String header = "Registrace";
         if(logged == null) {

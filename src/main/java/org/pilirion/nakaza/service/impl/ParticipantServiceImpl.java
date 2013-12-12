@@ -22,7 +22,7 @@ public class ParticipantServiceImpl implements ParticipantService{
 
     @Override
     public NakazaParticipant getById(Serializable id) {
-        return participantDAO.findById(id, false);
+        return participantDAO.findById(id);
     }
 
     @Override
@@ -37,12 +37,7 @@ public class ParticipantServiceImpl implements ParticipantService{
 
     @Override
     public void delete(NakazaParticipant participant) {
-        participantDAO.makeTransient(participant);
-    }
-
-    @Override
-    public List<NakazaParticipant> findByExample(NakazaParticipant participant) {
-        return participantDAO.findByExample(participant,new String[]{});
+        participantDAO.delete(participant);
     }
 
     @Override

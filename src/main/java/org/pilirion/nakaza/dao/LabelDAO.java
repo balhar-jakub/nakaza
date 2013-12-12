@@ -11,13 +11,14 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- *
+ * Ascendant of GenericHibernateDao, which handles Labels, therefore it implements getFirstChoices,
+ * as Labels are used in autocompletables.
  */
 @Repository
 public class LabelDAO extends GenericHibernateDAO<NakazaLabel, Serializable> {
+    @SuppressWarnings("unchecked")
     public List<NakazaLabel> getFirstChoices(String startsWith, int maxChoices) {
-        Session session = sessionFactory.getCurrentSession();
-        Criteria query = session.createCriteria(NakazaLabel.class);
+        Criteria query = sessionFactory.getCurrentSession().createCriteria(NakazaLabel.class);
         query.setMaxResults(maxChoices);
         query.add(Restrictions.ilike("name", "%" + startsWith + "%"));
         return query.list();

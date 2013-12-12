@@ -15,12 +15,18 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Jakub Balhar
- * Date: 12.12.12
- * Time: 14:06
+ * Base class responsible for handling work with files. Mainly saving files, anywhere it happens in the application.
  */
 public class FileUtils {
+    /**
+     * It takes image file, changes its size to max width and max height and the save it on the server.
+     *
+     * @param upload File to resize and save.
+     * @param name Basic name of the file. It is further changed in the process of saving.
+     * @param maxHeight Maximum height of the image.
+     * @param maxWidth Maximum width of the image
+     * @return relative path to the image.
+     */
     public static String saveImageFileAndReturnPath(FileUpload upload, String name, int maxHeight, int maxWidth){
         ServletContext context = ((Nakaza) Application.get()).getServletContext();
         String realPath = context.getRealPath("/WEB-INF/classes/" + Packages.absolutePath(Nakaza.class, Nakaza.getBaseContext()));;
@@ -51,6 +57,12 @@ public class FileUtils {
         return Nakaza.getBaseContext() + fileName;
     }
 
+    /**
+     * It returns last part of the file. Usually this says something about the type of the image.
+     *
+     * @param fileName Name of the file to parse
+     * @return type of the file.
+     */
     public static String getFileType(String fileName){
         String[] fileParts = fileName.trim().split("\\.");
         if(fileParts.length > 0){

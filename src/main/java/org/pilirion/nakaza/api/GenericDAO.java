@@ -6,22 +6,18 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Based on http://community.jboss.org/wiki/GenericDataAccessObjects
- * 
- * @author jmader
- *
+ * It is based on Generic DataAccessObject and therefore it provides basic methods needed to access and handle object.
+ * Basically standard CRUD operations.
  */
 public interface GenericDAO<T, ID extends Serializable> {
 	 
-    T findById(ID id, boolean lock);
+    T findById(ID id);
  
     List<T> findAll();
+
+    boolean saveOrUpdate(T entity);
  
-    List<T> findByExample(T exampleInstance, String[] excludeProperty);
- 
-    T makePersistent(T entity);
- 
-    void makeTransient(T entity);
+    void delete(T entity);
 
     public List<T> findByCriteria(Criterion... criterion);
 }

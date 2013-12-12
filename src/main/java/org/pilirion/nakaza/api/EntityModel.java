@@ -6,10 +6,7 @@ import javax.persistence.EntityNotFoundException;
 import java.io.Serializable;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Jakub Balhar
- * Date: 28.4.13
- * Time: 18:16
+ *
  */
 public class EntityModel<T extends Identifiable< ? >> implements IModel<T>
 {
@@ -25,13 +22,6 @@ public class EntityModel<T extends Identifiable< ? >> implements IModel<T>
         clazz = entity.getClass();
         id = entity.getId();
         this.entity = entity;
-    }
-
-    public EntityModel(Class<? extends T> clazz, Serializable id, GenericDAO genericDAO)
-    {
-        this.genericDAO = genericDAO;
-        this.clazz = clazz;
-        this.id = id;
     }
 
     public T getObject()
@@ -63,7 +53,7 @@ public class EntityModel<T extends Identifiable< ? >> implements IModel<T>
     }
 
     protected T load(Class clazz, Serializable id){
-        return (T) genericDAO.findById(id, false);
+        return (T) genericDAO.findById(id);
     }
 
     public void setObject(T object)

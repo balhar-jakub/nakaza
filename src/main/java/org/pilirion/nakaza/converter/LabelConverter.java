@@ -1,6 +1,5 @@
 package org.pilirion.nakaza.converter;
 
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.util.convert.IConverter;
 import org.pilirion.nakaza.entity.NakazaLabel;
 import org.pilirion.nakaza.service.LabelService;
@@ -10,6 +9,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * This component Converts text of the labels to the actual Label Entity and back.
+ */
 @Component
 public class LabelConverter implements IConverter<NakazaLabel> {
     @Autowired

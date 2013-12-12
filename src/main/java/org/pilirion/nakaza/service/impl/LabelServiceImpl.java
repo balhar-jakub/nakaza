@@ -23,7 +23,7 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     public NakazaLabel getById(Serializable id) {
-        return labelDAO.findById(id, false);
+        return labelDAO.findById(id);
     }
 
     @Override
@@ -38,12 +38,7 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     public void delete(NakazaLabel label) {
-        labelDAO.makeTransient(label);
-    }
-
-    @Override
-    public List<NakazaLabel> findByExample(NakazaLabel label) {
-        return labelDAO.findByExample(label, new String[]{});
+        labelDAO.delete(label);
     }
 
     @Override

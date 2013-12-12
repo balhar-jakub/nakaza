@@ -2,6 +2,7 @@ package org.pilirion.nakaza.components.page.story;
 
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.pilirion.nakaza.components.Menu;
 import org.pilirion.nakaza.components.page.BasePage;
 import org.pilirion.nakaza.components.page.character.CharacterList;
 import org.pilirion.nakaza.components.page.statics.AboutGame;
@@ -32,20 +33,7 @@ public class StoryList extends BasePage {
     public StoryList() {
         add(new NakazaSignInPanel("signInPanel"));
 
-        List<ButtonLike> upper = new ArrayList<ButtonLike>();
-        upper.add(new ButtonLike("Domů", HomePage.class));
-        upper.add(new ButtonLike("O hře", AboutGame.class));
-        upper.add(new ButtonLike("O světě", AboutWorld.class));
-        upper.add(new ButtonLike("Příběhy", StoryList.class));
-        upper.add(new ButtonLike("Postavy", CharacterList.class));
-        List<ButtonLike> lower = new ArrayList<ButtonLike>();
-        lower.add(new ButtonLike("Nový", CreateStory.class));
-        lower.add(new ButtonLike("Správa", AddStory.class));
-        NakazaUser loggedUser = ((NakazaAuthenticatedWebSession) NakazaAuthenticatedWebSession.get()).getLoggedUser();
-        if(loggedUser != null && loggedUser.getRole() >= NakazaRoles.getRoleByName("Admin")){
-            lower.add(new ButtonLike("Admin", AdministerStories.class));
-        }
-        add(new LeftMenus("leftMenus", upper, lower));
+        add(new LeftMenus("leftMenus", Menu.getMainButtons(), Menu.getStoryButtons()));
 
         add(new ListStoriesPanel("storiesPanel", storyService.getAll()));
 

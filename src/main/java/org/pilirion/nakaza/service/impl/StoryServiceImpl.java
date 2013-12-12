@@ -1,5 +1,6 @@
 package org.pilirion.nakaza.service.impl;
 
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.pilirion.nakaza.dao.StoryDAO;
 import org.pilirion.nakaza.entity.NakazaStory;
@@ -11,10 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Jakub Balhar
- * Date: 31.10.13
- * Time: 16:53
+ * Implementation of potential business logic focused on Story.
  */
 @Repository
 public class StoryServiceImpl implements StoryService{
@@ -23,7 +21,7 @@ public class StoryServiceImpl implements StoryService{
 
     @Override
     public NakazaStory getById(Serializable id) {
-        return storyDAO.findById(id, false);
+        return storyDAO.findById(id);
     }
 
     @Override
@@ -38,12 +36,17 @@ public class StoryServiceImpl implements StoryService{
 
     @Override
     public void delete(NakazaStory story) {
-        storyDAO.makeTransient(story);
+        storyDAO.delete(story);
     }
 
     @Override
-    public List<NakazaStory> findByExample(NakazaStory story) {
-        return storyDAO.findByExample(story,new String[]{});
+    public List<NakazaStory> getLastAdded(int maxStories) {
+        return storyDAO.getLastAdded(maxStories);
+    }
+
+    @Override
+    public List<NakazaStory> getAllApproved(int groupId) {
+        return storyDAO.getAllApproved(groupId);
     }
 
     @Override
@@ -54,15 +57,5 @@ public class StoryServiceImpl implements StoryService{
     @Override
     public List<NakazaStory> getFirstChoices(String s, int auto_complete_choices) {
         throw new UnsupportedOperationException("Not implemented");
-    }
-
-    @Override
-    public List<NakazaStory> getLastAdded(int maxStories) {
-        return storyDAO.getLastAdded(maxStories);
-    }
-
-    @Override
-    public List<NakazaStory> getAllApproved(int groupId) {
-        return storyDAO.getAllAproved(groupId);
     }
 }

@@ -18,8 +18,6 @@ public interface GenericService<T> {
 
     void delete(T entity);
 
-    List<T> findByExample(T entity);
-
     List<T> getUnique(T validatableEntity);
 
     List<T> getFirstChoices(String s, int auto_complete_choices);

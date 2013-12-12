@@ -2,13 +2,19 @@ package org.pilirion.nakaza.api;
 
 import org.hibernate.*;
 import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+/**
+ * Generic hibernate Data access object, it provides basic methods to anything implementing the DAO. Basically
+ * it provides standard CRUD operations.
+ *
+ * @param <T> Entity to be handled by specific Ancestor.
+ * @param <ID> Id of the entity.
+ */
 public abstract class GenericHibernateDAO<T, ID extends Serializable>
 		implements GenericDAO<T, ID> {
 
@@ -21,70 +27,61 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable>
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
-	public Class<T> getPersistentClass() {
+	protected Class<T> getPersistentClass() {
 		return persistentClass;
 	}
 
+    /**
+     * It returns unique entity found by Id (Unique identifier). It expects existence of entity with given Id. .
+     *
+     * @param id Unique identifier of entity.
+     * @return Specific entity
+     */
 	@SuppressWarnings("unchecked")
-	public T findById(ID id, boolean lock) {
-		T entity;
-		if (lock)
-			entity = (T) sessionFactory.getCurrentSession().load(getPersistentClass(), id,
-					LockOptions.UPGRADE);
-		else
-			entity = (T) sessionFactory.getCurrentSession().load(getPersistentClass(), id);
-
-        flush();
+	public T findById(ID id) {
+		T entity = (T) sessionFactory.getCurrentSession().load(getPersistentClass(), id);
+        sessionFactory.getCurrentSession().flush();
 		return entity;
 	}
 
+    /**
+     * It returns all entities of given type in the database.
+     *
+     * @return List of all entities. Carefull, list may be returned as PersistentBag.
+     */
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		return findByCriteria();
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<T> findByExample(T exampleInstance, String[] excludeProperty) {
-		Criteria crit = sessionFactory.getCurrentSession().createCriteria(getPersistentClass());
-		Example example = Example.create(exampleInstance);
-		for (String exclude : excludeProperty) {
-			example.excludeProperty(exclude);
-		}
-		crit.add(example);
-		return crit.list();
-	}
-
-	@SuppressWarnings("unchecked")
-	public T makePersistent(T entity) {
-		sessionFactory.getCurrentSession().saveOrUpdate(entity);
-		return entity;
-	}
-
-	public void makeTransient(T entity) {
+    /**
+     * It deletes given entity.
+     *
+     * @param entity Entity to be deleted.
+     */
+    public void delete(T entity) {
         Transaction tx = sessionFactory.getCurrentSession().beginTransaction();
 		sessionFactory.getCurrentSession().delete(entity);
         sessionFactory.getCurrentSession().flush();
         tx.commit();
 	}
 
+    /**
+     * It saves or updates given entity, if the entity already exists.
+     *
+     * @param entity entity to be changed.
+     * @return true if the operation was successful.
+     */
     public boolean saveOrUpdate(T entity) {
         try{
             sessionFactory.getCurrentSession().saveOrUpdate(entity);
-            flush();
+            sessionFactory.getCurrentSession().flush();
             return true;
         } catch (HibernateException ex){
             ex.printStackTrace();
             return false;
         }
     }
-
-	public void flush() {
-		sessionFactory.getCurrentSession().flush();
-	}
-
-	public void clear() {
-		sessionFactory.getCurrentSession().clear();
-	}
 
 	/**
 	 * Use this inside subclasses as a convenience method.
@@ -97,17 +94,4 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable>
 		}
 		return crit.list();
 	}
-
-    /**
-     * Use this inside subclasses as a convenience method.
-     */
-    @SuppressWarnings("unchecked")
-    public T findSingleByCriteria(Criterion... criterion) {
-        Criteria crit = sessionFactory.getCurrentSession().createCriteria(getPersistentClass());
-        for (Criterion c : criterion) {
-            crit.add(c);
-        }
-        return (T) crit.uniqueResult();
-    }
-
 }

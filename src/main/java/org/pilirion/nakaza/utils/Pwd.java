@@ -6,10 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Jakub Balhar
- * Date: 12.12.12
- * Time: 13:49
+ * Utility class for translating passwords from plain text to hash.
  */
 public class Pwd {
     public static String getMD5(String passwd)

@@ -7,7 +7,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.pilirion.nakaza.behavior.AjaxFeedbackUpdatingBehavior;
 
 /**
- *
+ * Field with Date and Text which has its own feedback position.
  */
 public class FeedbackDateTextField extends DateTextField {
     private String append = "Feedback";
