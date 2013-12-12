@@ -1,11 +1,5 @@
 package org.pilirion.nakaza.components.panel.story;
 
-import org.apache.wicket.RestartResponseAtInterceptPageException;
-import org.apache.wicket.RestartResponseException;
-import org.apache.wicket.ajax.AjaxEventBehavior;
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
-import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
@@ -19,7 +13,6 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.pilirion.nakaza.components.page.BasePage;
-import org.pilirion.nakaza.components.page.story.AdministerStories;
 import org.pilirion.nakaza.components.page.story.StoryDetail;
 import org.pilirion.nakaza.entity.NakazaStory;
 import org.pilirion.nakaza.service.StoryService;
