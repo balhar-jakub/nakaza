@@ -1,0 +1,41 @@
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+    <form class="storyForm" wicket:id="createParticipant">
+        <fieldset>
+            <div class="field">
+                <div class="label">Veřejný popis</div>
+                <div class="input">
+                    <textarea wicket:id="descriptionPublic">Sem patří popis, který uvidí všichni</textarea>
+                </div>
+                <div class="error" wicket:id="descriptionPublicFeedback"></div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="field">
+                <div class="label">Tajný popis</div>
+                <div class="input">
+                    <textarea wicket:id="descriptionPrivate">Sem patří popis, který uvidí pouze ti, kdo si již příběh
+                        zadali.</textarea>
+                </div>
+                <div class="error" wicket:id="descriptionPrivateFeedback"></div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="field">
+                <div class="label">Rasa</div>
+                <div wicket:id="group"></div>
+                <div wicket:id="groupFeedback" class="error"></div>
+            </div>
+
+            <div class="clear"></div>
+
+            <h2>Štítky charakterizující tento příběh.</h2>
+
+            <div class="labels" wicket:id="labels"></div>
+            <div class="clear"></div>
+
+            <div class="field">
+                <input type="submit" wicket:id="submit" value="Uložit nový příběh">
+            </div>
+        </fieldset>
+    </form>
+</wicket:panel>

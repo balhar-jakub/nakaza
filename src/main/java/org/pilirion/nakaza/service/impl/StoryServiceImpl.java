@@ -1,9 +1,13 @@
 package org.pilirion.nakaza.service.impl;
 
+import org.apache.wicket.RestartResponseException;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
+import org.pilirion.nakaza.components.page.story.AddStory;
 import org.pilirion.nakaza.dao.StoryDAO;
 import org.pilirion.nakaza.entity.NakazaStory;
+import org.pilirion.nakaza.entity.NakazaUser;
+import org.pilirion.nakaza.security.NakazaRoles;
 import org.pilirion.nakaza.service.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -47,6 +51,39 @@ public class StoryServiceImpl implements StoryService{
     @Override
     public List<NakazaStory> getAllApproved(int groupId) {
         return storyDAO.getAllApproved(groupId);
+    }
+
+    @Override
+    public NakazaStory getDetailOfStory(int id) {
+        NakazaStory story = getById(id);
+        if(story == null) {
+            throw new RestartResponseException(AddStory.class);
+        }
+        return story;
+    }
+
+    @Override
+    public boolean hasRights(NakazaUser loggedUser, NakazaStory story) {
+        if(loggedUser == null) {
+            return false;
+        }
+        if(loggedUser.getRole() >= NakazaRoles.EDITOR.getRole()) {
+            return true;
+        }
+        if(story.getCreatedBy().getId() == loggedUser.getId()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean participates(NakazaUser loggedUser, NakazaStory story) {
+        if(loggedUser != null) {
+            if(loggedUser.getStories().contains(story)){
+                return true;
+            }
+        }
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override

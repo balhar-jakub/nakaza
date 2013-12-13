@@ -18,27 +18,23 @@
 
             <h3>Štítky charakterizující tento příběh.</h3>
 
-            <div class="labels" wicket:id="labels">
-                <div class="label" wicket:id="label">Label 1</div>
-            </div>
-            <div class="clear"></div>
+            <div wicket:id="labelsPanel"></div>
 
             <h3>Účastníci tohoto příběhu</h3>
 
-            <div wicket:id="participants">
-                <div class="participant">
-                    <div class="description" wicket:id="descriptionPublic"></div>
-                    <div class="group">Skupina: <span wicket:id="group">Přeživší</span></div>
-                    <div class="private description" wicket:id="descriptionPrivate">
-                        <!-- Shown only if I am participant and furthermore this specific one. -->
-                    </div>
-                    <div class="labels" wicket:id="labels">
-                        <div class="label" wicket:id="label">Label 3</div>
-                    </div>
+            <div wicket:id="participants" class="participant">
+                <div wicket:id="participantDetail"></div>
 
-                    <div class="clear"></div>
-                </div>
+                <form wicket:id="editForm">
+                    <input type="submit" wicket:id="editParticipant" value="Editovat" />
+                </form>
+
+                <div wicket:id="modifyParticipant"></div>
             </div>
+            <form wicket:id="addParticipant">
+                <input type="submit" wicket:id="addParticipantButtton" value="Přidat účastníka" />
+            </form>
+            <div wicket:id="createParticipant"></div>
         </div>
     </div>
     <div class="w-col w-col-2 right-info">
@@ -47,6 +43,7 @@
 
             </div>
             <div class="right-menu-header rotate right-shift">Nejnovější příběhy</div>
+
             <div wicket:id="lastAddedStories" class="right-menu-content"></div>
         </div>
     </div>

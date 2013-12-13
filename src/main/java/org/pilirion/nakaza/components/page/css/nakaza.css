@@ -54,6 +54,10 @@ p {
     margin-bottom: 5px;
 }
 
+textarea {
+    width: 80%;
+}
+
 .clear {
     clear: both;
 }

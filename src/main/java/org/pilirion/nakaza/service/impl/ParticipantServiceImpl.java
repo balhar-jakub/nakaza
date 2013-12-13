@@ -2,6 +2,7 @@ package org.pilirion.nakaza.service.impl;
 
 import org.pilirion.nakaza.dao.ParticipantDAO;
 import org.pilirion.nakaza.entity.NakazaParticipant;
+import org.pilirion.nakaza.entity.NakazaUser;
 import org.pilirion.nakaza.service.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -48,5 +49,16 @@ public class ParticipantServiceImpl implements ParticipantService{
     @Override
     public List<NakazaParticipant> getFirstChoices(String s, int auto_complete_choices) {
         throw new UnsupportedOperationException("Not implemented");
+    }
+
+    @Override
+    public boolean participate(NakazaUser loggedUser, NakazaParticipant participant) {
+        if(loggedUser == null) {
+            return false;
+        }
+        if(loggedUser.getId() == participant.getUser().getId()) {
+            return true;
+        }
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

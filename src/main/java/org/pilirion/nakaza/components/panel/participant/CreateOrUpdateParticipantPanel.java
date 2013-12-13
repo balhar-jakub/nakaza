@@ -1,4 +1,4 @@
-package org.pilirion.nakaza.components.panel.story;
+package org.pilirion.nakaza.components.panel.participant;
 
 import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.extensions.ajax.markup.html.autocomplete.GenericFactory;
@@ -7,62 +7,66 @@ import org.apache.wicket.extensions.ajax.markup.html.autocomplete.IFactory;
 import org.apache.wicket.extensions.ajax.markup.html.autocomplete.RepeatableInputPanel;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.IValidator;
+import org.pilirion.nakaza.api.EntityModel;
 import org.pilirion.nakaza.components.form.FeedbackTextArea;
-import org.pilirion.nakaza.components.form.FeedbackTextField;
 import org.pilirion.nakaza.components.page.story.StoryDetail;
+import org.pilirion.nakaza.components.panel.character.FeedbackSelectPanel;
+import org.pilirion.nakaza.dao.ParticipantDAO;
+import org.pilirion.nakaza.dao.StoryDAO;
 import org.pilirion.nakaza.entity.NakazaLabel;
 import org.pilirion.nakaza.entity.NakazaParticipant;
 import org.pilirion.nakaza.entity.NakazaStory;
 import org.pilirion.nakaza.service.LabelService;
 import org.pilirion.nakaza.service.StoryService;
-import org.pilirion.nakaza.validator.AtLeastOneParticipantValidator;
 import org.pilirion.nakaza.validator.AtLeastOneRequiredValidator;
-
-import java.util.ArrayList;
 
 /**
  *
  */
-public class CreateOrUpdateStory extends Panel {
+public class CreateOrUpdateParticipantPanel extends Panel {
+    @SpringBean
+    ParticipantDAO participantDAO;
+    @SpringBean
+    StoryDAO storyDAO;
+
     @SpringBean
     StoryService storyService;
     @SpringBean
     LabelService labelService;
 
-    public CreateOrUpdateStory(String id, NakazaStory story) {
+    private boolean show;
+
+    private EntityModel<NakazaStory> storyModel;
+
+    public CreateOrUpdateParticipantPanel(String id, NakazaStory story, NakazaParticipant participant, boolean show) {
         super(id);
+        this.show = show;
+        storyModel = new EntityModel<NakazaStory>(story, storyDAO);
 
-        if(story.getLabels() == null) {
-            story.setLabels(new ArrayList<NakazaLabel>());
-        }
-        if(story.getParticipants() == null) {
-            story.setParticipants(new ArrayList<NakazaParticipant>());
-        }
-
-        Form<NakazaStory> storyForm = new Form<NakazaStory>("createStory", new CompoundPropertyModel<NakazaStory>(story)){
+        Form<NakazaParticipant> participantForm = new Form<NakazaParticipant>("createParticipant",
+                new CompoundPropertyModel<NakazaParticipant>(new EntityModel<NakazaParticipant>(participant, participantDAO))){
             @Override
             protected void onSubmit() {
-                NakazaStory story =  getModelObject();
-                story.setParticipants(((StoryParticipantsPanel) ((FormComponent)get("participants"))).getModelObject());
-                for(NakazaParticipant participant: story.getParticipants()) {
-                    participant.setStory(story);
+                NakazaStory story =  storyModel.getObject();
+                NakazaParticipant participant = getModelObject();
+                if(participant.getId() == null) {
+                    story.getParticipants().add(participant);
                 }
                 storyService.saveOrUpdate(story);
+
                 PageParameters params = new PageParameters();
                 params.add("id", story.getId());
                 throw new RestartResponseException(StoryDetail.class, params);
             }
         };
 
-        storyForm.add(new FeedbackTextField<String>("name", storyForm).setRequired(true));
-        storyForm.add(new FeedbackTextArea("descriptionPublic", storyForm).setRequired(true));
-        storyForm.add(new FeedbackTextArea("descriptionPrivate", storyForm).setRequired(true));
+        participantForm.add(new FeedbackTextArea("descriptionPublic", participantForm).setRequired(true));
+        participantForm.add(new FeedbackTextArea("descriptionPrivate", participantForm).setRequired(true));
 
         IFactory<NakazaLabel> labelIFactory = new GenericFactory<NakazaLabel>(NakazaLabel.class);
         IValidator<NakazaLabel> labelIValidator = new GenericValidator<NakazaLabel>(labelService);
@@ -70,9 +74,19 @@ public class CreateOrUpdateStory extends Panel {
         RepeatableInputPanel<NakazaLabel> labels = new RepeatableInputPanel<NakazaLabel>("labels", labelIFactory,
                 labelIValidator, story.getLabels(), labelService);
         labels.add(new AtLeastOneRequiredValidator());
-        storyForm.add(labels);
+        participantForm.add(labels);
 
-        storyForm.add(new Button("submit"));
-        add(storyForm);
+        participantForm.add(new FeedbackSelectPanel("group", participantForm, Integer.parseInt(participant.getGroup())));
+
+        participantForm.add(new Button("submit"));
+
+        add(participantForm);
+    }
+
+    @Override
+    protected void onConfigure() {
+        super.onConfigure();
+
+        setVisibilityAllowed(show);
     }
 }

@@ -1,5 +1,6 @@
 package org.pilirion.nakaza.components;
 
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.pilirion.nakaza.components.page.character.CharacterList;
 import org.pilirion.nakaza.components.page.character.CreateCharacter;
 import org.pilirion.nakaza.components.page.statics.AboutGame;
@@ -46,6 +47,17 @@ public class Menu {
             lower.add(new ButtonLike("Admin", AdministerStories.class));
         }
 
+        return lower;
+    }
+
+    public static List<ButtonLike> getStoryButton(PageParameters params) {
+        List<ButtonLike> lower = getStoryButtons();
+        ButtonLike button = new ButtonLike("Edit", CreateStory.class);
+        button.setParams(params);
+        lower.add(button);
+        ButtonLike button2 = new ButtonLike("Add participant", ManageParticipants.class);
+        button2.setParams(params);
+        lower.add(button2);
         return lower;
     }
 

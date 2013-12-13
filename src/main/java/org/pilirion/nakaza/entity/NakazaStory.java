@@ -1,6 +1,7 @@
 package org.pilirion.nakaza.entity;
 
 import org.hibernate.annotations.Cascade;
+import org.hsqldb.User;
 import org.pilirion.nakaza.api.Identifiable;
 
 import javax.persistence.*;
@@ -112,6 +113,23 @@ public class NakazaStory implements Identifiable<Integer>, Serializable {
         result = 31 * result + (descriptionPublic != null ? descriptionPublic.hashCode() : 0);
         result = 31 * result + (descriptionPrivate != null ? descriptionPrivate.hashCode() : 0);
         return result;
+    }
+
+    private NakazaUser createdBy;
+
+    @ManyToOne()
+    @JoinColumn(
+            name = "created_by",
+            referencedColumnName = "id",
+            insertable = true,
+            updatable = true
+    )
+    public NakazaUser getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(NakazaUser createdBy) {
+        this.createdBy = createdBy;
     }
 
     private List<NakazaLabel> labels;

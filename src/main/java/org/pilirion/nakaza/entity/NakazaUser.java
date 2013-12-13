@@ -151,6 +151,17 @@ public class NakazaUser implements Identifiable<Integer>, Serializable {
         return result;
     }
 
+    private List<NakazaStory> created;
+
+    @OneToMany(mappedBy = "createdBy")
+    public List<NakazaStory> getCreated() {
+        return created;
+    }
+
+    public void setCreated(List<NakazaStory> created) {
+        this.created = created;
+    }
+
     private List<NakazaStory> stories;
 
     @javax.persistence.JoinTable(name = "nakaza_user_has_story", catalog = "", schema = "public", joinColumns = @javax.persistence.JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false), inverseJoinColumns = @javax.persistence.JoinColumn(name = "id_story", referencedColumnName = "id", nullable = false))
