@@ -50,17 +50,6 @@ public class Menu {
         return lower;
     }
 
-    public static List<ButtonLike> getStoryButton(PageParameters params) {
-        List<ButtonLike> lower = getStoryButtons();
-        ButtonLike button = new ButtonLike("Edit", CreateStory.class);
-        button.setParams(params);
-        lower.add(button);
-        ButtonLike button2 = new ButtonLike("Add participant", ManageParticipants.class);
-        button2.setParams(params);
-        lower.add(button2);
-        return lower;
-    }
-
     public static List<ButtonLike> getEmptyButtons() {
         List<ButtonLike> lower = new ArrayList<ButtonLike>();
         return lower;

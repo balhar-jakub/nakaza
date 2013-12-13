@@ -18,17 +18,16 @@ import java.util.List;
 public abstract class GenericHibernateDAO<T, ID extends Serializable>
 		implements GenericDAO<T, ID> {
 
-	private Class<T> persistentClass;
 	@Autowired
 	protected SessionFactory sessionFactory;
 
 	public GenericHibernateDAO() {
-		this.persistentClass = (Class<T>) ((ParameterizedType) getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
+    @SuppressWarnings("unchecked")
 	protected Class<T> getPersistentClass() {
-		return persistentClass;
+		return (Class<T>) ((ParameterizedType) getClass()
+                .getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
     /**
@@ -40,7 +39,6 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable>
 	@SuppressWarnings("unchecked")
 	public T findById(ID id) {
 		T entity = (T) sessionFactory.getCurrentSession().load(getPersistentClass(), id);
-        sessionFactory.getCurrentSession().flush();
 		return entity;
 	}
 

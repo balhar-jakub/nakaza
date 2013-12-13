@@ -56,7 +56,7 @@ public class ParticipantServiceImpl implements ParticipantService{
         if(loggedUser == null) {
             return false;
         }
-        if(loggedUser.getId() == participant.getUser().getId()) {
+        if(participant.getUser() != null && loggedUser.getId() == participant.getUser().getId()) {
             return true;
         }
         return false;  //To change body of implemented methods use File | Settings | File Templates.

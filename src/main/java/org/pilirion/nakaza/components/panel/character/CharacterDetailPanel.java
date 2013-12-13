@@ -24,6 +24,7 @@ public class CharacterDetailPanel extends Panel {
         NakazaCharacter character = user.getCharacter();
         add(new Image("avatarImage", new PackageResourceReference(Nakaza.class, user.getImage())));
 
+        add(new Label("group", character.getGroupText()));
         add(new Label("name", character.getName()));
         add(new Label("age", character.getAge()));
         add(new Label("descriptionPublic", character.getDescription()).setEscapeModelStrings(false));

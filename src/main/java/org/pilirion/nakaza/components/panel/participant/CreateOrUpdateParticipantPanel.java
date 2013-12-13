@@ -14,6 +14,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.IValidator;
 import org.pilirion.nakaza.api.EntityModel;
 import org.pilirion.nakaza.components.form.FeedbackTextArea;
+import org.pilirion.nakaza.components.form.FeedbackTextField;
 import org.pilirion.nakaza.components.page.story.StoryDetail;
 import org.pilirion.nakaza.components.panel.character.FeedbackSelectPanel;
 import org.pilirion.nakaza.dao.ParticipantDAO;
@@ -49,12 +50,13 @@ public class CreateOrUpdateParticipantPanel extends Panel {
         storyModel = new EntityModel<NakazaStory>(story, storyDAO);
 
         Form<NakazaParticipant> participantForm = new Form<NakazaParticipant>("createParticipant",
-                new CompoundPropertyModel<NakazaParticipant>(new EntityModel<NakazaParticipant>(participant, participantDAO))){
+                new CompoundPropertyModel<NakazaParticipant>(participant)){
             @Override
             protected void onSubmit() {
                 NakazaStory story =  storyModel.getObject();
                 NakazaParticipant participant = getModelObject();
-                if(participant.getId() == null) {
+                if(participant.getId() == 0) {
+                    participant.setStory(story);
                     story.getParticipants().add(participant);
                 }
                 storyService.saveOrUpdate(story);
@@ -65,6 +67,7 @@ public class CreateOrUpdateParticipantPanel extends Panel {
             }
         };
 
+        participantForm.add(new FeedbackTextField<String>("name", participantForm).setRequired(true));
         participantForm.add(new FeedbackTextArea("descriptionPublic", participantForm).setRequired(true));
         participantForm.add(new FeedbackTextArea("descriptionPrivate", participantForm).setRequired(true));
 
@@ -72,11 +75,12 @@ public class CreateOrUpdateParticipantPanel extends Panel {
         IValidator<NakazaLabel> labelIValidator = new GenericValidator<NakazaLabel>(labelService);
 
         RepeatableInputPanel<NakazaLabel> labels = new RepeatableInputPanel<NakazaLabel>("labels", labelIFactory,
-                labelIValidator, story.getLabels(), labelService);
+                labelIValidator, participant.getLabels(), labelService);
         labels.add(new AtLeastOneRequiredValidator());
         participantForm.add(labels);
 
-        participantForm.add(new FeedbackSelectPanel("group", participantForm, Integer.parseInt(participant.getGroup())));
+        int group = (participant.getGroup() != null) ? Integer.parseInt(participant.getGroup()) : -1;
+        participantForm.add(new FeedbackSelectPanel("group", participantForm, group));
 
         participantForm.add(new Button("submit"));
 

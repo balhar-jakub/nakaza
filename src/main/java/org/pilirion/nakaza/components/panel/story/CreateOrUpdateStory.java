@@ -21,6 +21,7 @@ import org.pilirion.nakaza.entity.NakazaParticipant;
 import org.pilirion.nakaza.entity.NakazaStory;
 import org.pilirion.nakaza.service.LabelService;
 import org.pilirion.nakaza.service.StoryService;
+import org.pilirion.nakaza.service.UserService;
 import org.pilirion.nakaza.validator.AtLeastOneParticipantValidator;
 import org.pilirion.nakaza.validator.AtLeastOneRequiredValidator;
 
@@ -34,6 +35,8 @@ public class CreateOrUpdateStory extends Panel {
     StoryService storyService;
     @SpringBean
     LabelService labelService;
+    @SpringBean
+    UserService userService;
 
     public CreateOrUpdateStory(String id, NakazaStory story) {
         super(id);
@@ -49,10 +52,7 @@ public class CreateOrUpdateStory extends Panel {
             @Override
             protected void onSubmit() {
                 NakazaStory story =  getModelObject();
-                story.setParticipants(((StoryParticipantsPanel) ((FormComponent)get("participants"))).getModelObject());
-                for(NakazaParticipant participant: story.getParticipants()) {
-                    participant.setStory(story);
-                }
+                story.setCreatedBy(userService.getLoggedUser());
                 storyService.saveOrUpdate(story);
                 PageParameters params = new PageParameters();
                 params.add("id", story.getId());

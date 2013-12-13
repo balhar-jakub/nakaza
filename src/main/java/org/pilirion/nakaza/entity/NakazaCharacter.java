@@ -3,6 +3,7 @@ package org.pilirion.nakaza.entity;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -56,5 +57,21 @@ public class NakazaCharacter implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    @Transient
+    public String getGroupText() {
+        String groupText;
+        if(getGroup().equals("0")) {
+            groupText = "Zombie";
+        } else if(getGroup().equals("1")) {
+            groupText = "Přeživší";
+        } else if(getGroup().equals("2")) {
+            groupText = "Armáda";
+        } else {
+            groupText = "";
+        }
+        return groupText;
     }
 }

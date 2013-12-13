@@ -29,6 +29,24 @@ public class NakazaParticipant implements Identifiable<Integer>, Serializable {
         this.id = id;
     }
 
+    private String name;
+
+    @javax.persistence.Column(
+            name = "name",
+            nullable = true,
+            insertable = true,
+            updatable = true,
+            length = 2147483647,
+            precision = 0)
+    @Basic
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private String group;
 
     @javax.persistence.Column(

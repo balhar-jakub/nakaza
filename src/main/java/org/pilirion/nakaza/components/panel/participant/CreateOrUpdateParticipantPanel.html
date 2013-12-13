@@ -2,6 +2,15 @@
     <form class="storyForm" wicket:id="createParticipant">
         <fieldset>
             <div class="field">
+                <div class="label">Název</div>
+                <div class="input">
+                    <input type="text" name="name" wicket:id="name" />
+                </div>
+                <div class="error" wicket:id="nameFeedback"></div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="field">
                 <div class="label">Veřejný popis</div>
                 <div class="input">
                     <textarea wicket:id="descriptionPublic">Sem patří popis, který uvidí všichni</textarea>
@@ -28,13 +37,13 @@
 
             <div class="clear"></div>
 
-            <h2>Štítky charakterizující tento příběh.</h2>
+            <h2>Štítky charakterizující tohoto účastníka..</h2>
 
             <div class="labels" wicket:id="labels"></div>
             <div class="clear"></div>
 
             <div class="field">
-                <input type="submit" wicket:id="submit" value="Uložit nový příběh">
+                <input type="submit" wicket:id="submit" value="Uložit nového účastníka příběhu">
             </div>
         </fieldset>
     </form>

@@ -80,9 +80,12 @@ public class Registration extends BasePage {
                     user.setImage(FileUtils.saveImageFileAndReturnPath(uploadedImage, user.getEmail() +
                             new RandomString(5).nextString(), 120, 120));
                 }
+                String passwordForLogin = user.getPassword();
                 user.setPassword(Pwd.getSHA(user.getPassword()));
                 user.setRemainingPoints(20);
                 if(userService.saveOrUpdate(user)){
+                    NakazaAuthenticatedWebSession.get().signIn(user.getEmail(), passwordForLogin);
+
                     throw new RestartResponseException(HomePage.class);
                 }
             }

@@ -27,6 +27,7 @@ public class ParticipantDetail extends Panel {
         final boolean isPrivateVisible =
                 participantService.participate(userService.getLoggedUser(), participant);
 
+        add(new Label("name", Model.of(participant.getName())));
         add(new Label("group", Model.of(participant.getGroupText())));
         add(new Label("descriptionPublic", Model.of(participant.getDescriptionPublic())).setEscapeModelStrings(false));
         add(new HidingLabel("descriptionPrivate",

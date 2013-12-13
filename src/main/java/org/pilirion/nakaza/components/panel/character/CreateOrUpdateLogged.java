@@ -7,9 +7,11 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.pilirion.nakaza.components.form.FeedbackTextArea;
 import org.pilirion.nakaza.components.form.FeedbackTextField;
+import org.pilirion.nakaza.components.page.character.CharacterDetail;
 import org.pilirion.nakaza.components.page.character.CharacterList;
 import org.pilirion.nakaza.entity.NakazaCharacter;
 import org.pilirion.nakaza.entity.NakazaUser;
@@ -38,7 +40,11 @@ public class CreateOrUpdateLogged extends Panel {
                 groupId = -1;
             } else  {
                 headerText = "Úprava stávající postavy";
-                groupId = Integer.parseInt(user.getCharacter().getGroup());
+                if(user.getCharacter().getGroup() == null) {
+                    groupId = -1;
+                } else {
+                    groupId = Integer.parseInt(user.getCharacter().getGroup());
+                }
             }
         }
         Label label = new Label("createCharacterHeader", Model.of(headerText));
@@ -50,6 +56,10 @@ public class CreateOrUpdateLogged extends Panel {
             @Override
             protected void onSubmit() {
                 userService.saveOrUpdate(user);
+                PageParameters params = new PageParameters();
+                params.add("id", user.getId());
+
+                throw new RestartResponseException(CharacterDetail.class, params);
             }
         };
 
