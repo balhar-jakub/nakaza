@@ -8,13 +8,18 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.pilirion.nakaza.components.form.HidingLabel;
 import org.pilirion.nakaza.components.page.BasePage;
 import org.pilirion.nakaza.components.page.story.StoryDetail;
+import org.pilirion.nakaza.components.panel.LabelsPanel;
+import org.pilirion.nakaza.components.panel.participant.ParticipantShortPanel;
 import org.pilirion.nakaza.entity.NakazaLabel;
 import org.pilirion.nakaza.entity.NakazaParticipant;
 import org.pilirion.nakaza.entity.NakazaStory;
 import org.pilirion.nakaza.entity.NakazaUser;
 import org.pilirion.nakaza.security.NakazaAuthenticatedWebSession;
+import org.pilirion.nakaza.service.UserService;
 
 import java.util.List;
 
@@ -22,14 +27,17 @@ import java.util.List;
  *
  */
 public class ListStoriesPanel extends Panel {
+    @SpringBean
+    UserService userService;
+
     public ListStoriesPanel(String id, List<NakazaStory> stories) {
         super(id);
 
-        final NakazaUser logged = ((NakazaAuthenticatedWebSession)NakazaAuthenticatedWebSession.get()).getLoggedUser();
         add(new ListView<NakazaStory>("stories", stories) {
             @Override
             protected void populateItem(ListItem<NakazaStory> item) {
-                final NakazaStory story = item.getModelObject();
+                NakazaStory story = item.getModelObject();
+                NakazaUser logged = userService.getLoggedUser();
 
                 PageParameters params = new PageParameters();
                 params.add("id",story.getId());
@@ -38,15 +46,10 @@ public class ListStoriesPanel extends Panel {
                 storyDetail.add(storyName);
                 item.add(storyDetail);
 
+                boolean isPrivateShown = (logged != null) && story.getUsers().contains(logged);
                 item.add(new Label("descriptionPublic",Model.of(story.getDescriptionPublic())).setEscapeModelStrings(false));
-                item.add(new Label("descriptionPrivate",Model.of(story.getDescriptionPrivate())){
-                    @Override
-                    protected void onConfigure() {
-                        super.onConfigure();
-
-                        setVisibilityAllowed((logged != null) && story.getUsers().contains(logged));
-                    }
-                }.setEscapeModelStrings(false));
+                item.add(new HidingLabel("descriptionPrivate",
+                        Model.of(story.getDescriptionPrivate()), isPrivateShown).setEscapeModelStrings(false));
 
                 boolean amParticipant = (logged != null) && story.getUsers().contains(logged);
                 NakazaParticipant me = null;
@@ -65,28 +68,12 @@ public class ListStoriesPanel extends Panel {
                     me = NakazaParticipant.getEmptyParticipant();
                 }
 
-                item.add(new Label("descriptionPrivateRole", Model.of(me.getDescriptionPrivate())){
-                    @Override
-                    protected void onConfigure() {
-                        super.onConfigure();
+                item.add(new HidingLabel("descriptionPrivateRole",
+                        Model.of(me.getDescriptionPrivate()), isPrivateShown).setEscapeModelStrings(false));
 
-                        setVisibilityAllowed((logged != null) && story.getUsers().contains(logged));
-                    }
-                }.setEscapeModelStrings(false));
+                item.add(new LabelsPanel("labelsPanel", story.getLabels()));
 
-                item.add(new ListView<NakazaLabel>("labels", story.getLabels()) {
-                    @Override
-                    protected void populateItem(ListItem<NakazaLabel> item) {
-                        item.add(new Label("label", item.getModelObject().getName()));
-                    }
-                });
-
-                item.add(new ListView<NakazaParticipant>("participants", story.getParticipants()) {
-                    @Override
-                    protected void populateItem(ListItem<NakazaParticipant> item) {
-                        item.add(new Label("participant", item.getModelObject().getDescriptionPublic()).setEscapeModelStrings(false));
-                    }
-                });
+                item.add(new ParticipantShortPanel("participantsPanel", story.getParticipants()));
             }
         });
     }

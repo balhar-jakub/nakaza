@@ -94,14 +94,17 @@ public class NakazaStory implements Identifiable<Integer>, Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        NakazaStory that = (NakazaStory) o;
+        NakazaStory story = (NakazaStory) o;
 
-        if (id != that.id) return false;
-        if (descriptionPrivate != null ? !descriptionPrivate.equals(that.descriptionPrivate) : that.descriptionPrivate != null)
+        if (id != story.id) return false;
+        if (accepted != null ? !accepted.equals(story.accepted) : story.accepted != null) return false;
+        if (createdBy != null ? !createdBy.equals(story.createdBy) : story.createdBy != null) return false;
+        if (descriptionPrivate != null ? !descriptionPrivate.equals(story.descriptionPrivate) : story.descriptionPrivate != null)
             return false;
-        if (descriptionPublic != null ? !descriptionPublic.equals(that.descriptionPublic) : that.descriptionPublic != null)
+        if (descriptionPublic != null ? !descriptionPublic.equals(story.descriptionPublic) : story.descriptionPublic != null)
             return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (name != null ? !name.equals(story.name) : story.name != null) return false;
+        if (points != null ? !points.equals(story.points) : story.points != null) return false;
 
         return true;
     }
@@ -112,6 +115,9 @@ public class NakazaStory implements Identifiable<Integer>, Serializable {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (descriptionPublic != null ? descriptionPublic.hashCode() : 0);
         result = 31 * result + (descriptionPrivate != null ? descriptionPrivate.hashCode() : 0);
+        result = 31 * result + (points != null ? points.hashCode() : 0);
+        result = 31 * result + (accepted != null ? accepted.hashCode() : 0);
+        result = 31 * result + (createdBy != null ? createdBy.hashCode() : 0);
         return result;
     }
 
@@ -158,8 +164,7 @@ public class NakazaStory implements Identifiable<Integer>, Serializable {
     private List<NakazaParticipant> participants;
 
     @OneToMany(
-            mappedBy = "story",
-            fetch = FetchType.EAGER
+            mappedBy = "story"
     )
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     public List<NakazaParticipant> getParticipants() {
@@ -168,19 +173,6 @@ public class NakazaStory implements Identifiable<Integer>, Serializable {
 
     public void setParticipants(List<NakazaParticipant> participants) {
         this.participants = participants;
-    }
-
-    @Transient
-    private String group;
-
-    @Transient
-    public void setGroup(String group) {
-        this.group = group;
-    }
-
-    @Transient
-    public String getGroup(){
-        return group;
     }
 
     public static NakazaStory getEmptyStory() {
