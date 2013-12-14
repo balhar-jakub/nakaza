@@ -71,13 +71,16 @@ public class AddStory extends BasePage {
 
         List<NakazaUser> nakazaUsers = userService.getFirstUsersWithCharacters();
 
+        add(new FeedbackPanel("feedback"));
+
         Model<Integer> remainingPoints = Model.of(loggedUser.getObject().getRemainingPoints());
         add(new Label("pointsRemaining", remainingPoints).setOutputMarkupId(true));
 
         Form form = new Form("storiesForm");
-        form.add(new FeedbackPanel("feedback"));
-        form.add(new StoryList("availableStories",
-                storyService.getAllApproved(Integer.parseInt(loggedUser.getObject().getCharacter().getGroup()))));
+
+        List<NakazaStory> approved= storyService.getAllApproved(Integer.parseInt(loggedUser.getObject().getCharacter().getGroup()));
+        approved.removeAll(loggedUser.getObject().getStories());
+        form.add(new StoryList("availableStories", approved));
         form.add(new StoryListShort("myStories", loggedUser.getObject().getStories()));
         add(form);
 
@@ -99,7 +102,8 @@ public class AddStory extends BasePage {
 
         @Override
         protected void populateItem(ListItem<NakazaStory> item) {
-            final NakazaStory story = item.getModelObject();
+            NakazaStory story = item.getModelObject();
+            final int storyId = story.getId();
             int storyPoints = ((story.getPoints() == null) ? 0 : story.getPoints());
             item.add(new Label("storyPoints", storyPoints));
 
@@ -112,20 +116,34 @@ public class AddStory extends BasePage {
             item.add(new AjaxButton("change") {}.add(new AjaxFormComponentUpdatingBehavior("click") {
                 @Override
                 protected void onUpdate(AjaxRequestTarget target) {
-                    for(NakazaParticipant participant: story.getParticipants()){
-                        if(participant.getUser() == loggedUser.getObject()){
+                    NakazaStory story = storyService.getById(storyId);
+                    List<NakazaParticipant> participants = story.getParticipants();
+                    for(NakazaParticipant participant: participants){
+                        if(participant.getUser() != null && ((int)participant.getUser().getId() == (int)loggedUser.getObject().getId())){
                             participant.setUser(null);
                             participantService.saveOrUpdate(participant);
                         }
                     }
-                    loggedUser.getObject().getStories().remove(story);
+                    for(NakazaStory storyLocal: loggedUser.getObject().getStories()) {
+                        if((int)storyLocal.getId() == (int)story.getId()){
+                            loggedUser.getObject().getStories().remove(storyLocal);
+                            break;
+                        }
+                    }
+                    for(NakazaUser user: story.getUsers()) {
+                        if((int)user.getId() == (int)loggedUser.getObject().getId()){
+                            story.getUsers().remove(user);
+                            break;
+                        }
+                    }
+                    storyService.saveOrUpdate(story);
 
                     int remainingPoints = ((loggedUser.getObject().getRemainingPoints() != null) ? loggedUser.getObject().getRemainingPoints(): 0);
                     int storyPoints = ((story.getPoints() == null) ? 0 : story.getPoints());
                     loggedUser.getObject().setRemainingPoints(remainingPoints + storyPoints);
                     userService.saveOrUpdate(loggedUser.getObject());
 
-                    target.add(AddStory.this);
+                    throw new RestartResponseException(AddStory.class);
                 }
             }));
         }
@@ -169,7 +187,7 @@ public class AddStory extends BasePage {
                         protected void onUpdate(AjaxRequestTarget target) {
                             int remainingPoints = ((loggedUser.getObject().getRemainingPoints() != null) ? loggedUser.getObject().getRemainingPoints(): 0);
                             int storyPoints = ((story.getPoints() == null) ? 0 : story.getPoints());
-                            if(remainingPoints > storyPoints) {
+                            if(remainingPoints >= storyPoints) {
                                 participant.setUser(loggedUser.getObject());
                                 loggedUser.getObject().getStories().add(story);
                                 getList().remove(story);
@@ -177,6 +195,8 @@ public class AddStory extends BasePage {
 
                                 participantService.saveOrUpdate(participant);
                                 userService.saveOrUpdate(loggedUser.getObject());
+
+                                throw new RestartResponseException(AddStory.class);
                             } else {
                                 error("You do not have enough points left for this story.");
                             }

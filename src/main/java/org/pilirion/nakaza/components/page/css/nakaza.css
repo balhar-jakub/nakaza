@@ -476,6 +476,14 @@ textarea {
     height: 28px;
 }
 
+.participantText {
+    float: left;
+}
+
+.storyChange {
+    float: right;
+}
+
 @media (max-width: 991px) {
     .hero-column {
         padding-top: 0px;

@@ -36,10 +36,10 @@ public class StoryDAO extends GenericHibernateDAO<NakazaStory, Serializable> {
      */
     @SuppressWarnings("unchecked")
     public List<NakazaStory> getAllApproved(int groupId) {
-        Query query = sessionFactory.getCurrentSession().createSQLQuery("select story.created_by, story.id, story.description_private, story.description_public," +
-                "story.points, story.state, story.name from nakaza_story as story join nakaza_participant as participant " +
-                "on story.id = participant.story where story.state=true and participant.id_user is null and " +
-                "participant.group_id = '" + groupId + "'").addEntity(NakazaStory.class);
+        Query query = sessionFactory.getCurrentSession().createSQLQuery("select * from nakaza_story " +
+                "where state = true and id in " +
+                "(select story from nakaza_participant where group_id = '"+groupId+"' and id_user is null group by story)").
+                addEntity(NakazaStory.class);
         return query.list();
     }
 }

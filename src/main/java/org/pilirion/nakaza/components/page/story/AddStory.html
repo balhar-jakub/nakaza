@@ -6,12 +6,13 @@
         <div class="middle-cotent">
             <h1>Tvorba postavy</h1>
 
+            <div class="error" wicket:id="feedback"></div>
+
             <div class="info">
                 Zbývá <span class="availablePoints" wicket:id="pointsRemaining">20</span> bodů schopnosti.
             </div>
 
             <form wicket:id="storiesForm">
-                <div class="error" wicket:id="feedback"></div>
                 <div class="storyLines">
                     <div class="availableStories">
                         <h3>Příběhy, kterých se můžete zůčastnit</h3>
@@ -26,9 +27,10 @@
                             <div class="clear"></div>
                             <div class="participants" wicket:id="participants">
                                 <div class="participant">
-                                    <span wicket:id="participantDescription"></span>
+                                    <span class="participantText" wicket:id="participantDescription"></span>
                                     <input type="button" wicket:id="change" class="storyChange" value="Přidej"/>
                                 </div>
+                                <div class="clear"></div>
                             </div>
                             <div class="clear"></div>
                         </div>

@@ -56,7 +56,7 @@ public class ListStoriesPanel extends Panel {
                 if(amParticipant) {
                     List<NakazaParticipant> participants = story.getParticipants();
                     for(NakazaParticipant participant: participants){
-                        if(participant.getUser().equals(logged)){
+                        if(participant.getUser() != null && participant.getUser().equals(logged)){
                             me = participant;
                             break;
                         }
