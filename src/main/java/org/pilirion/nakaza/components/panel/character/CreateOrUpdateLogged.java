@@ -7,6 +7,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.pilirion.nakaza.components.form.FeedbackTextArea;
@@ -25,11 +26,13 @@ public class CreateOrUpdateLogged extends Panel {
     @SpringBean
     UserService userService;
     private NakazaUser user;
+    private String buttonText;
 
     public CreateOrUpdateLogged(String id) {
         super(id);
         user = ((NakazaAuthenticatedWebSession)NakazaAuthenticatedWebSession.get()).getLoggedUser();
         String headerText = "Vytvořit novou postavu";
+        buttonText = "Vytvořit";
         int groupId;
         if(user == null) {
             user = NakazaUser.getEmptyUser();
@@ -40,6 +43,7 @@ public class CreateOrUpdateLogged extends Panel {
                 groupId = -1;
             } else  {
                 headerText = "Úprava stávající postavy";
+                buttonText = "Upravit";
                 if(user.getCharacter().getGroup() == null) {
                     groupId = -1;
                 } else {
@@ -69,7 +73,7 @@ public class CreateOrUpdateLogged extends Panel {
         characterForm.add(new FeedbackSelectPanel("group", characterForm, groupId));
         characterForm.add(new FeedbackTextArea("description", characterForm).setRequired(true));
 
-        characterForm.add(new Button("submit"));
+        characterForm.add(new Button("submit", new PropertyModel<String>(this,"buttonText")));
 
         add(characterForm);
     }

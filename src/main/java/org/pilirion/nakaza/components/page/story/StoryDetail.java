@@ -115,7 +115,7 @@ public class StoryDetail extends BasePage {
                 item.add(form);
 
                 item.add(new CreateOrUpdateParticipantPanel("modifyParticipant", storyModel.getObject(), participant,
-                        storyService.hasRights(userService.getLoggedUser(), storyModel.getObject()) && !isEditFormVisible));
+                        storyService.hasRights(userService.getLoggedUser(), storyModel.getObject()) && !isEditFormVisible, true));
             }
         });
 
@@ -137,6 +137,6 @@ public class StoryDetail extends BasePage {
         add(form);
 
         add(new CreateOrUpdateParticipantPanel("createParticipant", storyModel.getObject(), NakazaParticipant.getEmptyParticipant(),
-                storyService.hasRights(userService.getLoggedUser(), storyModel.getObject()) && isAddParticipantVisible));
+                storyService.hasRights(userService.getLoggedUser(), storyModel.getObject()) && isAddParticipantVisible, false));
     }
 }

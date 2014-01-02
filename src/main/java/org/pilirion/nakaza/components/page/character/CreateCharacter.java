@@ -1,5 +1,6 @@
 package org.pilirion.nakaza.components.page.character;
 
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.pilirion.nakaza.components.Menu;
@@ -24,6 +25,7 @@ import java.util.List;
 /**
  *
  */
+@AuthorizeInstantiation({"Admin", "Editor", "User"})
 public class CreateCharacter extends BasePage {
     @SpringBean
     UserService userService;

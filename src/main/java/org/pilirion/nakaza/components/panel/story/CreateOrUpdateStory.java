@@ -10,6 +10,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.IValidator;
@@ -38,9 +39,15 @@ public class CreateOrUpdateStory extends Panel {
     @SpringBean
     UserService userService;
 
-    public CreateOrUpdateStory(String id, NakazaStory story) {
+    private String buttonText;
+
+    public CreateOrUpdateStory(String id, NakazaStory story, boolean isUpdate) {
         super(id);
 
+        buttonText = "Vytvořit";
+        if(isUpdate) {
+            buttonText = "Upravit";
+        }
         if(story.getLabels() == null) {
             story.setLabels(new ArrayList<NakazaLabel>());
         }
@@ -72,7 +79,7 @@ public class CreateOrUpdateStory extends Panel {
         labels.add(new AtLeastOneRequiredValidator());
         storyForm.add(labels);
 
-        storyForm.add(new Button("submit"));
+        storyForm.add(new Button("submit", new PropertyModel<String>(this, "buttonText")));
         add(storyForm);
     }
 }

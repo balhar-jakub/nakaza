@@ -24,6 +24,7 @@ import java.util.List;
 /**
  *
  */
+@AuthorizeInstantiation({"Admin"})
 public class AdministerStories extends BasePage {
     @SpringBean
     StoryService storyService;

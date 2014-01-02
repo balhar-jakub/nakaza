@@ -1,5 +1,6 @@
 package org.pilirion.nakaza.components.page.story;
 
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.pilirion.nakaza.components.Menu;
@@ -25,6 +26,7 @@ import java.util.List;
 /**
  *
  */
+@AuthorizeInstantiation({"Admin", "Editor", "User"})
 public class CreateStory extends BasePage {
     @SpringBean
     StoryService storyService;
@@ -51,7 +53,7 @@ public class CreateStory extends BasePage {
             }
         }
 
-        add(new CreateOrUpdateStory("createStory", story));
+        add(new CreateOrUpdateStory("createStory", story, actualStory != NONE));
         int MAX_STORIES = 5;
         List<NakazaStory> stories = storyService.getLastAdded(MAX_STORIES);
         add(new LastAddedStories("lastAddedStories", stories));

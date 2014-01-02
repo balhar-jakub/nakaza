@@ -12,6 +12,7 @@ import org.pilirion.nakaza.components.page.story.StoryList;
 import org.pilirion.nakaza.components.page.user.Login;
 import org.pilirion.nakaza.components.panel.character.CreateCharacterPanel;
 import org.pilirion.nakaza.components.panel.character.ListCharacters;
+import org.pilirion.nakaza.components.panel.character.ListShortCharacters;
 import org.pilirion.nakaza.components.panel.layout.ButtonLike;
 import org.pilirion.nakaza.components.panel.layout.LeftMenus;
 import org.pilirion.nakaza.components.panel.layout.NakazaSignInPanel;
@@ -41,6 +42,8 @@ public class CharacterList extends BasePage {
         List<NakazaUser> charactersData = characterService.getCharacters();
 
         add(new ListCharacters("charactersPanel", charactersData));
+
+        add(new ListShortCharacters("listShortChars", characterService.getFirstUsersWithCharacters()));
 
         add(new BookmarkablePageLink<BasePage>("login", Login.class));
     }

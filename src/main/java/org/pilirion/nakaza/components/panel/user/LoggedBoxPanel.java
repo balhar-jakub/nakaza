@@ -6,6 +6,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.pilirion.nakaza.components.page.BasePage;
 import org.pilirion.nakaza.components.page.character.CharacterDetail;
+import org.pilirion.nakaza.components.page.character.CreateCharacter;
 import org.pilirion.nakaza.components.page.user.Registration;
 import org.pilirion.nakaza.components.page.user.SignOut;
 import org.pilirion.nakaza.entity.NakazaUser;
@@ -23,9 +24,14 @@ public class LoggedBoxPanel extends Panel {
             logged = NakazaUser.getEmptyUser();
         }
 
-        PageParameters params = new PageParameters();
-        params.set("id",logged.getId());
-        Link characterDetail = new BookmarkablePageLink<BasePage>("characterDetail", CharacterDetail.class, params);
+        Link characterDetail;
+        if(logged.getCharacter() == null) {
+            characterDetail = new BookmarkablePageLink<BasePage>("characterDetail", CreateCharacter.class);
+        } else {
+            PageParameters params = new PageParameters();
+            params.set("id",logged.getId());
+            characterDetail = new BookmarkablePageLink<BasePage>("characterDetail", CharacterDetail.class, params);
+        }
         add(characterDetail);
 
         Link logout = new BookmarkablePageLink<BasePage>("logout", SignOut.class);

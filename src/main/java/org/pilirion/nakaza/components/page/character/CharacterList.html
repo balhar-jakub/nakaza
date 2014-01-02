@@ -6,6 +6,12 @@
         <div class="middle-cotent">
             <h1>Registrované postavy</h1>
 
+            <p>
+                V případě, že si chcete vytvořit postavu pro tuto hru, je potřeba se nejprve <a wicket:id="login">přihlásit</a>.
+                V případě, že již přihlášeni jste stačí kliknout v okénku vpravo nahoře na moje postava nebo na
+                tlačítko vytvořit v levém spodním menu.
+            </p>
+
             <div wicket:id="charactersPanel"></div>
         </div>
     </div>
@@ -15,10 +21,7 @@
 
             </div>
             <div class="right-menu-header rotate right-shift">Nejnovější postavy</div>
-            <div class="right-menu-content">
-                <div class="right-menu-section">
-                    Pro možnost tvořit a upravovat postavu je potřeba se <a wicket:id="login">přihlásit</a>.
-                </div>
+            <div class="right-menu-content" wicket:id="listShortChars">
             </div>
         </div>
     </div>

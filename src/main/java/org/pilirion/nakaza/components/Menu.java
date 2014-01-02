@@ -34,16 +34,26 @@ public class Menu {
 
     public static List<ButtonLike> getCharacterButtons() {
         List<ButtonLike> lower = new ArrayList<ButtonLike>();
-        lower.add(new ButtonLike("Nová", CreateCharacter.class));
+        NakazaUser loggedUser = ((NakazaAuthenticatedWebSession) NakazaAuthenticatedWebSession.get()).getLoggedUser();
+        if(loggedUser != null) {
+            if(loggedUser.getCharacter() == null) {
+                lower.add(new ButtonLike("Nová", CreateCharacter.class));
+            } else {
+                lower.add(new ButtonLike("Upravit", CreateCharacter.class));
+            }
+        }
         return lower;
     }
 
     public static List<ButtonLike> getStoryButtons() {
         List<ButtonLike> lower = new ArrayList<ButtonLike>();
-        lower.add(new ButtonLike("Nový", CreateStory.class));
-        lower.add(new ButtonLike("Správa", AddStory.class));
+
         NakazaUser loggedUser = ((NakazaAuthenticatedWebSession) NakazaAuthenticatedWebSession.get()).getLoggedUser();
-        if(loggedUser != null && loggedUser.getRole() >= NakazaRoles.getRoleByName("Admin")){
+        if(loggedUser != null) {
+            lower.add(new ButtonLike("Nový", CreateStory.class));
+            lower.add(new ButtonLike("Výběr", AddStory.class));
+        }
+        if(loggedUser != null && loggedUser.getRole() >= NakazaRoles.ADMIN.getRole()){
             lower.add(new ButtonLike("Admin", AdministerStories.class));
         }
 

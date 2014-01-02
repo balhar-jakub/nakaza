@@ -9,6 +9,7 @@ import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.IValidator;
@@ -41,13 +42,18 @@ public class CreateOrUpdateParticipantPanel extends Panel {
     LabelService labelService;
 
     private boolean show;
+    private String buttonText;
 
     private EntityModel<NakazaStory> storyModel;
 
-    public CreateOrUpdateParticipantPanel(String id, NakazaStory story, NakazaParticipant participant, boolean show) {
+    public CreateOrUpdateParticipantPanel(String id, NakazaStory story, NakazaParticipant participant, boolean show, boolean isUpdate) {
         super(id);
         this.show = show;
         storyModel = new EntityModel<NakazaStory>(story, storyDAO);
+        buttonText = "Vytvořit nového účastníka příběhu";
+        if(isUpdate) {
+            buttonText = "Uložit úpravu";
+        }
 
         Form<NakazaParticipant> participantForm = new Form<NakazaParticipant>("createParticipant",
                 new CompoundPropertyModel<NakazaParticipant>(participant)){
@@ -82,7 +88,7 @@ public class CreateOrUpdateParticipantPanel extends Panel {
         int group = (participant.getGroup() != null) ? Integer.parseInt(participant.getGroup()) : -1;
         participantForm.add(new FeedbackSelectPanel("group", participantForm, group));
 
-        participantForm.add(new Button("submit"));
+        participantForm.add(new Button("submit", new PropertyModel<String>(this,"buttonText")));
 
         add(participantForm);
     }
