@@ -276,6 +276,7 @@
                         <!-- specific configuration for this execution -->
                         <configuration>
                             <!-- specify your SQL commands, can be all of the following configurations -->
+                            <url>jdbc:postgresql://localhost:5432/balhar</url>
                             <srcFiles>
                                 <srcFile>sql/nakaza20140102.sql</srcFile>
                             </srcFiles>
