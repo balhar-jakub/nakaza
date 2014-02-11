@@ -23,9 +23,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
         <property name="driverClassName" value="org.postgresql.Driver" />
-        <property name="url" value="jdbc:postgresql://localhost/balhar" />
-        <property name="username" value="pia" />
-        <property name="password" value="pia" />
+        <property name="url" value="jdbc:postgresql://localhost/nakaza" />
+        <property name="username" value="nakaza" />
+        <property name="password" value="nakaza" />
     </bean>
 
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

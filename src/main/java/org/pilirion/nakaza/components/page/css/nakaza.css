@@ -87,9 +87,10 @@ textarea {
     margin-bottom: 25px;
     padding: 9px 21px;
     background-color: black;
-    color: white;
     text-align: center;
     text-decoration: none;
+    color: #76653b;
+    font-weight: bold;
 }
 
 .button:hover {
@@ -113,7 +114,6 @@ textarea {
     padding: 0px 19px;
     border: 1px solid #e5e4e1;
     background-color: #ededed;
-    color: black;
 }
 
 .button.left-menu-upper-button.active {
@@ -316,7 +316,7 @@ textarea {
     position: relative;
     left: 0px;
     top: -450px;
-    padding-left: 90px;
+    padding-left: 100px;
     color: #76653b;
 }
 
@@ -541,4 +541,17 @@ textarea {
         padding-right: 0px;
         padding-left: 0px;
     }
+}
+
+.date{
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #c3bca9;
+    border:1px solid #76653b;
+}
+
+a, a:active, a:hover, a:visited {
+    color: #76653b;
 }

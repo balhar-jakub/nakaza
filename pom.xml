@@ -129,7 +129,7 @@
         <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.1-901.jdbc4</version>
+            <version>${postgresql.version}</version>
         </dependency>
         <dependency>
             <groupId>com.mortennobel</groupId>
@@ -235,8 +235,8 @@
                 <configuration>
                     <driver>org.postgresql.Driver</driver>
                     <url>jdbc:postgresql://localhost:5432/postgres</url>
-                    <username>pia</username>
-                    <password>pia</password>
+                    <username>postgres</username>
+                    <password>postgres</password>
                 </configuration>
 
                 <executions>
@@ -249,7 +249,7 @@
                         <configuration>
                             <!-- need another database to drop the targeted one -->
                             <autocommit>true</autocommit>
-                            <sqlCommand>drop database balhar</sqlCommand>
+                            <sqlCommand>drop database nakaza</sqlCommand>
                             <!-- ignore error when database is not avaiable -->
                             <onError>continue</onError>
                         </configuration>
@@ -264,7 +264,7 @@
                         <configuration>
                             <!-- specify your SQL commands, can be all of the following configurations -->
                             <autocommit>true</autocommit>
-                            <sqlCommand>create database balhar with owner pia</sqlCommand>
+                            <sqlCommand>create database nakaza with owner nakaza</sqlCommand>
                         </configuration>
                     </execution>
                     <execution>
@@ -276,7 +276,7 @@
                         <!-- specific configuration for this execution -->
                         <configuration>
                             <!-- specify your SQL commands, can be all of the following configurations -->
-                            <url>jdbc:postgresql://localhost:5432/balhar</url>
+                            <url>jdbc:postgresql://localhost:5432/nakaza</url>
                             <srcFiles>
                                 <srcFile>sql/nakaza20140102.sql</srcFile>
                             </srcFiles>
@@ -295,6 +295,28 @@
 					<debug>true</debug>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <contextFile>${tomcatContextFile}</contextFile>
+                    <path>/</path>
+                    <httpsPort>8443</httpsPort>
+                    <keystoreFile>${basedir}/src/test/config/keystore</keystoreFile>
+                    <keystorePass>csldcsld</keystorePass>
+                    <additionalClasspathDirs>
+                        <additionalClasspathDir>${basedir}/src/test/config/tomcat</additionalClasspathDir>
+                    </additionalClasspathDirs>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>${postgresql.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -327,5 +349,6 @@
 		<spring.version>3.0.3.RELEASE</spring.version>
 		<hsqldb.version>1.8.0.7</hsqldb.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
+        <postgresql.version>9.1-901.jdbc4</postgresql.version>
 	</properties>
 </project>

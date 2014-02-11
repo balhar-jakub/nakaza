@@ -25,7 +25,7 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 SET search_path = public, pg_catalog;
 
 --
--- Name: nakaza_label_ids; Type: SEQUENCE; Schema: public; Owner: pia
+-- Name: nakaza_label_ids; Type: SEQUENCE; Schema: public; Owner: nakaza
 --
 
 CREATE SEQUENCE nakaza_label_ids
@@ -36,14 +36,14 @@ CREATE SEQUENCE nakaza_label_ids
     CACHE 1;
 
 
-ALTER TABLE public.nakaza_label_ids OWNER TO pia;
+ALTER TABLE public.nakaza_label_ids OWNER TO nakaza;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: nakaza_label; Type: TABLE; Schema: public; Owner: pia; Tablespace: 
+-- Name: nakaza_label; Type: TABLE; Schema: public; Owner: nakaza; Tablespace: 
 --
 
 CREATE TABLE nakaza_label (
@@ -53,10 +53,10 @@ CREATE TABLE nakaza_label (
 );
 
 
-ALTER TABLE public.nakaza_label OWNER TO pia;
+ALTER TABLE public.nakaza_label OWNER TO nakaza;
 
 --
--- Name: nakaza_participant_ids; Type: SEQUENCE; Schema: public; Owner: pia
+-- Name: nakaza_participant_ids; Type: SEQUENCE; Schema: public; Owner: nakaza
 --
 
 CREATE SEQUENCE nakaza_participant_ids
@@ -67,10 +67,10 @@ CREATE SEQUENCE nakaza_participant_ids
     CACHE 1;
 
 
-ALTER TABLE public.nakaza_participant_ids OWNER TO pia;
+ALTER TABLE public.nakaza_participant_ids OWNER TO nakaza;
 
 --
--- Name: nakaza_participant; Type: TABLE; Schema: public; Owner: pia; Tablespace: 
+-- Name: nakaza_participant; Type: TABLE; Schema: public; Owner: nakaza; Tablespace: 
 --
 
 CREATE TABLE nakaza_participant (
@@ -84,10 +84,10 @@ CREATE TABLE nakaza_participant (
 );
 
 
-ALTER TABLE public.nakaza_participant OWNER TO pia;
+ALTER TABLE public.nakaza_participant OWNER TO nakaza;
 
 --
--- Name: nakaza_participant_has_label; Type: TABLE; Schema: public; Owner: pia; Tablespace: 
+-- Name: nakaza_participant_has_label; Type: TABLE; Schema: public; Owner: nakaza; Tablespace: 
 --
 
 CREATE TABLE nakaza_participant_has_label (
@@ -96,10 +96,10 @@ CREATE TABLE nakaza_participant_has_label (
 );
 
 
-ALTER TABLE public.nakaza_participant_has_label OWNER TO pia;
+ALTER TABLE public.nakaza_participant_has_label OWNER TO nakaza;
 
 --
--- Name: nakaza_story_ids; Type: SEQUENCE; Schema: public; Owner: pia
+-- Name: nakaza_story_ids; Type: SEQUENCE; Schema: public; Owner: nakaza
 --
 
 CREATE SEQUENCE nakaza_story_ids
@@ -110,10 +110,10 @@ CREATE SEQUENCE nakaza_story_ids
     CACHE 1;
 
 
-ALTER TABLE public.nakaza_story_ids OWNER TO pia;
+ALTER TABLE public.nakaza_story_ids OWNER TO nakaza;
 
 --
--- Name: nakaza_story; Type: TABLE; Schema: public; Owner: pia; Tablespace: 
+-- Name: nakaza_story; Type: TABLE; Schema: public; Owner: nakaza; Tablespace: 
 --
 
 CREATE TABLE nakaza_story (
@@ -127,10 +127,10 @@ CREATE TABLE nakaza_story (
 );
 
 
-ALTER TABLE public.nakaza_story OWNER TO pia;
+ALTER TABLE public.nakaza_story OWNER TO nakaza;
 
 --
--- Name: nakaza_story_has_label; Type: TABLE; Schema: public; Owner: pia; Tablespace: 
+-- Name: nakaza_story_has_label; Type: TABLE; Schema: public; Owner: nakaza; Tablespace: 
 --
 
 CREATE TABLE nakaza_story_has_label (
@@ -139,10 +139,10 @@ CREATE TABLE nakaza_story_has_label (
 );
 
 
-ALTER TABLE public.nakaza_story_has_label OWNER TO pia;
+ALTER TABLE public.nakaza_story_has_label OWNER TO nakaza;
 
 --
--- Name: nakaza_user_ids; Type: SEQUENCE; Schema: public; Owner: pia
+-- Name: nakaza_user_ids; Type: SEQUENCE; Schema: public; Owner: nakaza
 --
 
 CREATE SEQUENCE nakaza_user_ids
@@ -153,10 +153,10 @@ CREATE SEQUENCE nakaza_user_ids
     CACHE 1;
 
 
-ALTER TABLE public.nakaza_user_ids OWNER TO pia;
+ALTER TABLE public.nakaza_user_ids OWNER TO nakaza;
 
 --
--- Name: nakaza_user; Type: TABLE; Schema: public; Owner: pia; Tablespace: 
+-- Name: nakaza_user; Type: TABLE; Schema: public; Owner: nakaza; Tablespace: 
 --
 
 CREATE TABLE nakaza_user (
@@ -175,10 +175,10 @@ CREATE TABLE nakaza_user (
 );
 
 
-ALTER TABLE public.nakaza_user OWNER TO pia;
+ALTER TABLE public.nakaza_user OWNER TO nakaza;
 
 --
--- Name: nakaza_user_has_story; Type: TABLE; Schema: public; Owner: pia; Tablespace: 
+-- Name: nakaza_user_has_story; Type: TABLE; Schema: public; Owner: nakaza; Tablespace: 
 --
 
 CREATE TABLE nakaza_user_has_story (
@@ -187,10 +187,10 @@ CREATE TABLE nakaza_user_has_story (
 );
 
 
-ALTER TABLE public.nakaza_user_has_story OWNER TO pia;
+ALTER TABLE public.nakaza_user_has_story OWNER TO nakaza;
 
 --
--- Data for Name: nakaza_label; Type: TABLE DATA; Schema: public; Owner: pia
+-- Data for Name: nakaza_label; Type: TABLE DATA; Schema: public; Owner: nakaza
 --
 
 INSERT INTO nakaza_label VALUES (8, 'Akční', 'Jedná se o štítek pro roli, která má být silně akční, to znamená hodně střílení nebo pohybu.');
@@ -203,14 +203,14 @@ INSERT INTO nakaza_label VALUES (14, 'Informátor', 'Osoba, která má informace
 
 
 --
--- Name: nakaza_label_ids; Type: SEQUENCE SET; Schema: public; Owner: pia
+-- Name: nakaza_label_ids; Type: SEQUENCE SET; Schema: public; Owner: nakaza
 --
 
 SELECT pg_catalog.setval('nakaza_label_ids', 14, true);
 
 
 --
--- Data for Name: nakaza_participant; Type: TABLE DATA; Schema: public; Owner: pia
+-- Data for Name: nakaza_participant; Type: TABLE DATA; Schema: public; Owner: nakaza
 --
 
 INSERT INTO nakaza_participant VALUES (17, '1', '<p>Zamiloval se do tebe voj&aacute;k a d&iacute;ky jeho ochotě ti pomoci zat&iacute;m přež&iacute;v&aacute;&scaron;, zač&iacute;n&aacute;&scaron; na sobě ale pozorovat n&aacute;znaky n&aacute;kazy. Je nějak&aacute; cesta?</p>', 15, NULL, '<p>D&iacute;vka, do kter&eacute; se zamiloval</p>', 'Dívka');
@@ -220,20 +220,20 @@ INSERT INTO nakaza_participant VALUES (14, '0', '<p>Pot&eacute; co ses proměnil
 
 
 --
--- Data for Name: nakaza_participant_has_label; Type: TABLE DATA; Schema: public; Owner: pia
+-- Data for Name: nakaza_participant_has_label; Type: TABLE DATA; Schema: public; Owner: nakaza
 --
 
 
 
 --
--- Name: nakaza_participant_ids; Type: SEQUENCE SET; Schema: public; Owner: pia
+-- Name: nakaza_participant_ids; Type: SEQUENCE SET; Schema: public; Owner: nakaza
 --
 
 SELECT pg_catalog.setval('nakaza_participant_ids', 17, true);
 
 
 --
--- Data for Name: nakaza_story; Type: TABLE DATA; Schema: public; Owner: pia
+-- Data for Name: nakaza_story; Type: TABLE DATA; Schema: public; Owner: nakaza
 --
 
 INSERT INTO nakaza_story VALUES (15, 'Voják a láska', '<p>I zelen&yacute; mozek se může zamilovat.&nbsp;</p>', '<p>Voj&aacute;k se zamiluje do jedn&eacute; z přeživ&scaron;&iacute;ch.&nbsp;</p>', 5, true, 15);
@@ -241,7 +241,7 @@ INSERT INTO nakaza_story VALUES (14, 'Muž hledá dceru', '<p>Zombie p&aacute;tr
 
 
 --
--- Data for Name: nakaza_story_has_label; Type: TABLE DATA; Schema: public; Owner: pia
+-- Data for Name: nakaza_story_has_label; Type: TABLE DATA; Schema: public; Owner: nakaza
 --
 
 INSERT INTO nakaza_story_has_label VALUES (15, 10);
@@ -250,14 +250,14 @@ INSERT INTO nakaza_story_has_label VALUES (14, 10);
 
 
 --
--- Name: nakaza_story_ids; Type: SEQUENCE SET; Schema: public; Owner: pia
+-- Name: nakaza_story_ids; Type: SEQUENCE SET; Schema: public; Owner: nakaza
 --
 
 SELECT pg_catalog.setval('nakaza_story_ids', 15, true);
 
 
 --
--- Data for Name: nakaza_user; Type: TABLE DATA; Schema: public; Owner: pia
+-- Data for Name: nakaza_user; Type: TABLE DATA; Schema: public; Owner: nakaza
 --
 
 INSERT INTO nakaza_user VALUES (12, 'ilien22@seznam.cz', '1', '1996-01-12 00:03:00', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'img/question_icon.png', 'Test', 55, '0', '<p>Abcd</p>', 1, 20);
@@ -268,7 +268,7 @@ INSERT INTO nakaza_user VALUES (14, 'balhar.jakub@gmail.com', 'Jakub Balhar', '1
 
 
 --
--- Data for Name: nakaza_user_has_story; Type: TABLE DATA; Schema: public; Owner: pia
+-- Data for Name: nakaza_user_has_story; Type: TABLE DATA; Schema: public; Owner: nakaza
 --
 
 INSERT INTO nakaza_user_has_story VALUES (14, 14);
@@ -276,14 +276,14 @@ INSERT INTO nakaza_user_has_story VALUES (15, 15);
 
 
 --
--- Name: nakaza_user_ids; Type: SEQUENCE SET; Schema: public; Owner: pia
+-- Name: nakaza_user_ids; Type: SEQUENCE SET; Schema: public; Owner: nakaza
 --
 
 SELECT pg_catalog.setval('nakaza_user_ids', 16, true);
 
 
 --
--- Name: nakaza_label_pkey; Type: CONSTRAINT; Schema: public; Owner: pia; Tablespace: 
+-- Name: nakaza_label_pkey; Type: CONSTRAINT; Schema: public; Owner: nakaza; Tablespace: 
 --
 
 ALTER TABLE ONLY nakaza_label
@@ -291,7 +291,7 @@ ALTER TABLE ONLY nakaza_label
 
 
 --
--- Name: nakaza_participant_has_label_pkey; Type: CONSTRAINT; Schema: public; Owner: pia; Tablespace: 
+-- Name: nakaza_participant_has_label_pkey; Type: CONSTRAINT; Schema: public; Owner: nakaza; Tablespace: 
 --
 
 ALTER TABLE ONLY nakaza_participant_has_label
@@ -299,7 +299,7 @@ ALTER TABLE ONLY nakaza_participant_has_label
 
 
 --
--- Name: nakaza_participant_pkey; Type: CONSTRAINT; Schema: public; Owner: pia; Tablespace: 
+-- Name: nakaza_participant_pkey; Type: CONSTRAINT; Schema: public; Owner: nakaza; Tablespace: 
 --
 
 ALTER TABLE ONLY nakaza_participant
@@ -307,7 +307,7 @@ ALTER TABLE ONLY nakaza_participant
 
 
 --
--- Name: nakaza_story_has_label_pkey; Type: CONSTRAINT; Schema: public; Owner: pia; Tablespace: 
+-- Name: nakaza_story_has_label_pkey; Type: CONSTRAINT; Schema: public; Owner: nakaza; Tablespace: 
 --
 
 ALTER TABLE ONLY nakaza_story_has_label
@@ -315,7 +315,7 @@ ALTER TABLE ONLY nakaza_story_has_label
 
 
 --
--- Name: nakaza_story_pkey; Type: CONSTRAINT; Schema: public; Owner: pia; Tablespace: 
+-- Name: nakaza_story_pkey; Type: CONSTRAINT; Schema: public; Owner: nakaza; Tablespace: 
 --
 
 ALTER TABLE ONLY nakaza_story
@@ -323,7 +323,7 @@ ALTER TABLE ONLY nakaza_story
 
 
 --
--- Name: nakaza_user_has_story_pkey; Type: CONSTRAINT; Schema: public; Owner: pia; Tablespace: 
+-- Name: nakaza_user_has_story_pkey; Type: CONSTRAINT; Schema: public; Owner: nakaza; Tablespace: 
 --
 
 ALTER TABLE ONLY nakaza_user_has_story
@@ -331,7 +331,7 @@ ALTER TABLE ONLY nakaza_user_has_story
 
 
 --
--- Name: nakaza_user_pkey; Type: CONSTRAINT; Schema: public; Owner: pia; Tablespace: 
+-- Name: nakaza_user_pkey; Type: CONSTRAINT; Schema: public; Owner: nakaza; Tablespace: 
 --
 
 ALTER TABLE ONLY nakaza_user
@@ -339,7 +339,7 @@ ALTER TABLE ONLY nakaza_user
 
 
 --
--- Name: nakaza_participant_user_fk; Type: FK CONSTRAINT; Schema: public; Owner: pia
+-- Name: nakaza_participant_user_fk; Type: FK CONSTRAINT; Schema: public; Owner: nakaza
 --
 
 ALTER TABLE ONLY nakaza_participant
@@ -347,7 +347,7 @@ ALTER TABLE ONLY nakaza_participant
 
 
 --
--- Name: nakaza_story_user_fk; Type: FK CONSTRAINT; Schema: public; Owner: pia
+-- Name: nakaza_story_user_fk; Type: FK CONSTRAINT; Schema: public; Owner: nakaza
 --
 
 ALTER TABLE ONLY nakaza_story
@@ -355,7 +355,7 @@ ALTER TABLE ONLY nakaza_story
 
 
 --
--- Name: participant_has_label__label_fk; Type: FK CONSTRAINT; Schema: public; Owner: pia
+-- Name: participant_has_label__label_fk; Type: FK CONSTRAINT; Schema: public; Owner: nakaza
 --
 
 ALTER TABLE ONLY nakaza_participant_has_label
@@ -363,7 +363,7 @@ ALTER TABLE ONLY nakaza_participant_has_label
 
 
 --
--- Name: participant_has_label_participant_fk; Type: FK CONSTRAINT; Schema: public; Owner: pia
+-- Name: participant_has_label_participant_fk; Type: FK CONSTRAINT; Schema: public; Owner: nakaza
 --
 
 ALTER TABLE ONLY nakaza_participant_has_label
@@ -371,7 +371,7 @@ ALTER TABLE ONLY nakaza_participant_has_label
 
 
 --
--- Name: participant_story_fk; Type: FK CONSTRAINT; Schema: public; Owner: pia
+-- Name: participant_story_fk; Type: FK CONSTRAINT; Schema: public; Owner: nakaza
 --
 
 ALTER TABLE ONLY nakaza_participant
@@ -379,7 +379,7 @@ ALTER TABLE ONLY nakaza_participant
 
 
 --
--- Name: story_label_label_fk; Type: FK CONSTRAINT; Schema: public; Owner: pia
+-- Name: story_label_label_fk; Type: FK CONSTRAINT; Schema: public; Owner: nakaza
 --
 
 ALTER TABLE ONLY nakaza_story_has_label
@@ -387,7 +387,7 @@ ALTER TABLE ONLY nakaza_story_has_label
 
 
 --
--- Name: story_label_story_fk; Type: FK CONSTRAINT; Schema: public; Owner: pia
+-- Name: story_label_story_fk; Type: FK CONSTRAINT; Schema: public; Owner: nakaza
 --
 
 ALTER TABLE ONLY nakaza_story_has_label
@@ -395,7 +395,7 @@ ALTER TABLE ONLY nakaza_story_has_label
 
 
 --
--- Name: story_user_story_fk; Type: FK CONSTRAINT; Schema: public; Owner: pia
+-- Name: story_user_story_fk; Type: FK CONSTRAINT; Schema: public; Owner: nakaza
 --
 
 ALTER TABLE ONLY nakaza_user_has_story
@@ -403,7 +403,7 @@ ALTER TABLE ONLY nakaza_user_has_story
 
 
 --
--- Name: story_user_user_fk; Type: FK CONSTRAINT; Schema: public; Owner: pia
+-- Name: story_user_user_fk; Type: FK CONSTRAINT; Schema: public; Owner: nakaza
 --
 
 ALTER TABLE ONLY nakaza_user_has_story
