@@ -32,7 +32,7 @@ public class ListCharacters extends Panel {
                 characterDetail.add(new Label("name", character.getName()));
                 item.add(characterDetail);
                 item.add(new Label("age", character.getAge()));
-                item.add(new Label("group", character.getGroup()));
+                item.add(new Label("group", character.getGroupText()));
                 item.add(new Label("description", character.getDescription()).setEscapeModelStrings(false));
             }
         });

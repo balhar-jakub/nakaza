@@ -4,6 +4,7 @@ import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
@@ -16,6 +17,7 @@ import org.pilirion.nakaza.components.page.character.CharacterDetail;
 import org.pilirion.nakaza.components.page.character.CharacterList;
 import org.pilirion.nakaza.entity.NakazaCharacter;
 import org.pilirion.nakaza.entity.NakazaUser;
+import org.pilirion.nakaza.exception.TooManyPlayersInGroup;
 import org.pilirion.nakaza.security.NakazaAuthenticatedWebSession;
 import org.pilirion.nakaza.service.UserService;
 
@@ -59,14 +61,19 @@ public class CreateOrUpdateLogged extends Panel {
         {
             @Override
             protected void onSubmit() {
-                userService.saveOrUpdate(user);
-                PageParameters params = new PageParameters();
-                params.add("id", user.getId());
+                try {
+                    userService.changeCharacter(user);
+                    PageParameters params = new PageParameters();
+                    params.add("id", user.getId());
 
-                throw new RestartResponseException(CharacterDetail.class, params);
+                    throw new RestartResponseException(CharacterDetail.class, params);
+                } catch (TooManyPlayersInGroup tooManyPlayersInGroup) {
+                    error(tooManyPlayersInGroup.getMessage());
+                }
             }
         };
 
+        add(new FeedbackPanel("feedback"));
         characterForm.add(new FeedbackTextField<String>("name", characterForm).setRequired(true));
         characterForm.add(new FeedbackTextField<Integer>("age", characterForm).setRequired(true));
 

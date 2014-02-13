@@ -2,10 +2,13 @@ package org.pilirion.nakaza.dao;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.pilirion.nakaza.api.GenericHibernateDAO;
+import org.pilirion.nakaza.entity.NakazaCharacter;
 import org.pilirion.nakaza.entity.NakazaUser;
 import org.springframework.stereotype.Repository;
 
@@ -39,5 +42,26 @@ public class UserDAO extends GenericHibernateDAO<NakazaUser, Serializable> {
         crit.setMaxResults(limit);
         crit.add(Restrictions.isNotNull("character.name"));
         return crit.list();
+    }
+
+    public int getZombies() {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(NakazaUser.class);
+        criteria.add(Restrictions.eq("character.group","0"));
+        criteria.setProjection(Projections.rowCount());
+        return ((Long) criteria.uniqueResult()).intValue();
+    }
+
+    public int getSurvivors() {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(NakazaUser.class);
+        criteria.add(Restrictions.eq("character.group","1"));
+        criteria.setProjection(Projections.rowCount());
+        return ((Long) criteria.uniqueResult()).intValue();
+    }
+
+    public int getArmy() {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(NakazaUser.class);
+        criteria.add(Restrictions.eq("character.group","2"));
+        criteria.setProjection(Projections.rowCount());
+        return ((Long) criteria.uniqueResult()).intValue();
     }
 }

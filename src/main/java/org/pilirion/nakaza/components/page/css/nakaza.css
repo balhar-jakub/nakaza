@@ -555,3 +555,20 @@ textarea {
 a, a:active, a:hover, a:visited {
     color: #76653b;
 }
+
+.label{
+    font-style: italic;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.participant {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+p {
+    margin: 0px;
+}
