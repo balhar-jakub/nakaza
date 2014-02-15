@@ -64,4 +64,13 @@ public class UserDAO extends GenericHibernateDAO<NakazaUser, Serializable> {
         criteria.setProjection(Projections.rowCount());
         return ((Long) criteria.uniqueResult()).intValue();
     }
+
+    public boolean removeStory(Integer userId, Integer storyId) {
+        SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("delete from nakaza_user_has_story where " +
+                "id_user = :idUser and id_story = :idStory");
+        query.setInteger("idUser", userId);
+        query.setInteger("idStory", storyId);
+        query.executeUpdate();
+        return true;
+    }
 }

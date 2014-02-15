@@ -5,6 +5,7 @@ import org.hibernate.criterion.Restrictions;
 import org.pilirion.nakaza.components.page.character.CharacterList;
 import org.pilirion.nakaza.dao.UserDAO;
 import org.pilirion.nakaza.entity.NakazaCharacter;
+import org.pilirion.nakaza.entity.NakazaStory;
 import org.pilirion.nakaza.entity.NakazaUser;
 import org.pilirion.nakaza.exception.TooManyPlayersInGroup;
 import org.pilirion.nakaza.security.NakazaAuthenticatedWebSession;
@@ -129,6 +130,11 @@ public class UserServiceImpl implements UserService {
     public boolean isArmyAvailable() {
         int army = userDAO.getArmy();
         return army < this.army;
+    }
+
+    @Override
+    public boolean removeStory(NakazaUser user, NakazaStory story) {
+        return userDAO.removeStory(user.getId(), story.getId());
     }
 
     @Override

@@ -131,11 +131,17 @@ public class NakazaUser implements Identifiable<Integer>, Serializable {
         NakazaUser that = (NakazaUser) o;
 
         if (id != that.id) return false;
+        if (character != null ? !character.equals(that.character) : that.character != null) return false;
+        if (created != null ? !created.equals(that.created) : that.created != null) return false;
         if (dateOfBirth != null ? !dateOfBirth.equals(that.dateOfBirth) : that.dateOfBirth != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
         if (image != null ? !image.equals(that.image) : that.image != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (remainingPoints != null ? !remainingPoints.equals(that.remainingPoints) : that.remainingPoints != null)
+            return false;
+        if (role != null ? !role.equals(that.role) : that.role != null) return false;
+        if (stories != null ? !stories.equals(that.stories) : that.stories != null) return false;
 
         return true;
     }
@@ -148,6 +154,11 @@ public class NakazaUser implements Identifiable<Integer>, Serializable {
         result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (image != null ? image.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + (remainingPoints != null ? remainingPoints.hashCode() : 0);
+        result = 31 * result + (character != null ? character.hashCode() : 0);
+        result = 31 * result + (created != null ? created.hashCode() : 0);
+        result = 31 * result + (stories != null ? stories.hashCode() : 0);
         return result;
     }
 

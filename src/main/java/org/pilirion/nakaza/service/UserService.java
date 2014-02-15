@@ -1,6 +1,7 @@
 package org.pilirion.nakaza.service;
 
 import org.pilirion.nakaza.entity.NakazaCharacter;
+import org.pilirion.nakaza.entity.NakazaStory;
 import org.pilirion.nakaza.entity.NakazaUser;
 import org.pilirion.nakaza.exception.TooManyPlayersInGroup;
 
@@ -27,4 +28,6 @@ public interface UserService extends GenericService<NakazaUser> {
     boolean isSurvivorsAvailable();
 
     boolean isArmyAvailable();
+
+    boolean removeStory(NakazaUser user, NakazaStory story);
 }

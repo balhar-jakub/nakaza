@@ -27,8 +27,8 @@ public class Menu {
         upper.add(new ButtonLike("Domů", HomePage.class));
         upper.add(new ButtonLike("O hře", AboutGame.class));
         upper.add(new ButtonLike("O světě", AboutWorld.class));
-        upper.add(new ButtonLike("Příběhy", StoryList.class));
         upper.add(new ButtonLike("Postavy", CharacterList.class));
+        upper.add(new ButtonLike("Příběhy", StoryList.class));
         return upper;
     }
 

@@ -118,30 +118,33 @@ public class AddStory extends BasePage {
                 protected void onUpdate(AjaxRequestTarget target) {
                     NakazaStory story = storyService.getById(storyId);
                     List<NakazaParticipant> participants = story.getParticipants();
+                    NakazaUser logged = loggedUser.getObject();
+                    int loggedUserId = logged.getId();
                     for(NakazaParticipant participant: participants){
-                        if(participant.getUser() != null && ((int)participant.getUser().getId() == (int)loggedUser.getObject().getId())){
+                        if(participant.getUser() != null && (participant.getUser().getId() == loggedUserId)){
                             participant.setUser(null);
                             participantService.saveOrUpdate(participant);
                         }
                     }
-                    for(NakazaStory storyLocal: loggedUser.getObject().getStories()) {
+                    for(NakazaStory storyLocal: logged.getStories()) {
                         if((int)storyLocal.getId() == (int)story.getId()){
-                            loggedUser.getObject().getStories().remove(storyLocal);
+                            logged.getStories().remove(storyLocal);
                             break;
                         }
                     }
                     for(NakazaUser user: story.getUsers()) {
-                        if((int)user.getId() == (int)loggedUser.getObject().getId()){
+                        if((int)user.getId() == loggedUserId){
                             story.getUsers().remove(user);
                             break;
                         }
                     }
                     storyService.saveOrUpdate(story);
 
-                    int remainingPoints = ((loggedUser.getObject().getRemainingPoints() != null) ? loggedUser.getObject().getRemainingPoints(): 0);
+                    int remainingPoints = ((logged.getRemainingPoints() != null) ? logged.getRemainingPoints(): 0);
                     int storyPoints = ((story.getPoints() == null) ? 0 : story.getPoints());
-                    loggedUser.getObject().setRemainingPoints(remainingPoints + storyPoints);
-                    userService.saveOrUpdate(loggedUser.getObject());
+                    logged.setRemainingPoints(remainingPoints + storyPoints);
+                    userService.saveOrUpdate(logged);
+                    userService.removeStory(logged, story);
 
                     throw new RestartResponseException(AddStory.class);
                 }
