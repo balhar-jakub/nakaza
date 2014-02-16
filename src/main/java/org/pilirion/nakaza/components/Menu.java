@@ -64,4 +64,11 @@ public class Menu {
         List<ButtonLike> lower = new ArrayList<ButtonLike>();
         return lower;
     }
+
+    public static List<ButtonLike> getAboutGame() {
+        List<ButtonLike> lower = new ArrayList<ButtonLike>();
+        lower.add(new ButtonLike("O hře", AboutGame.class, "aboutGame"));
+        lower.add(new ButtonLike("Obecná pravidla", AboutGame.class, "generalRules"));
+        return lower;
+    }
 }

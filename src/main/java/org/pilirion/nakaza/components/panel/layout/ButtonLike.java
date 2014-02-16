@@ -12,10 +12,20 @@ public class ButtonLike implements Serializable {
     private String buttonText;
     private Class<? extends BasePage> linkClass;
     private PageParameters params;
+    private String anchor;
 
     public ButtonLike(String buttonText, Class<? extends BasePage> linkClass) {
+        this(buttonText, linkClass, null);
+    }
+
+    public ButtonLike(String buttonText, Class<? extends BasePage> linkClass, String anchor) {
         this.buttonText = buttonText;
         this.linkClass = linkClass;
+        this.anchor = anchor;
+    }
+
+    public String getAnchor() {
+        return anchor;
     }
 
     public String getButtonText() {

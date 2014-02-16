@@ -9,6 +9,7 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.pilirion.nakaza.components.form.AnchoredBookmarkablePageLink;
 import org.pilirion.nakaza.components.page.BasePage;
 
 import java.util.List;
@@ -32,7 +33,12 @@ public class LeftMenu extends Panel {
                 if(buttonLike.getParams() != null) {
                     params = buttonLike.getParams();
                 }
-                Link buttonLink = new BookmarkablePageLink<BasePage>("button", buttonLike.getLinkClass(), params);
+                Link buttonLink;
+                if(buttonLike.getAnchor() == null) {
+                    buttonLink = new BookmarkablePageLink<BasePage>("button", buttonLike.getLinkClass(), params);
+                } else {
+                    buttonLink = new AnchoredBookmarkablePageLink("button", buttonLike.getLinkClass(), params, Model.of(buttonLike.getAnchor()));
+                }
                 Label buttonText = new Label("buttonText", Model.of(buttonLike.getButtonText()));
                 buttonLink.add(buttonText);
                 item.add(buttonLink);
