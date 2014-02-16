@@ -73,4 +73,13 @@ public class UserDAO extends GenericHibernateDAO<NakazaUser, Serializable> {
         query.executeUpdate();
         return true;
     }
+
+    public void setPoints(Integer userId, int remainingPoints) {
+        SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("update nakaza_user set remaining_points = :points where " +
+                "id = :idUser");
+        query.setInteger("idUser", userId);
+        query.setInteger("points", remainingPoints);
+        query.executeUpdate();
+
+    }
 }

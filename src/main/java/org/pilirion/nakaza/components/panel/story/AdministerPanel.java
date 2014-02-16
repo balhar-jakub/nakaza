@@ -12,9 +12,12 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.pilirion.nakaza.components.form.BookmarkableLinkWithLabel;
 import org.pilirion.nakaza.components.page.BasePage;
 import org.pilirion.nakaza.components.page.story.StoryDetail;
+import org.pilirion.nakaza.entity.NakazaParticipant;
 import org.pilirion.nakaza.entity.NakazaStory;
+import org.pilirion.nakaza.service.ParticipantService;
 import org.pilirion.nakaza.service.StoryService;
 
 import java.util.List;
@@ -25,6 +28,8 @@ import java.util.List;
 public class AdministerPanel extends Panel {
     @SpringBean
     StoryService storyService;
+    @SpringBean
+    ParticipantService participantService;
 
     public AdministerPanel(String id, List<NakazaStory> stories) {
         super(id);
@@ -40,20 +45,16 @@ public class AdministerPanel extends Panel {
 
                 PageParameters params = new PageParameters();
                 params.add("id", story.getId());
-                Link storyDetail = new BookmarkablePageLink<BasePage>("storyDetail", StoryDetail.class, params);
-                Label storyName = new Label("storyName", Model.of(story.getName()));
-                storyDetail.add(storyName);
-                item.add(storyDetail);
-                final TextField rating = new TextField<Integer>("rating", Model.of(story.getPoints()));
-                item.add(rating);
+                item.add(new BookmarkableLinkWithLabel("storyDetail", StoryDetail.class, Model.of(story.getName()), Model.of(params)));
+
+                String accepted = story.getAccepted() ? "Schváleno" : "Čeká";
+                item.add(new Label("state", Model.of(accepted)));
 
                 item.add(new Button("accept") {
                     @Override
                     public void onSubmit() {
                         super.onSubmit();
                         story.setAccepted(true);
-                        Integer data = Integer.parseInt((String)rating.getModelObject());
-                        story.setPoints(data);
                         storyService.saveOrUpdate(story);
                     }
                 });
@@ -65,6 +66,27 @@ public class AdministerPanel extends Panel {
 
                         storyService.delete(story);
                         getList().remove(story);
+                    }
+                });
+
+                item.add(new ListView<NakazaParticipant>("participants", story.getParticipants()) {
+                    @Override
+                    protected void populateItem(ListItem<NakazaParticipant> item) {
+                        final NakazaParticipant participant = item.getModelObject();
+                        item.add(new Label("name", Model.of(participant.getName())));
+
+                        final TextField<String> points = new TextField<String>("points", Model.of(String.valueOf(participant.getPoints())));
+                        item.add(points);
+
+                        item.add(new Button("submit"){
+                            @Override
+                            public void onSubmit() {
+                                super.onSubmit();
+
+                                participant.setPoints(Integer.parseInt(points.getModelObject()));
+                                participantService.saveOrUpdate(participant);
+                            }
+                        });
                     }
                 });
             }

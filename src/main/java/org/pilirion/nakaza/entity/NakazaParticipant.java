@@ -89,6 +89,18 @@ public class NakazaParticipant implements Identifiable<Integer>, Serializable {
         this.descriptionPublic = descriptionPublic;
     }
 
+    private Integer points;
+
+    @javax.persistence.Column(name = "points", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    @Basic
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

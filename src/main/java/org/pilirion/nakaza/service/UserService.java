@@ -30,4 +30,6 @@ public interface UserService extends GenericService<NakazaUser> {
     boolean isArmyAvailable();
 
     boolean removeStory(NakazaUser user, NakazaStory story);
+
+    void setPoints(Integer userId, int remainingPoints);
 }

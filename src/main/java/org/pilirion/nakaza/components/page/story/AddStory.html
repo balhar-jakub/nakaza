@@ -19,14 +19,12 @@
 
                         <div id="sortable1" class="connectedSortable" wicket:id="availableStories">
                             <div class="story">
-                                <span wicket:id="storyPoints" class="storyPoints"></span>
-                                <a wicket:id="storyDetail">
-                                    <span wicket:id="story" class="storyName">Příběh 1 </span>
-                                </a>
+                                <span wicket:id="storyDetail"></span>
                             </div>
                             <div class="clear"></div>
                             <div class="participants" wicket:id="participants">
                                 <div class="participant">
+                                    <span class="storyPoint" wicket:id="participantPoints"></span>
                                     <span class="participantText" wicket:id="participantDescription"></span>
                                     <input type="button" wicket:id="change" class="storyChange" value="Přidej"/>
                                 </div>
@@ -41,9 +39,7 @@
                         <div id="sortable2" class="connectedSortable" wicket:id="myStories">
                             <div class="story">
                                 <span wicket:id="storyPoints" class="storyPoints"></span>
-                                <a wicket:id="storyDetail">
-                                    <span wicket:id="story" class="storyName">Příběh 1 </span>
-                                </a>
+                                <span wicket:id="storyDetail"></span>
                                 <input type="button" wicket:id="change" class="storyChange" value="Odeber"/>
                             </div>
                             <div class="clear"></div>

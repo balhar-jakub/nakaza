@@ -18,6 +18,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.pilirion.nakaza.api.EntityModel;
 import org.pilirion.nakaza.components.Menu;
+import org.pilirion.nakaza.components.form.BookmarkableLinkWithLabel;
 import org.pilirion.nakaza.components.page.BasePage;
 import org.pilirion.nakaza.components.page.character.CharacterDetail;
 import org.pilirion.nakaza.components.page.character.CreateCharacter;
@@ -87,6 +88,17 @@ public class AddStory extends BasePage {
         add(new ListShortCharacters("shortCharacters", nakazaUsers));
     }
 
+    private NakazaParticipant getMyParticipant(NakazaStory story){
+        List<NakazaParticipant> participants = story.getParticipants();
+        int loggedUserId = loggedUser.getObject().getId();
+        for(NakazaParticipant participant: participants){
+            if(participant.getUser() != null && (participant.getUser().getId() == loggedUserId)){
+                return participant;
+            }
+        }
+        return null;
+    }
+
     @Override
     public void renderHead(IHeaderResponse response) {
         response.render(JavaScriptHeaderItem.forUrl("jquery-ui.min.js"));
@@ -104,28 +116,22 @@ public class AddStory extends BasePage {
         protected void populateItem(ListItem<NakazaStory> item) {
             NakazaStory story = item.getModelObject();
             final int storyId = story.getId();
-            int storyPoints = ((story.getPoints() == null) ? 0 : story.getPoints());
-            item.add(new Label("storyPoints", storyPoints));
+            item.add(new Label("storyPoints", getMyParticipant(story).getPoints()));
 
             PageParameters params = new PageParameters();
             params.add("id", story.getId());
-            Link storyDetailLink = new BookmarkablePageLink<CharacterDetail>("storyDetail", CharacterDetail.class, params);
-            storyDetailLink.add(new Label("story", story.getName()));
-            item.add(storyDetailLink);
+            item.add(new BookmarkableLinkWithLabel("storyDetail", StoryDetail.class, Model.of(story.getName()), Model.of(params)));
 
             item.add(new AjaxButton("change") {}.add(new AjaxFormComponentUpdatingBehavior("click") {
                 @Override
                 protected void onUpdate(AjaxRequestTarget target) {
                     NakazaStory story = storyService.getById(storyId);
-                    List<NakazaParticipant> participants = story.getParticipants();
+                    NakazaParticipant actualParticipant = getMyParticipant(story);
+                    actualParticipant.setUser(null);
+                    int storyPoints = ((actualParticipant.getPoints() == null) ? 0 : actualParticipant.getPoints());
+                    participantService.saveOrUpdate(actualParticipant);
+
                     NakazaUser logged = loggedUser.getObject();
-                    int loggedUserId = logged.getId();
-                    for(NakazaParticipant participant: participants){
-                        if(participant.getUser() != null && (participant.getUser().getId() == loggedUserId)){
-                            participant.setUser(null);
-                            participantService.saveOrUpdate(participant);
-                        }
-                    }
                     for(NakazaStory storyLocal: logged.getStories()) {
                         if((int)storyLocal.getId() == (int)story.getId()){
                             logged.getStories().remove(storyLocal);
@@ -133,7 +139,7 @@ public class AddStory extends BasePage {
                         }
                     }
                     for(NakazaUser user: story.getUsers()) {
-                        if((int)user.getId() == loggedUserId){
+                        if((int)user.getId() == logged.getId()){
                             story.getUsers().remove(user);
                             break;
                         }
@@ -141,9 +147,9 @@ public class AddStory extends BasePage {
                     storyService.saveOrUpdate(story);
 
                     int remainingPoints = ((logged.getRemainingPoints() != null) ? logged.getRemainingPoints(): 0);
-                    int storyPoints = ((story.getPoints() == null) ? 0 : story.getPoints());
-                    logged.setRemainingPoints(remainingPoints + storyPoints);
-                    userService.saveOrUpdate(logged);
+                    loggedUser.getObject().setRemainingPoints(remainingPoints + storyPoints);
+                    userService.saveOrUpdate(loggedUser.getObject());
+                    userService.setPoints(loggedUser.getObject().getId(), remainingPoints + storyPoints);
                     userService.removeStory(logged, story);
 
                     throw new RestartResponseException(AddStory.class);
@@ -162,14 +168,10 @@ public class AddStory extends BasePage {
         @Override
         protected void populateItem(ListItem<NakazaStory> item) {
             final NakazaStory story = item.getModelObject();
-            int storyPoints = ((story.getPoints() == null) ? 0 : story.getPoints());
-            item.add(new Label("storyPoints", storyPoints));
 
             PageParameters params = new PageParameters();
             params.add("id", story.getId());
-            Link storyDetailLink = new BookmarkablePageLink<CharacterDetail>("storyDetail", CharacterDetail.class, params);
-            storyDetailLink.add(new Label("story", story.getName()));
-            item.add(storyDetailLink);
+            item.add(new BookmarkableLinkWithLabel("storyDetail", StoryDetail.class, Model.of(story.getName()), Model.of(params)));
 
             List<NakazaParticipant> participants = new ArrayList<NakazaParticipant>();
             for(NakazaParticipant participant: story.getParticipants()) {
@@ -182,6 +184,9 @@ public class AddStory extends BasePage {
                 @Override
                 protected void populateItem(ListItem<NakazaParticipant> item) {
                     final NakazaParticipant participant = item.getModelObject();
+                    int storyPoints = ((participant.getPoints() == null) ? 0 : participant.getPoints());
+                    item.add(new Label("participantPoints", storyPoints));
+
                     item.add(new Label("participantDescription", Model.of(participant.getDescriptionPublic())).
                             setEscapeModelStrings(false));
 
@@ -189,7 +194,7 @@ public class AddStory extends BasePage {
                         @Override
                         protected void onUpdate(AjaxRequestTarget target) {
                             int remainingPoints = ((loggedUser.getObject().getRemainingPoints() != null) ? loggedUser.getObject().getRemainingPoints(): 0);
-                            int storyPoints = ((story.getPoints() == null) ? 0 : story.getPoints());
+                            int storyPoints = ((participant.getPoints() == null) ? 0 : participant.getPoints());
                             if(remainingPoints >= storyPoints) {
                                 participant.setUser(loggedUser.getObject());
                                 loggedUser.getObject().getStories().add(story);

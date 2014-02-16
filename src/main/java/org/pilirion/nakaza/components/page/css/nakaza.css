@@ -570,8 +570,26 @@ a, a:active, a:hover, a:visited {
     margin-bottom: 15px;
 }
 
+.participant .storyPoint{
+    float: left;
+    margin-right: 20px;
+}
+
 .wicket-aa {
     z-index: 10;
     background-color: white;
     border: 1px solid black;
+}
+
+.story table {
+    width: 100%;
+}
+
+.toggle {
+    cursor: pointer;
+    padding-right: 5px;
+}
+
+.administer .story {
+    margin-top: 20px;
 }

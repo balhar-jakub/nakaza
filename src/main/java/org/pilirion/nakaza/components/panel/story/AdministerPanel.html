@@ -1,14 +1,36 @@
 <wicket:panel xmlns:wicket="http://wicket.apache.org">
+    <script type="text/javascript">
+        $(".toggle").each(function(idx, elm){
+            $(elm).bind("click", function(){
+                $(elm).parent().parent().parent().parent().parent().find(".participants").toggle();
+            });
+        });
+    </script>
+
     <form wicket:id="storyForm">
-        <table wicket:id="stories">
-            <tr>
-                <td>
-                    <a wicket:id="storyDetail"><span wicket:id="storyName">Name of story</span></a>
-                </td>
-                <td><input type="text" value="0" wicket:id="rating"/></td>
-                <td><input type="submit" value="Potvrdit" wicket:id="accept"/></td>
-                <td><input type="submit" value="Smazat" wicket:id="delete"/></td>
-            </tr>
-        </table>
+        <div class="administer" wicket:id="stories">
+            <div class="story">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>
+                                <span class="toggle">+/-</span><span wicket:id="storyDetail"></span>
+                            </td>
+                            <td><span wicket:id="state"></span></td>
+                            <td><input type="submit" value="Potvrdit" wicket:id="accept"/></td>
+                            <td><input type="submit" value="Smazat" wicket:id="delete"/></td>
+                        </tr>
+                    </thead>
+                    <tbody class="participants" wicket:id="participants">
+                        <tr>
+                            <td><span wicket:id="name"></span></td>
+                            <td></td>
+                            <td><input type="text" wicket:id="points" /></td>
+                            <td><input type="submit" wicket:id="submit" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </form>
 </wicket:panel>

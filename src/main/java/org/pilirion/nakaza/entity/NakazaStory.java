@@ -65,18 +65,6 @@ public class NakazaStory implements Identifiable<Integer>, Serializable {
         this.descriptionPrivate = descriptionPrivate;
     }
 
-    private Integer points;
-
-    @javax.persistence.Column(name = "points", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
-    @Basic
-    public Integer getPoints() {
-        return points;
-    }
-
-    public void setPoints(Integer points) {
-        this.points = points;
-    }
-
     private Boolean accepted;
 
     @javax.persistence.Column(name = "state", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
@@ -104,7 +92,6 @@ public class NakazaStory implements Identifiable<Integer>, Serializable {
         if (descriptionPublic != null ? !descriptionPublic.equals(story.descriptionPublic) : story.descriptionPublic != null)
             return false;
         if (name != null ? !name.equals(story.name) : story.name != null) return false;
-        if (points != null ? !points.equals(story.points) : story.points != null) return false;
 
         return true;
     }
@@ -115,7 +102,6 @@ public class NakazaStory implements Identifiable<Integer>, Serializable {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (descriptionPublic != null ? descriptionPublic.hashCode() : 0);
         result = 31 * result + (descriptionPrivate != null ? descriptionPrivate.hashCode() : 0);
-        result = 31 * result + (points != null ? points.hashCode() : 0);
         result = 31 * result + (accepted != null ? accepted.hashCode() : 0);
         result = 31 * result + (createdBy != null ? createdBy.hashCode() : 0);
         return result;

@@ -138,6 +138,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void setPoints(Integer userId, int remainingPoints) {
+        userDAO.setPoints(userId, remainingPoints);
+    }
+
+    @Override
     public List<NakazaUser> getUnique(NakazaUser validatableEntity) {
         throw new UnsupportedOperationException("Not implemented");
     }
