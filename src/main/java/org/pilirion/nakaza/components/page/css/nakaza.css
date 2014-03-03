@@ -594,10 +594,6 @@ a, a:active, a:hover, a:visited {
     margin-top: 20px;
 }
 
-.sign-in {
-    visibility: hidden;
-}
-
 .float-left {
     float: left;
     margin-right: 10px;

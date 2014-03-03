@@ -96,14 +96,17 @@ public class UserServiceImpl implements UserService {
         }
 
         if(user.getCharacter().getGroup().equals("0")){
+            user.setRemainingPoints(20);
             if(!isZombieAvailable()) {
                 throw new TooManyPlayersInGroup("Zombie už jsou plné.");
             }
         } else if(user.getCharacter().getGroup().equals("1")){
+            user.setRemainingPoints(25);
             if(!isSurvivorsAvailable()) {
                 throw new TooManyPlayersInGroup("Přeživší už jsou plní.");
             }
         } else if(user.getCharacter().getGroup().equals("2")) {
+            user.setRemainingPoints(10);
             if(!isArmyAvailable()) {
                 throw new TooManyPlayersInGroup("Armáda už je plná.");
             }

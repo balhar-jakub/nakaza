@@ -35,7 +35,7 @@ public class StoryList extends BasePage {
 
         add(new LeftMenus("leftMenus", Menu.getMainButtons(), Menu.getStoryButtons()));
 
-        add(new ListStoriesPanel("storiesPanel", storyService.getAll()));
+        add(new ListStoriesPanel("storiesPanel", storyService.getApproved()));
 
         add(new BookmarkablePageLink<BasePage>("login",Login.class));
     }

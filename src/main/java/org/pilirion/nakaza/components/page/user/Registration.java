@@ -82,7 +82,7 @@ public class Registration extends BasePage {
                 }
                 String passwordForLogin = user.getPassword();
                 user.setPassword(Pwd.getSHA(user.getPassword()));
-                user.setRemainingPoints(20);
+                user.setRemainingPoints(0);
                 if(userService.saveOrUpdate(user)){
                     NakazaAuthenticatedWebSession.get().signIn(user.getEmail(), passwordForLogin);
 

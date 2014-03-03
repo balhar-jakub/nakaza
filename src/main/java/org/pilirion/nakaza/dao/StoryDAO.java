@@ -42,4 +42,21 @@ public class StoryDAO extends GenericHibernateDAO<NakazaStory, Serializable> {
                 addEntity(NakazaStory.class);
         return query.list();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<NakazaStory> getApproved(){
+        Query query = sessionFactory.getCurrentSession().createSQLQuery("select * from nakaza_story " +
+                "where state = true").
+                addEntity(NakazaStory.class);
+        return query.list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<NakazaStory> getLastAddedApproved(int max_stories) {
+        Query query = sessionFactory.getCurrentSession().createSQLQuery("select * from nakaza_story " +
+                "where state = true order by id desc limit :max_stories").
+                addEntity(NakazaStory.class);
+        query.setParameter("max_stories", max_stories);
+        return query.list();
+    }
 }

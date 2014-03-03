@@ -19,4 +19,8 @@ public interface StoryService extends GenericService<NakazaStory> {
     boolean hasRights(NakazaUser loggedUser, NakazaStory story);
 
     boolean participates(NakazaUser loggedUser, NakazaStory story);
+
+    public List<NakazaStory> getApproved();
+
+    List<NakazaStory> getLastAddedApproved(int max_stories);
 }

@@ -30,12 +30,25 @@ public class StoryServiceImpl implements StoryService{
 
     @Override
     public boolean saveOrUpdate(NakazaStory story) {
+        if(story.getAccepted() == null){
+            story.setAccepted(false);
+        }
         return storyDAO.saveOrUpdate(story);
     }
 
     @Override
     public List<NakazaStory> getAll() {
         return storyDAO.findAll();
+    }
+
+    @Override
+    public List<NakazaStory> getApproved() {
+        return storyDAO.getApproved();
+    }
+
+    @Override
+    public List<NakazaStory> getLastAddedApproved(int max_stories) {
+        return storyDAO.getLastAddedApproved(max_stories);
     }
 
     @Override

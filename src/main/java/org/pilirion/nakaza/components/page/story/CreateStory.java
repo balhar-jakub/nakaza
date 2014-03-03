@@ -55,7 +55,7 @@ public class CreateStory extends BasePage {
 
         add(new CreateOrUpdateStory("createStory", story, actualStory != NONE));
         int MAX_STORIES = 5;
-        List<NakazaStory> stories = storyService.getLastAdded(MAX_STORIES);
+        List<NakazaStory> stories = storyService.getLastAddedApproved(MAX_STORIES);
         add(new LastAddedStories("lastAddedStories", stories));
     }
 }
