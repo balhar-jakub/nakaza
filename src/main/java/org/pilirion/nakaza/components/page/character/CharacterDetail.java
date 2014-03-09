@@ -4,7 +4,9 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.pilirion.nakaza.components.Menu;
 import org.pilirion.nakaza.components.page.BasePage;
+import org.pilirion.nakaza.components.panel.character.ArmyPanel;
 import org.pilirion.nakaza.components.panel.character.CharacterDetailPanel;
+import org.pilirion.nakaza.components.panel.character.ZombiePanel;
 import org.pilirion.nakaza.components.panel.layout.LeftMenus;
 import org.pilirion.nakaza.components.panel.layout.NakazaSignInPanel;
 import org.pilirion.nakaza.components.panel.story.ListStoriesShortPanel;
@@ -30,5 +32,7 @@ public class CharacterDetail extends BasePage {
         add(new CharacterDetailPanel("character-detail", user));
         add(new ListStoriesShortPanel("shortStories", user.getStories()));
 
+        add(new ArmyPanel("armyRules", user));
+        add(new ZombiePanel("zombieRules", user));
     }
 }

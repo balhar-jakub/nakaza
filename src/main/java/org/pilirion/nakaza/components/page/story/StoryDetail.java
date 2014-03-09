@@ -68,7 +68,8 @@ public class StoryDetail extends BasePage {
         storyModel = new EntityModel<NakazaStory>(storyService.getDetailOfStory(id), storyDAO);
 
         List<ButtonLike> lower = Menu.getStoryButtons();
-        if(storyService.hasRights(userService.getLoggedUser(), storyModel.getObject())) {
+        boolean canEdit = storyService.hasRights(userService.getLoggedUser(), storyModel.getObject());
+        if(canEdit) {
             PageParameters parameters = new PageParameters();
             parameters.add("id", id);
             ButtonLike edit = new ButtonLike("Editovat", CreateStory.class);
@@ -84,7 +85,7 @@ public class StoryDetail extends BasePage {
         add(new Label("name", Model.of(storyModel.getObject().getName())));
         add(new Label("descriptionPublic", Model.of(storyModel.getObject().getDescriptionPublic())).setEscapeModelStrings(false));
         add(new HidingLabel("descriptionPrivate", Model.of(storyModel.getObject().getDescriptionPrivate()),
-                storyService.participates(userService.getLoggedUser(), storyModel.getObject())).setEscapeModelStrings(false));
+                storyService.participates(userService.getLoggedUser(), storyModel.getObject()) || canEdit).setEscapeModelStrings(false));
 
         add(new LabelsPanel("labelsPanel", storyModel.getObject().getLabels()));
 
