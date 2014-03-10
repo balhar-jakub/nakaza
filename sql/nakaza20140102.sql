@@ -80,7 +80,8 @@ CREATE TABLE nakaza_participant (
     story integer NOT NULL,
     id_user integer,
     description_public text,
-    name text
+    name text,
+    points integer
 );
 
 
@@ -213,10 +214,10 @@ SELECT pg_catalog.setval('nakaza_label_ids', 14, true);
 -- Data for Name: nakaza_participant; Type: TABLE DATA; Schema: public; Owner: nakaza
 --
 
-INSERT INTO nakaza_participant VALUES (17, '1', '<p>Zamiloval se do tebe voj&aacute;k a d&iacute;ky jeho ochotě ti pomoci zat&iacute;m přež&iacute;v&aacute;&scaron;, zač&iacute;n&aacute;&scaron; na sobě ale pozorovat n&aacute;znaky n&aacute;kazy. Je nějak&aacute; cesta?</p>', 15, NULL, '<p>D&iacute;vka, do kter&eacute; se zamiloval</p>', 'Dívka');
-INSERT INTO nakaza_participant VALUES (16, '2', '<p>Zamiloval ses do jedn&eacute; z přeživ&scaron;&iacute;ch. Nen&iacute; ti &uacute;plně jasn&eacute;, jak se ti to stalo, ale přece se stalo.&nbsp;</p>', 15, 15, '<p>Voj&aacute;k, kter&eacute;ho se i za těchto okolnost&iacute; dotkne l&aacute;ska.</p>', 'Voják');
-INSERT INTO nakaza_participant VALUES (15, '1', '<p>Ztracen&aacute; dcera / syn. Tvůj otec se tě pokusil sežrat, podařilo se ti v&scaron;ak d&iacute;kybohu ut&eacute;ci.&nbsp;</p>', 14, NULL, '<p>Postava, kter&aacute; v&iacute; jak to bylo s dcerou.&nbsp;</p>', 'Vědoucí');
-INSERT INTO nakaza_participant VALUES (14, '0', '<p>Pot&eacute; co ses proměnil, byl jsi na cestě domů, pamatuje&scaron; si je&scaron;tě dom&aacute;c&iacute; plot, v domě byla i tvoje dcera, nev&iacute;&scaron; co se s n&iacute; stalo. Douf&aacute;&scaron;, že to přežila.</p>', 14, 14, '<p>Muž, kter&yacute; p&aacute;tr&aacute; po ztracen&eacute; dceře</p>', 'Muž hledající');
+INSERT INTO nakaza_participant VALUES (17, '1', '<p>Zamiloval se do tebe voj&aacute;k a d&iacute;ky jeho ochotě ti pomoci zat&iacute;m přež&iacute;v&aacute;&scaron;, zač&iacute;n&aacute;&scaron; na sobě ale pozorovat n&aacute;znaky n&aacute;kazy. Je nějak&aacute; cesta?</p>', 15, NULL, '<p>D&iacute;vka, do kter&eacute; se zamiloval</p>', 'Dívka',5);
+INSERT INTO nakaza_participant VALUES (16, '2', '<p>Zamiloval ses do jedn&eacute; z přeživ&scaron;&iacute;ch. Nen&iacute; ti &uacute;plně jasn&eacute;, jak se ti to stalo, ale přece se stalo.&nbsp;</p>', 15, 15, '<p>Voj&aacute;k, kter&eacute;ho se i za těchto okolnost&iacute; dotkne l&aacute;ska.</p>', 'Voják',5);
+INSERT INTO nakaza_participant VALUES (15, '1', '<p>Ztracen&aacute; dcera / syn. Tvůj otec se tě pokusil sežrat, podařilo se ti v&scaron;ak d&iacute;kybohu ut&eacute;ci.&nbsp;</p>', 14, NULL, '<p>Postava, kter&aacute; v&iacute; jak to bylo s dcerou.&nbsp;</p>', 'Vědoucí',5);
+INSERT INTO nakaza_participant VALUES (14, '0', '<p>Pot&eacute; co ses proměnil, byl jsi na cestě domů, pamatuje&scaron; si je&scaron;tě dom&aacute;c&iacute; plot, v domě byla i tvoje dcera, nev&iacute;&scaron; co se s n&iacute; stalo. Douf&aacute;&scaron;, že to přežila.</p>', 14, 14, '<p>Muž, kter&yacute; p&aacute;tr&aacute; po ztracen&eacute; dceře</p>', 'Muž hledající',5);
 
 
 --

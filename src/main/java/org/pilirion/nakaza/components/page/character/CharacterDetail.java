@@ -32,7 +32,7 @@ public class CharacterDetail extends BasePage {
         add(new CharacterDetailPanel("character-detail", user));
         add(new ListStoriesShortPanel("shortStories", user.getStories()));
 
-        add(new ArmyPanel("armyRules", user));
-        add(new ZombiePanel("zombieRules", user));
+        add(new ArmyPanel("armyRules", userService.getLoggedUser()));
+        add(new ZombiePanel("zombieRules", userService.getLoggedUser()));
     }
 }
