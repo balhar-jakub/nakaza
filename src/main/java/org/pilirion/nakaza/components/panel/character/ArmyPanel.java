@@ -13,7 +13,7 @@ public class ArmyPanel extends Panel {
     public ArmyPanel(String id, NakazaUser user) {
         super(id);
 
-        if(user.getCharacter() != null && user.getCharacter().getGroup() != null &&
+        if(user != null && user.getCharacter() != null && user.getCharacter().getGroup() != null &&
                 user.getCharacter().getGroup().equals("2")) {
             setVisibilityAllowed(true);
         } else {

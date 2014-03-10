@@ -10,7 +10,7 @@ public class ZombiePanel extends Panel {
     public ZombiePanel(String id, NakazaUser user) {
         super(id);
 
-        if(user.getCharacter() != null && user.getCharacter().getGroup() != null &&
+        if(user != null && user.getCharacter() != null && user.getCharacter().getGroup() != null &&
                 user.getCharacter().getGroup().equals("0")) {
             setVisibilityAllowed(true);
         } else {
