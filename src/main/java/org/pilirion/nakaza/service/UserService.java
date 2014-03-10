@@ -15,7 +15,7 @@ public interface UserService extends GenericService<NakazaUser> {
 
     List<NakazaUser> getCharacters();
 
-    List<NakazaUser> getFirstUsersWithCharacters();
+    List<NakazaUser> getMostRecentWithCharacters();
 
     NakazaUser getCharacterOfUser(int id);
 

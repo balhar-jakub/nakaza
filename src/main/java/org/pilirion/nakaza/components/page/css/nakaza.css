@@ -16,7 +16,7 @@ h1 {
 }
 
 h2 {
-    margin: 10px 0px;
+    margin: 20px 0px 10px 0px;
     font-size: 32px;
     line-height: 36px;
     font-weight: 700;
@@ -602,4 +602,22 @@ a, a:active, a:hover, a:visited {
 .float-right {
     float: right;
     margin-left: 10px;
+}
+
+td {
+    width: 250px;
+    margin-left: 5px;
+}
+
+.groupDiv {
+    display: block;
+    height: 300px;
+}
+
+.groupZombieDiv {
+    height: 350px;
+}
+
+.groupPic {
+    height: 250px;
 }

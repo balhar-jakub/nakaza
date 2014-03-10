@@ -4,7 +4,6 @@ import org.apache.wicket.RestartResponseException;
 import org.hibernate.criterion.Restrictions;
 import org.pilirion.nakaza.components.page.character.CharacterList;
 import org.pilirion.nakaza.dao.UserDAO;
-import org.pilirion.nakaza.entity.NakazaCharacter;
 import org.pilirion.nakaza.entity.NakazaStory;
 import org.pilirion.nakaza.entity.NakazaUser;
 import org.pilirion.nakaza.exception.TooManyPlayersInGroup;
@@ -62,8 +61,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<NakazaUser> getFirstUsersWithCharacters() {
-        return userDAO.getFirstWithCharacters(5);
+    public List<NakazaUser> getMostRecentWithCharacters() {
+        return userDAO.getMostRecentWithCharacters(5);
     }
 
     @Override

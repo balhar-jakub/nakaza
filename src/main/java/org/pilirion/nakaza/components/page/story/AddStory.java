@@ -8,8 +8,6 @@ import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -20,7 +18,6 @@ import org.pilirion.nakaza.api.EntityModel;
 import org.pilirion.nakaza.components.Menu;
 import org.pilirion.nakaza.components.form.BookmarkableLinkWithLabel;
 import org.pilirion.nakaza.components.page.BasePage;
-import org.pilirion.nakaza.components.page.character.CharacterDetail;
 import org.pilirion.nakaza.components.page.character.CreateCharacter;
 import org.pilirion.nakaza.components.page.statics.HomePage;
 import org.pilirion.nakaza.components.panel.character.ListShortCharacters;
@@ -70,7 +67,7 @@ public class AddStory extends BasePage {
             throw new RestartResponseException(CreateCharacter.class);
         }
 
-        List<NakazaUser> nakazaUsers = userService.getFirstUsersWithCharacters();
+        List<NakazaUser> nakazaUsers = userService.getMostRecentWithCharacters();
 
         add(new FeedbackPanel("feedback"));
 

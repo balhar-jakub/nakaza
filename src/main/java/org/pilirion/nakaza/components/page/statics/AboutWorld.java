@@ -30,7 +30,7 @@ public class AboutWorld extends BasePage {
 
         add(new NakazaSignInPanel("signInPanel"));
 
-        add(new LeftMenus("leftMenus", Menu.getMainButtons(), Menu.getEmptyButtons()));
+        add(new LeftMenus("leftMenus", Menu.getMainButtons(), Menu.getAboutWorld()));
 
         add(new NewsPanel("newsPanel"));
     }

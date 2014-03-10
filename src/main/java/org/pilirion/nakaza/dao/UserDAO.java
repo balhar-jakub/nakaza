@@ -5,6 +5,7 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.pilirion.nakaza.api.GenericHibernateDAO;
@@ -37,8 +38,9 @@ public class UserDAO extends GenericHibernateDAO<NakazaUser, Serializable> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<NakazaUser> getFirstWithCharacters(int limit) {
+    public List<NakazaUser> getMostRecentWithCharacters(int limit) {
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(getPersistentClass());
+        crit.addOrder(Order.desc("id"));
         crit.setMaxResults(limit);
         crit.add(Restrictions.isNotNull("character.name"));
         return crit.list();
