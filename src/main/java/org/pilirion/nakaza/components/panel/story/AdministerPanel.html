@@ -1,8 +1,10 @@
 <wicket:panel xmlns:wicket="http://wicket.apache.org">
     <script type="text/javascript">
-        $(".toggle").each(function(idx, elm){
-            $(elm).bind("click", function(){
-                $(elm).parent().parent().parent().parent().parent().find(".participants").toggle();
+        $(document).ready(function(){
+            $(".toggle").each(function(idx, elm){
+                $(elm).bind("click", function(){
+                    $(elm).parent().parent().parent().parent().parent().find(".participants").toggle();
+                });
             });
         });
     </script>

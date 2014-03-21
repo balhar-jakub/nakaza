@@ -1,8 +1,6 @@
 package org.pilirion.nakaza.service.impl;
 
 import org.apache.wicket.RestartResponseException;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Restrictions;
 import org.pilirion.nakaza.components.page.story.AddStory;
 import org.pilirion.nakaza.dao.StoryDAO;
 import org.pilirion.nakaza.entity.NakazaStory;
@@ -49,6 +47,11 @@ public class StoryServiceImpl implements StoryService{
     @Override
     public List<NakazaStory> getLastAddedApproved(int max_stories) {
         return storyDAO.getLastAddedApproved(max_stories);
+    }
+
+    @Override
+    public List<NakazaStory> getAllUnauthorizedFirst() {
+        return storyDAO.getAllUnauthorizedFirst();
     }
 
     @Override

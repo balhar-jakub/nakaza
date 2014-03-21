@@ -23,4 +23,6 @@ public interface StoryService extends GenericService<NakazaStory> {
     public List<NakazaStory> getApproved();
 
     List<NakazaStory> getLastAddedApproved(int max_stories);
+
+    List<NakazaStory> getAllUnauthorizedFirst();
 }

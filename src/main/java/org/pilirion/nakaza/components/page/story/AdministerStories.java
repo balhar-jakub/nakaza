@@ -38,6 +38,6 @@ public class AdministerStories extends BasePage {
 
         add(new LeftMenus("leftMenus", Menu.getMainButtons(), Menu.getStoryButtons()));
 
-        add(new AdministerPanel("stories", storyService.getAll()));
+        add(new AdministerPanel("stories", storyService.getAllUnauthorizedFirst()));
     }
 }
