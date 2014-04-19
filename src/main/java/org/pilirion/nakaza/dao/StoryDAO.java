@@ -63,7 +63,7 @@ public class StoryDAO extends GenericHibernateDAO<NakazaStory, Serializable> {
     @SuppressWarnings("unchecked")
     public List<NakazaStory> getAllUnauthorizedFirst() {
         Query query = sessionFactory.getCurrentSession().createSQLQuery("select * from nakaza_story " +
-                "order by state desc")
+                "order by state")
                 .addEntity(NakazaStory.class);
         return query.list();
     }
